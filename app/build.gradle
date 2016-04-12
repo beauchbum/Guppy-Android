@@ -1,0 +1,41 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "com.example.androidhive"
+        minSdkVersion 21
+        targetSdkVersion 21
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+   
+    
+    // This library handles authentication and authorization
+    
+    compile group: 'cz.msebera.android', name: 'httpclient', version: '4.4.1.1'
+    // This library handles music playback
+    compile 'com.spotify.sdk:spotify-player:1.0.0-beta11@aar'
+    compile 'com.spotify.sdk:spotify-auth:1.0.0-beta11@aar'
+    compile 'com.github.kaaes:spotify-web-api-android:0.2.0'
+
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+}
