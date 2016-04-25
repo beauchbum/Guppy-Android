@@ -4,7 +4,15 @@
         "source": "C:\\Users\\Ryan\\AndroidStudioProjects\\Garpy\\Garpy\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
     },
     {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\ic_guppy_launch.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\mipmap-mdpi\\ic_guppy_launch.png"
+    },
+    {
         "merged": "C:\\Users\\Ryan\\AndroidStudioProjects\\Garpy\\Garpy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\ic_guppy_launch.png",
         "source": "C:\\Users\\Ryan\\AndroidStudioProjects\\Garpy\\Garpy\\app\\src\\main\\res\\mipmap-mdpi\\ic_guppy_launch.png"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\ic_launcher.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
     }
 ]

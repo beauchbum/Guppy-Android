@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Garpy.iml" filepath="$PROJECT_DIR$/Garpy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Guppy.iml" filepath="$PROJECT_DIR$/Guppy.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

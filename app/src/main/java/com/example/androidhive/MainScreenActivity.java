@@ -78,7 +78,7 @@ public class MainScreenActivity extends Activity {
 
 
 
-	private static String ip = "10.0.0.26";
+	private static String ip = "10.214.238.84";
 	// url to get all products list
 	private static String url_all_products = "http://" + ip + "/android_connect/get_all_products.php";
 	private static final String url_start_broadcast = "http://" + ip + "/android_connect/start_broadcast.php";
@@ -327,8 +327,8 @@ public class MainScreenActivity extends Activity {
 					setListAdapter(adapter);
 */
 
-					System.out.println(listDataHeader);
-					System.out.println(listDataChild);
+					//System.out.println(listDataHeader);
+					//System.out.println(listDataChild);
 					exp_adapter = new ExpandableListAdapter(MainScreenActivity.this, listDataHeader, listDataChild);
 					lv.setAdapter(exp_adapter);
 
@@ -364,8 +364,6 @@ public class MainScreenActivity extends Activity {
 			params.add(new BasicNameValuePair("id", args[1]));
 			params.add(new BasicNameValuePair("name", args[0]));
 
-
-			//params.add(new BasicNameValuePair("description", args[2]));
 
 			// getting JSON Object
 			// Note that create product url accepts POST method
