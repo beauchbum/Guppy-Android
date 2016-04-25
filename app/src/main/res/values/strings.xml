@@ -4,5 +4,6 @@
     <string name="hello">Hello World, AndroidConnectingToPhpMySQLActivity!</string>
     <string name="app_name">MainScreen</string>
     <string name="ip">localhost</string>
+    <string name="title_activity_tune_in">TuneIn</string>
 
 </resources>

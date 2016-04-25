@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -33,9 +34,9 @@ public class AllUsersActivity extends ListActivity {
 	JSONParser jParser = new JSONParser();
 
 	ArrayList<HashMap<String, String>> productsList;
-
+	private static String ip = "10.0.0.26";
 	// url to get all products list
-	private static String url_all_products = "http://10.0.0.26/android_connect/get_all_products.php";
+	private static String url_all_products = "http://" + ip + "/android_connect/get_all_products.php";
 
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
@@ -82,7 +83,11 @@ public class AllUsersActivity extends ListActivity {
 			}
 		});
 
+
+
 	}
+
+
 
 	// Response from Edit Product Activity
 	@Override

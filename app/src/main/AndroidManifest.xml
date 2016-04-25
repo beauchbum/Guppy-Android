@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.androidhive"
-
     android:versionCode="1"
-    android:versionName="1.0" >
-
+    android:versionName="1.0">
 
     <uses-sdk android:minSdkVersion="21" />
 
+    <!-- Internet Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
-        android:theme="@android:style/Theme.Light"
         android:configChanges="keyboardHidden|orientation"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name" >
-
-
+        android:icon="@drawable/ic_launcher_guppy"
+        android:label="Guppy"
+        android:theme="@android:style/Theme.Light">
         <activity
             android:name=".MainScreenActivity"
-            android:label="@string/app_name" >
+            android:label="Guppy">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,33 +31,31 @@
         <!-- All Product Activity -->
         <activity
             android:name=".AllUsersActivity"
-            android:label="All Users" >
-        </activity>
+            android:label="All Users"></activity>
 
         <!-- Add Product Activity -->
         <activity
             android:name=".NewUserActivity"
-            android:label="Add New User" >
-        </activity>
+            android:label="Add New User"></activity>
 
         <!-- Edit Product Activity -->
         <activity
             android:name=".EditUserActivity"
-            android:label="Edit User" >
-        </activity>
-
+            android:label="Edit User"></activity>
         <activity
             android:name="com.spotify.sdk.android.authentication.LoginActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!--
+             ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
+        <activity
+            android:name=".TuneIn"
+            android:label="@string/title_activity_tune_in"></activity>
     </application>
-
-    <!--  Internet Permissions -->
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

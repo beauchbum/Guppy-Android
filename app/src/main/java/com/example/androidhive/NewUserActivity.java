@@ -33,8 +33,9 @@ public class 	NewUserActivity extends Activity {
 	EditText inputPrice;
 	EditText inputDesc;
 
+	private static String ip = "10.0.0.26";
 	// url to create new product
-	private static String url_create_product = "http://10.0.0.26/android_connect/create_product.php";
+	private static String url_create_product = "http://" + ip + "/android_connect/create_product.php";
 
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";

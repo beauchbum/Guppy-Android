@@ -13,12 +13,12 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textOn="Broadcasting"
-        android:textOff="Listening Solo"/>
+        android:textOff="Listening Solo" />
 
 
     <ExpandableListView
-        android:id="@android:id/list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:id="@+id/exp_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
 
 </LinearLayout>

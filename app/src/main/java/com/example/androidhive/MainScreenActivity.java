@@ -1,14 +1,18 @@
 package com.example.androidhive;
 
 import android.app.Activity;
+import android.app.ExpandableListActivity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +27,7 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
+import android.widget.ToggleButton;
 
 
 import com.spotify.sdk.android.authentication.AuthenticationClient;
@@ -50,7 +55,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class MainScreenActivity extends ListActivity {
+public class MainScreenActivity extends Activity {
 
 	// Progress Dialog
 
@@ -59,20 +64,32 @@ public class MainScreenActivity extends ListActivity {
 
 	ArrayList<HashMap<String, String>> productsList;
 	HashMap<String, List<String>> listDataChild;
-	List<String> listDataHeader;
+	ArrayList<String> listDataHeader;
 	List<String> user_options;
+	ArrayList<String> pid_list;
 
-	ExpandableListAdapter listAdapter;
-	ExpandableListView expListView;
+	private MyBroadcastReceiver receiver;
+
+	private boolean receiver_exists = false;
 
 
+	ExpandableListView lv;
+	ExpandableListAdapter exp_adapter;
+
+
+
+	private static String ip = "10.0.0.26";
 	// url to get all products list
-	private static String url_all_products = "http://10.0.0.26/android_connect/get_all_products.php";
+	private static String url_all_products = "http://" + ip + "/android_connect/get_all_products.php";
+	private static final String url_start_broadcast = "http://" + ip + "/android_connect/start_broadcast.php";
+	private static final String url_stop_broadcast = "http://" + ip + "/android_connect/stop_broadcast.php";
+	private static String url_create_product = "http://" + ip + "/android_connect/create_product.php";
+	private static String url_post_uri = "http://" + ip + "/android_connect/post_uri.php";
 
 	// JSON Node names
 
-	private static final String TAG_PRODUCTS = "products";
-	private static final String TAG_PID = "pid";
+	private static final String TAG_PRODUCTS = "users";
+	public static final String TAG_PID = "id";
 	private static final String TAG_NAME = "name";
 
 	// products JSONArray
@@ -88,10 +105,13 @@ public class MainScreenActivity extends ListActivity {
 	private ProgressDialog pDialog;
 	JSONParser jsonParser = new JSONParser();
 	// url to create new product
-	private static String url_create_product = "http://10.0.0.26/android_connect/create_product.php";
+
 
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
+
+	private String id;
+	private Button broad_button;
 
 
 	public final static String EXTRA_MESSAGE = "com.mycompany.app.MESSAGE";
@@ -110,6 +130,9 @@ public class MainScreenActivity extends ListActivity {
 
 		listDataChild = new HashMap<String, List<String>>();
 		user_options = new ArrayList<String>();
+
+		listDataHeader = new ArrayList<String>();
+		pid_list = new ArrayList<String>();
 
 		user_options.add("Tune In");
 		user_options.add("See Profile");
@@ -132,29 +155,38 @@ public class MainScreenActivity extends ListActivity {
 		new LoadAllProducts().execute();
 
 		// Get listview
-		expListView = (ExpandableListView) findViewById(R.id.list);
+		lv = (ExpandableListView) findViewById(R.id.exp_list);
 
-		// on seleting single product
-		// launching Edit Product Screen
-		expListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+		lv.setOnChildClickListener(new OnChildClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-									int position, long id) {
-				// getting values from selected ListItem
-				String pid = ((TextView) view.findViewById(R.id.pid)).getText()
-						.toString();
+			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+				if(childPosition == 0){
+					String pid = pid_list.get(groupPosition);
+					Intent in = new Intent(getApplicationContext(),
+							TuneIn.class);
 
-				// Starting new intent
-				Intent in = new Intent(getApplicationContext(),
-						EditUserActivity.class);
-				// sending pid to next activity
-				in.putExtra(TAG_PID, pid);
+					in.putExtra(TAG_PID, pid);
+					in.putExtra(EXTRA_MESSAGE, response);
+					startActivity(in);
+				}
+				return true;
 
-				// starting new activity and expecting some response back
-				startActivityForResult(in, 100);
 			}
 		});
+
+		broad_button = (ToggleButton) findViewById(R.id.toggBtn);
+		broad_button.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				if(((ToggleButton) v).isChecked()) {
+					new StartBroadcast().execute();
+				}
+				else {
+					new StopBroadcast().execute();
+				}
+			}
+		});
+
+
 
 	}
 
@@ -175,9 +207,8 @@ public class MainScreenActivity extends ListActivity {
 				public void success(UserPrivate userPrivate, Response response) {
 					Log.d("User Success", userPrivate.id);
 					String name = userPrivate.display_name.toString();
-					String username = userPrivate.id.toString();
-					String description = "Created Automatically by Spotify login";
-					//addUser(name, username, description);
+					id = userPrivate.id.toString();
+					addUser(name, id);
 
 				}
 
@@ -187,12 +218,15 @@ public class MainScreenActivity extends ListActivity {
 				}
 			});
 
+
+
 		}
+
 	}
 
-	public void addUser(String name, String username, String description) {
+	public void addUser(String name, String id) {
 
-		new CreateNewProduct().execute(name, username, description);
+		new CreateNewProduct().execute(name, id);
 	}
 
 
@@ -235,6 +269,7 @@ public class MainScreenActivity extends ListActivity {
 					// looping through All Products
 					for (int i = 0; i < products.length(); i++) {
 						JSONObject c = products.getJSONObject(i);
+						boolean exists = false;
 
 						// Storing each json item in variable
 						String id = c.getString(TAG_PID);
@@ -246,22 +281,24 @@ public class MainScreenActivity extends ListActivity {
 						// adding each child node to HashMap key => value
 						map.put(TAG_PID, id);
 						map.put(TAG_NAME, name);
+						System.out.println(name);
 
-						listDataHeader.add(name);
-						listDataChild.put(name, user_options);
+						for (String str: listDataHeader){
+							if(str.trim().contains(name))
+								exists = true;
+						}
+						if(!exists) {
+							listDataHeader.add(name);
+							listDataChild.put(name, user_options);
+							pid_list.add(id);
+						}
+
 
 						// adding HashList to ArrayList
 						productsList.add(map);
 					}
-				} else {
-					// no products found
-					// Launch Add New product Activity
-					Intent i = new Intent(getApplicationContext(),
-							NewUserActivity.class);
-					// Closing all previous activities
-					i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(i);
 				}
+
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -281,15 +318,20 @@ public class MainScreenActivity extends ListActivity {
 					/**
 					 * Updating parsed JSON data into ListView
 					 * */
+/*
 					ListAdapter adapter = new SimpleAdapter(
 							MainScreenActivity.this, productsList,
-							R.layout.list_item, new String[] { TAG_PID},
-							new int[] { R.id.pid});
+							R.layout.list_item, new String[] {TAG_NAME, TAG_PID},
+							new int[] {R.id.name ,R.id.pid});
 					// updating listview
 					setListAdapter(adapter);
+*/
 
-					listAdapter = new ExpandableListAdapter(MainScreenActivity.this,listDataHeader, listDataChild);
-					expListView.setAdapter(listAdapter);
+					System.out.println(listDataHeader);
+					System.out.println(listDataChild);
+					exp_adapter = new ExpandableListAdapter(MainScreenActivity.this, listDataHeader, listDataChild);
+					lv.setAdapter(exp_adapter);
+
 				}
 			});
 
@@ -319,9 +361,11 @@ public class MainScreenActivity extends ListActivity {
 
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("id", args[1]));
 			params.add(new BasicNameValuePair("name", args[0]));
-			params.add(new BasicNameValuePair("price", args[1]));
-			params.add(new BasicNameValuePair("description", args[2]));
+
+
+			//params.add(new BasicNameValuePair("description", args[2]));
 
 			// getting JSON Object
 			// Note that create product url accepts POST method
@@ -337,11 +381,11 @@ public class MainScreenActivity extends ListActivity {
 
 				if (success == 1) {
 					// successfully created product
-					Intent i = new Intent(getApplicationContext(), AllUsersActivity.class);
-					startActivity(i);
+					//Intent i = new Intent(getApplicationContext(), AllUsersActivity.class);
+					//startActivity(i);
 
 					// closing this screen
-					finish();
+					//finish();
 				} else {
 					// failed to create product
 				}
@@ -359,6 +403,245 @@ public class MainScreenActivity extends ListActivity {
 			// dismiss the dialog once done
 			pDialog.dismiss();
 		}
+	}
+
+	class StartBroadcast extends AsyncTask<String, String, String> {
+
+		/**
+		 * Before starting background thread Show Progress Dialog
+		 * */
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+
+		}
+
+		/**
+		 * Saving product
+		 * */
+		protected String doInBackground(String... args) {
+
+			/*
+			// getting updated data from EditTexts
+			String name = txtName.getText().toString();
+			String price = txtPrice.getText().toString();
+			String description = txtDesc.getText().toString();
+			*/
+
+			// Building Parameters
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("id", id));
+
+			Log.d("Broadcast", "Started");
+
+
+			// sending modified data through http request
+			// Notice that update product url accepts POST method
+			JSONObject json = jsonParser.makeHttpRequest(url_start_broadcast,
+					"POST", params);
+
+			// check json success tag
+			try {
+				int success = json.getInt(TAG_SUCCESS);
+
+				if (success == 1) {
+					// successfully updated
+					Intent i = getIntent();
+					// send result code 100 to notify about product update
+					setResult(100, i);
+
+				} else {
+					// failed to update product
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+			IntentFilter filter = new IntentFilter();
+			filter.addAction("com.spotify.music.playbackstatechanged");
+			filter.addAction("com.spotify.music.metadatachanged");
+			filter.addAction("com.spotify.music.queuechanged");
+
+
+
+			receiver = new MyBroadcastReceiver() {
+				@Override
+				public void onReceive(Context context, Intent intent) {
+					long timeSentInMs = intent.getLongExtra("timeSent", 0L);
+					String action = intent.getAction();
+
+					String trackId = intent.getStringExtra("id");
+					String artistName = intent.getStringExtra("artist");
+					String albumName = intent.getStringExtra("album");
+					String trackName = intent.getStringExtra("track");
+					int trackLengthInSec = intent.getIntExtra("length", 0);
+					if (action.equals(BroadcastTypes.METADATA_CHANGED)){
+						new SetURI().execute(trackId);
+					}
+
+
+				}
+			};
+			registerReceiver(receiver, filter);
+			receiver_exists = true;
+
+			return null;
+		}
+
+
+		/**
+		 * After completing background task Dismiss the progress dialog
+		 * **/
+		protected void onPostExecute(String file_url) {
+			// dismiss the dialog once product uupdated
+			pDialog.dismiss();
+		}
+	}
+
+	class StopBroadcast extends AsyncTask<String, String, String> {
+
+		/**
+		 * Before starting background thread Show Progress Dialog
+		 * */
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+
+		}
+
+		/**
+		 * Saving product
+		 * */
+		protected String doInBackground(String... args) {
+
+			/*
+			// getting updated data from EditTexts
+			String name = txtName.getText().toString();
+			String price = txtPrice.getText().toString();
+			String description = txtDesc.getText().toString();
+			*/
+
+			// Building Parameters
+			if(receiver_exists){
+				unregisterReceiver(receiver);
+			}
+			receiver_exists = false;
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("id", id));
+
+			Log.d("Broadcast", "Stopped");
+
+
+			// sending modified data through http request
+			// Notice that update product url accepts POST method
+			JSONObject json = jsonParser.makeHttpRequest(url_stop_broadcast,
+					"POST", params);
+
+			// check json success tag
+			try {
+				int success = json.getInt(TAG_SUCCESS);
+
+				if (success == 1) {
+					// successfully updated
+					Intent i = getIntent();
+					// send result code 100 to notify about product update
+					setResult(100, i);
+
+				} else {
+					// failed to update product
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+			return null;
+		}
+
+
+		/**
+		 * After completing background task Dismiss the progress dialog
+		 * **/
+		protected void onPostExecute(String file_url) {
+			// dismiss the dialog once product uupdated
+			pDialog.dismiss();
+		}
+	}
+
+	class SetURI extends AsyncTask<String, String, String> {
+
+		/**
+		 * Before starting background thread Show Progress Dialog
+		 * */
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+
+		}
+
+		/**
+		 * Saving product
+		 * */
+		protected String doInBackground(String... args) {
+
+			/*
+			// getting updated data from EditTexts
+			String name = txtName.getText().toString();
+			String price = txtPrice.getText().toString();
+			String description = txtDesc.getText().toString();
+			*/
+
+			// Building Parameters
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("id", id));
+			params.add(new BasicNameValuePair("uri", args[0]));
+
+			Log.d("Setting URI", params.toString());
+
+
+			// sending modified data through http request
+			// Notice that update product url accepts POST method
+			JSONObject json = jsonParser.makeHttpRequest(url_post_uri,
+					"POST", params);
+
+			// check json success tag
+			try {
+				int success = json.getInt(TAG_SUCCESS);
+
+				if (success == 1) {
+					// successfully updated
+					Intent i = getIntent();
+					// send result code 100 to notify about product update
+					setResult(100, i);
+
+				} else {
+					// failed to update product
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+			return null;
+		}
+
+
+		/**
+		 * After completing background task Dismiss the progress dialog
+		 * **/
+		protected void onPostExecute(String file_url) {
+			// dismiss the dialog once product uupdated
+			pDialog.dismiss();
+		}
+	}
+
+
+
+
+
+
+	@Override
+	public void onDestroy(){
+		new StopBroadcast().execute();
+		super.onDestroy();
 	}
 }
 

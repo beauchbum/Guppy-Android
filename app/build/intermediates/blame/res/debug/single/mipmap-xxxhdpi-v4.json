@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\Users\\Ryan\\AndroidStudioProjects\\Garpy\\Garpy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi-v4\\ic_launcher.png",
+        "source": "C:\\Users\\Ryan\\AndroidStudioProjects\\Garpy\\Garpy\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\AndroidStudioProjects\\Garpy\\Garpy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi-v4\\ic_guppy_launch.png",
+        "source": "C:\\Users\\Ryan\\AndroidStudioProjects\\Garpy\\Garpy\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_guppy_launch.png"
+    }
+]

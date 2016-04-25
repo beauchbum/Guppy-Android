@@ -39,14 +39,16 @@ public class EditUserActivity extends Activity {
 	// JSON parser class
 	JSONParser jsonParser = new JSONParser();
 
+	private static String ip = "10.0.0.26";
+
 	// single product url
-	private static final String url_product_detials = "http://10.0.0.26/android_connect/get_product_details.php";
+	private static final String url_product_detials = "http://" + ip + "/android_connect/get_product_details.php";
 
 	// url to update product
-	private static final String url_update_product = "http://10.0.0.26/android_connect/update_product.php";
+	private static final String url_update_product = "http://" + ip + "/android_connect/update_product.php";
 	
 	// url to delete product
-	private static final String url_delete_product = "http://10.0.0.26/android_connect/delete_product.php";
+	private static final String url_delete_product = "http://" + ip + "/android_connect/delete_product.php";
 
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
@@ -59,22 +61,22 @@ public class EditUserActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.edit_product);
+		setContentView(R.layout.main_screen);
 
-		// save button
-		btnSave = (Button) findViewById(R.id.btnSave);
-		btnDelete = (Button) findViewById(R.id.btnDelete);
+
 
 		// getting product details from intent
 		Intent i = getIntent();
 		
 		// getting product id (pid) from intent
 		pid = i.getStringExtra(TAG_PID);
+		new SaveProductDetails().execute();
 
 		// Getting complete product details in background thread
-		new GetProductDetails().execute();
+		//new GetProductDetails().execute();
 
 		// save button click event
+		/*
 		btnSave.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -93,17 +95,20 @@ public class EditUserActivity extends Activity {
 				new DeleteProduct().execute();
 			}
 		});
+		*/
 
 	}
 
 	/**
 	 * Background Async Task to Get complete product details
 	 * */
+
+
 	class GetProductDetails extends AsyncTask<String, String, String> {
 
 		/**
 		 * Before starting background thread Show Progress Dialog
-		 * */
+		 ** /
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
@@ -154,9 +159,6 @@ public class EditUserActivity extends Activity {
 							txtDesc = (EditText) findViewById(R.id.inputDesc);
 
 							// display product data in EditText
-							txtName.setText(product.getString(TAG_NAME));
-							txtPrice.setText(product.getString(TAG_PRICE));
-							txtDesc.setText(product.getString(TAG_DESCRIPTION));
 
 						}else{
 							// product with pid not found
@@ -203,17 +205,17 @@ public class EditUserActivity extends Activity {
 		 * */
 		protected String doInBackground(String... args) {
 
+			/*
 			// getting updated data from EditTexts
 			String name = txtName.getText().toString();
 			String price = txtPrice.getText().toString();
 			String description = txtDesc.getText().toString();
+			*/
 
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair(TAG_PID, pid));
-			params.add(new BasicNameValuePair(TAG_NAME, name));
-			params.add(new BasicNameValuePair(TAG_PRICE, price));
-			params.add(new BasicNameValuePair(TAG_DESCRIPTION, description));
+
 
 			// sending modified data through http request
 			// Notice that update product url accepts POST method
