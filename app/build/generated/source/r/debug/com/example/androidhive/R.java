@@ -68,36 +68,26 @@ containing a value of this type.
         public static final int adjust_width=0x7f090001;
         public static final int album=0x7f090004;
         public static final int artist=0x7f090005;
-        public static final int btnCreateProduct=0x7f090009;
-        public static final int btnDelete=0x7f09000e;
-        public static final int btnSave=0x7f09000d;
-        public static final int com_spotify_sdk_login_webview=0x7f09000c;
-        public static final int com_spotify_sdk_login_webview_container=0x7f09000b;
-        public static final int exp_list=0x7f090013;
-        public static final int inputDesc=0x7f090008;
-        public static final int inputName=0x7f090006;
-        public static final int inputPrice=0x7f090007;
-        public static final int lblListHeader=0x7f09000f;
-        public static final int list=0x7f09000a;
-        public static final int name=0x7f090011;
+        public static final int com_spotify_sdk_login_webview=0x7f090007;
+        public static final int com_spotify_sdk_login_webview_container=0x7f090006;
+        public static final int exp_list=0x7f09000c;
+        public static final int lblListHeader=0x7f090008;
+        public static final int name=0x7f09000a;
         public static final int none=0x7f090002;
-        public static final int pid=0x7f090010;
+        public static final int pid=0x7f090009;
         public static final int song=0x7f090003;
-        public static final int toggBtn=0x7f090012;
+        public static final int toggBtn=0x7f09000b;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f080000;
     }
     public static final class layout {
         public static final int activity_tune_in=0x7f040000;
-        public static final int add_product=0x7f040001;
-        public static final int all_products=0x7f040002;
-        public static final int com_spotify_sdk_login_activity=0x7f040003;
-        public static final int com_spotify_sdk_login_dialog=0x7f040004;
-        public static final int edit_product=0x7f040005;
-        public static final int list_group=0x7f040006;
-        public static final int list_item=0x7f040007;
-        public static final int main_screen=0x7f040008;
+        public static final int com_spotify_sdk_login_activity=0x7f040001;
+        public static final int com_spotify_sdk_login_dialog=0x7f040002;
+        public static final int list_group=0x7f040003;
+        public static final int list_item=0x7f040004;
+        public static final int main_screen=0x7f040005;
     }
     public static final class mipmap {
         public static final int ic_guppy_launch=0x7f030000;

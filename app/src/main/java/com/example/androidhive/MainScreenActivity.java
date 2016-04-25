@@ -96,16 +96,10 @@ public class MainScreenActivity extends Activity {
 	JSONArray products = null;
 
 
-
-
-	Button btnViewProducts;
-	Button btnNewProduct;
-
 	// Progress Dialog
 	private ProgressDialog pDialog;
 	JSONParser jsonParser = new JSONParser();
 	// url to create new product
-
 
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
@@ -122,6 +116,8 @@ public class MainScreenActivity extends Activity {
 	// TODO: Replace with your redirect URI
 	private static final String REDIRECT_URI = "sync-me-up://callback";
 
+
+	//Runs "LoadAllProducts" and begins the Spotify login 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -136,7 +132,7 @@ public class MainScreenActivity extends Activity {
 
 		user_options.add("Tune In");
 		user_options.add("See Profile");
-		user_options.add("Gando Sux");
+		//user_options.add("Gando Sux");
 
 
 
@@ -185,12 +181,10 @@ public class MainScreenActivity extends Activity {
 				}
 			}
 		});
-
-
-
 	}
 
-
+	//Receives a "success" code from Spotify login attempt
+	//Runs "CreateNewProduct" to add user to database
 	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		super.onActivityResult(requestCode, resultCode, intent);
 
@@ -208,7 +202,7 @@ public class MainScreenActivity extends Activity {
 					Log.d("User Success", userPrivate.id);
 					String name = userPrivate.display_name.toString();
 					id = userPrivate.id.toString();
-					addUser(name, id);
+					new CreateNewProduct().execute(name, id);
 
 				}
 
@@ -217,19 +211,12 @@ public class MainScreenActivity extends Activity {
 					Log.d("User Failure", error.toString());
 				}
 			});
-
-
-
 		}
-
-	}
-
-	public void addUser(String name, String id) {
-
-		new CreateNewProduct().execute(name, id);
 	}
 
 
+	//Runs a PHP script to load all users from database
+	//Then expandable listview adapter displays the users in the UI
 	class LoadAllProducts extends AsyncTask<String, String, String> {
 
 		/**
@@ -338,6 +325,8 @@ public class MainScreenActivity extends Activity {
 		}
 
 	}
+
+	//Runs a PHP script to add a user to the database as long as they do not already exist
 	class CreateNewProduct extends AsyncTask<String, String, String> {
 
 		/**
@@ -378,12 +367,7 @@ public class MainScreenActivity extends Activity {
 				int success = json.getInt(TAG_SUCCESS);
 
 				if (success == 1) {
-					// successfully created product
-					//Intent i = new Intent(getApplicationContext(), AllUsersActivity.class);
-					//startActivity(i);
 
-					// closing this screen
-					//finish();
 				} else {
 					// failed to create product
 				}
@@ -403,6 +387,8 @@ public class MainScreenActivity extends Activity {
 		}
 	}
 
+	//Registers Broadcast Receiver which will listen for changes in Spotify playback
+	//Then sets the broadcasting variable to "1"
 	class StartBroadcast extends AsyncTask<String, String, String> {
 
 		/**
@@ -496,6 +482,7 @@ public class MainScreenActivity extends Activity {
 		}
 	}
 
+	//Runs PHP script to change broadcasting variable to "0"
 	class StopBroadcast extends AsyncTask<String, String, String> {
 
 		/**
@@ -511,13 +498,6 @@ public class MainScreenActivity extends Activity {
 		 * Saving product
 		 * */
 		protected String doInBackground(String... args) {
-
-			/*
-			// getting updated data from EditTexts
-			String name = txtName.getText().toString();
-			String price = txtPrice.getText().toString();
-			String description = txtDesc.getText().toString();
-			*/
 
 			// Building Parameters
 			if(receiver_exists){
@@ -565,6 +545,7 @@ public class MainScreenActivity extends Activity {
 		}
 	}
 
+	//Runs PHP script to set the new song URI
 	class SetURI extends AsyncTask<String, String, String> {
 
 		/**
@@ -580,13 +561,6 @@ public class MainScreenActivity extends Activity {
 		 * Saving product
 		 * */
 		protected String doInBackground(String... args) {
-
-			/*
-			// getting updated data from EditTexts
-			String name = txtName.getText().toString();
-			String price = txtPrice.getText().toString();
-			String description = txtDesc.getText().toString();
-			*/
 
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -630,11 +604,6 @@ public class MainScreenActivity extends Activity {
 			pDialog.dismiss();
 		}
 	}
-
-
-
-
-
 
 	@Override
 	public void onDestroy(){

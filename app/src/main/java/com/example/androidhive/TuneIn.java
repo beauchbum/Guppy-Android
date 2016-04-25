@@ -87,16 +87,19 @@ public class TuneIn extends Activity implements
             @Override
             public void onInitialized(Player player) {
                 mPlayer = player;
-                //mPlayer.play("spotify:track:0scQIzgcOhnmfqfOTpRUFH");
+
+               //Non UI Thread that runs continuosly to check for new song URI/play/pause
                 ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(1);
                 exec.scheduleAtFixedRate(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d("Old URI", old_uri);
+
+                        //JSON making the HTTP request
                         List<NameValuePair> params = new ArrayList<NameValuePair>();
                         params.add(new BasicNameValuePair("id", pid));
                         JSONObject json = jsonParser.makeHttpRequest(
                                 url_get_uri, "GET", params);
+                        
                         try {
 
                             int success = json.getInt(TAG_SUCCESS);
@@ -133,15 +136,6 @@ public class TuneIn extends Activity implements
                 Log.e("MainActivity", "Could not initialize player: " + throwable.getMessage());
             }
         });
-
-/*
-        btnClick3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPlayer.play("spotify:track:0scQIzgcOhnmfqfOTpRUFH");
-            }
-        });
-        */
     }
 
     @Override
@@ -188,7 +182,7 @@ public class TuneIn extends Activity implements
         super.onDestroy();
     }
 
-
+    //Runs PHP script to grab the song URI from the database
     class Get_uri extends AsyncTask<String, String, String> {
 
         /**
