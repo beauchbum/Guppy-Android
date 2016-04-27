@@ -67,6 +67,8 @@ public class MainScreenActivity extends Activity {
 	ArrayList<String> listDataHeader;
 	List<String> user_options;
 	ArrayList<String> pid_list;
+	private String is_playing;
+	private boolean playing;
 
 	private MyBroadcastReceiver receiver;
 
@@ -78,13 +80,16 @@ public class MainScreenActivity extends Activity {
 
 
 
-	private static String ip = "10.214.238.84";
+	private static String ip = "10.0.0.26";
 	// url to get all products list
 	private static String url_all_products = "http://" + ip + "/android_connect/get_all_products.php";
 	private static final String url_start_broadcast = "http://" + ip + "/android_connect/start_broadcast.php";
 	private static final String url_stop_broadcast = "http://" + ip + "/android_connect/stop_broadcast.php";
 	private static String url_create_product = "http://" + ip + "/android_connect/create_product.php";
 	private static String url_post_uri = "http://" + ip + "/android_connect/post_uri.php";
+	private static String url_play_playback = "http://" + ip + "/android_connect/play_playback.php";
+	private static String url_pause_playback = "http://" + ip + "/android_connect/pause_playback.php";
+
 
 	// JSON Node names
 
@@ -117,7 +122,7 @@ public class MainScreenActivity extends Activity {
 	private static final String REDIRECT_URI = "sync-me-up://callback";
 
 
-	//Runs "LoadAllProducts" and begins the Spotify login 
+	//Runs "LoadAllProducts" and begins the Spotify login
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -460,7 +465,18 @@ public class MainScreenActivity extends Activity {
 					String trackName = intent.getStringExtra("track");
 					int trackLengthInSec = intent.getIntExtra("length", 0);
 					if (action.equals(BroadcastTypes.METADATA_CHANGED)){
-						new SetURI().execute(trackId);
+						new SetURI().execute(trackId, trackName, albumName, artistName);
+					}
+					if (action.equals(BroadcastTypes.PLAYBACK_STATE_CHANGED)) {
+						playing = intent.getBooleanExtra("playing", false);
+						//int positionInMs = intent.getIntExtra("playbackPosition", 0);
+						if (playing){
+							is_playing = "true";
+						}
+						else{
+							is_playing = "false";
+						}
+						new ChangePlayback().execute(is_playing);
 					}
 
 
@@ -562,10 +578,20 @@ public class MainScreenActivity extends Activity {
 		 * */
 		protected String doInBackground(String... args) {
 
+			/*
+			// getting updated data from EditTexts
+			String name = txtName.getText().toString();
+			String price = txtPrice.getText().toString();
+			String description = txtDesc.getText().toString();
+			*/
+
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair("id", id));
 			params.add(new BasicNameValuePair("uri", args[0]));
+			params.add(new BasicNameValuePair("song", args[1]));
+			params.add(new BasicNameValuePair("album", args[2]));
+			params.add(new BasicNameValuePair("artist", args[3]));
 
 			Log.d("Setting URI", params.toString());
 
@@ -574,6 +600,81 @@ public class MainScreenActivity extends Activity {
 			// Notice that update product url accepts POST method
 			JSONObject json = jsonParser.makeHttpRequest(url_post_uri,
 					"POST", params);
+
+			// check json success tag
+			try {
+				int success = json.getInt(TAG_SUCCESS);
+
+				if (success == 1) {
+					// successfully updated
+					Intent i = getIntent();
+					// send result code 100 to notify about product update
+					setResult(100, i);
+
+				} else {
+					// failed to update product
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+			return null;
+		}
+
+
+		/**
+		 * After completing background task Dismiss the progress dialog
+		 * **/
+		protected void onPostExecute(String file_url) {
+			// dismiss the dialog once product uupdated
+			pDialog.dismiss();
+		}
+	}
+
+	class ChangePlayback extends AsyncTask<String, String, String> {
+
+		/**
+		 * Before starting background thread Show Progress Dialog
+		 * */
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+
+		}
+
+		/**
+		 * Saving product
+		 * */
+		protected String doInBackground(String... args) {
+
+			/*
+			// getting updated data from EditTexts
+			String name = txtName.getText().toString();
+			String price = txtPrice.getText().toString();
+			String description = txtDesc.getText().toString();
+			*/
+
+
+			// Building Parameters
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("id", id));
+
+
+			Log.d("Setting URI", params.toString());
+			JSONObject json;
+
+
+			// sending modified data through http request
+			// Notice that update product url accepts POST method
+			if(args[0].equals("true")){
+				json = jsonParser.makeHttpRequest(url_play_playback,
+						"POST", params);
+			}
+			else{
+				json = jsonParser.makeHttpRequest(url_pause_playback,
+						"POST", params);
+			}
+
 
 			// check json success tag
 			try {

@@ -9,38 +9,64 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.androidhive.TuneIn">
 
+
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="1">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Steph Curry"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+
+        <ImageView
+            android:layout_width="400px"
+            android:layout_height="400px"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="50px"
+            />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Large Text"
         android:id="@+id/song"
         android:layout_gravity="center_horizontal"
+        android:layout_margin="10px"
         android:layout_weight="0.03" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Large Text"
         android:id="@+id/album"
         android:layout_gravity="center_horizontal"
+        android:layout_margin="10px"
         android:layout_weight="0.03" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Large Text"
         android:id="@+id/artist"
         android:layout_gravity="center_horizontal"
+        android:layout_margin="10px"
         android:layout_weight="0.03" />
+
+        <ProgressBar
+            android:layout_width="400px"
+            android:layout_height="30px"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40px"/>
 
 
     </LinearLayout>
