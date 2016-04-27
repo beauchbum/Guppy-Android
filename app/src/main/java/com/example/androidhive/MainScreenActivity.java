@@ -7,19 +7,24 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import android.widget.ExpandableListView;
@@ -27,6 +32,7 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 
@@ -90,6 +96,13 @@ public class MainScreenActivity extends Activity {
 	private static String url_play_playback = "http://" + ip + "/android_connect/play_playback.php";
 	private static String url_pause_playback = "http://" + ip + "/android_connect/pause_playback.php";
 
+	// Drawer List Stuff
+	private LinearLayout mDrawerLayout;
+	private ListView mDrawerList;
+	private Switch mDrawerSwitch;
+	private TextView drawerSwitchStatus;
+	private ArrayAdapter<String> mAdapter;
+
 
 	// JSON Node names
 
@@ -139,7 +152,11 @@ public class MainScreenActivity extends Activity {
 		user_options.add("See Profile");
 		//user_options.add("Gando Sux");
 
-
+		//Set ListView for Drawer
+		mDrawerLayout = (LinearLayout) findViewById(R.id.drawer_linear_layout);
+		//mDrawerSwitch = (Switch) findViewById(R.id.drawer_switch);
+		mDrawerList = (ListView) findViewById(R.id.drawer_list);
+		addDrawerItems();
 
 		//Spotify Authentication
 		AuthenticationRequest.Builder builder = new AuthenticationRequest.Builder(CLIENT_ID,
@@ -217,6 +234,35 @@ public class MainScreenActivity extends Activity {
 				}
 			});
 		}
+	}
+
+
+	private void addDrawerItems(){
+		// More Drawer Stuff
+		String[] mDrawerTitles = {"Home", "Following", "Settings", "Logout"};
+		mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mDrawerTitles) {
+			@Override
+			public View getView(int position, View convertView,
+								ViewGroup parent) {
+				View view =super.getView(position, convertView, parent);
+
+				TextView textView=(TextView) view.findViewById(android.R.id.text1);
+
+            /*YOUR CHOICE OF COLOR*/
+				textView.setTextColor(Color.WHITE);
+
+				return view;
+			}
+		};
+		mDrawerList.setAdapter(mAdapter);
+
+		mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Toast.makeText(MainScreenActivity.this, "Click", Toast.LENGTH_SHORT).show();
+			}
+		});
+
 	}
 
 
