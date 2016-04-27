@@ -65,7 +65,7 @@ public class TuneIn extends Activity implements
 
     private static final String TAG_SUCCESS = "success";
 
-    private static String ip = "10.105.79.220";
+    private static String ip = "10.0.0.26";
     JSONParser jsonParser = new JSONParser();
     private static String url_get_uri = "http://" + ip + "/android_connect/get_uri.php";
 
