@@ -30,7 +30,20 @@
             </intent-filter>
         </activity>
 
+        <!-- All Product Activity -->
+        <activity
+            android:name="com.example.androidhive.AllUsersActivity"
+            android:label="All Users" />
 
+        <!-- Add Product Activity -->
+        <activity
+            android:name="com.example.androidhive.NewUserActivity"
+            android:label="Add New User" />
+
+        <!-- Edit Product Activity -->
+        <activity
+            android:name="com.example.androidhive.EditUserActivity"
+            android:label="Edit User" />
         <activity
             android:name="com.spotify.sdk.android.authentication.LoginActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />

@@ -57,26 +57,34 @@ containing a value of this type.
         public static final int activity_vertical_margin=0x7f060001;
     }
     public static final class drawable {
-        public static final int common_full_open_on_phone=0x7f020000;
-        public static final int common_ic_googleplayservices=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int ic_launcher_guppy=0x7f020003;
-        public static final int ic_speaker=0x7f020004;
+        public static final int car=0x7f020000;
+        public static final int chicago=0x7f020001;
+        public static final int common_full_open_on_phone=0x7f020002;
+        public static final int common_ic_googleplayservices=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
+        public static final int ic_launcher_guppy=0x7f020005;
+        public static final int ic_speaker=0x7f020006;
+        public static final int japan=0x7f020007;
+        public static final int mountains=0x7f020008;
+        public static final int progress_bar=0x7f020009;
+        public static final int stars=0x7f02000a;
+        public static final int steph=0x7f02000b;
     }
     public static final class id {
         public static final int adjust_height=0x7f090000;
         public static final int adjust_width=0x7f090001;
-        public static final int album=0x7f090004;
-        public static final int artist=0x7f090005;
-        public static final int com_spotify_sdk_login_webview=0x7f090007;
-        public static final int com_spotify_sdk_login_webview_container=0x7f090006;
-        public static final int exp_list=0x7f09000c;
-        public static final int lblListHeader=0x7f090008;
-        public static final int name=0x7f09000a;
+        public static final int album=0x7f090005;
+        public static final int artist=0x7f090006;
+        public static final int com_spotify_sdk_login_webview=0x7f090008;
+        public static final int com_spotify_sdk_login_webview_container=0x7f090007;
+        public static final int exp_list=0x7f09000d;
+        public static final int lblListHeader=0x7f090009;
+        public static final int name=0x7f09000b;
         public static final int none=0x7f090002;
-        public static final int pid=0x7f090009;
-        public static final int song=0x7f090003;
-        public static final int toggBtn=0x7f09000b;
+        public static final int pid=0x7f09000a;
+        public static final int song=0x7f090004;
+        public static final int toggBtn=0x7f09000c;
+        public static final int username=0x7f090003;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f080000;
@@ -90,8 +98,12 @@ containing a value of this type.
         public static final int main_screen=0x7f040005;
     }
     public static final class mipmap {
-        public static final int ic_guppy_launch=0x7f030000;
-        public static final int ic_launcher=0x7f030001;
+        public static final int dickbutt=0x7f030000;
+        public static final int gradiant1=0x7f030001;
+        public static final int ic_guppy_launch=0x7f030002;
+        public static final int ic_launcher=0x7f030003;
+        public static final int stars=0x7f030004;
+        public static final int steph=0x7f030005;
     }
     public static final class string {
         public static final int app_name=0x7f05001e;

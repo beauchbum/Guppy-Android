@@ -3,13 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
     tools:context="com.example.androidhive.TuneIn">
 
-
     <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:src="@mipmap/gradiant1"/>
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:src="@drawable/chicago"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"/>
+
+
 
     <LinearLayout
         android:orientation="vertical"
@@ -22,16 +26,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
             android:text="Steph Curry"
             android:textAppearance="?android:attr/textAppearanceLarge"/>
 
 
         <ImageView
-            android:layout_width="500px"
-            android:layout_height="500px"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="25px"
-            android:src="@mipmap/steph"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="110dp"
+            android:src="@drawable/steph"
             />
 
     <TextView
@@ -41,7 +47,7 @@
         android:text="Large Text"
         android:id="@+id/song"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="10px"
+        android:layout_marginBottom="10dp"
         android:layout_weight="0.03" />
 
     <TextView
@@ -51,7 +57,7 @@
         android:text="Large Text"
         android:id="@+id/album"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="10px"
+        android:layout_margin="10dp"
         android:layout_weight="0.03" />
 
     <TextView
@@ -61,17 +67,21 @@
         android:text="Large Text"
         android:id="@+id/artist"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="10px"
+        android:layout_margin="10dp"
         android:layout_weight="0.03" />
 
-        <ProgressBar
+    <ProgressBar
             style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="500px"
-            android:layout_height="20px"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30px"/>
+            android:layout_marginTop="10dp"
+            android:progressDrawable="@drawable/progress_bar"/>
 
 
     </LinearLayout>
 
+
 </RelativeLayout>
+
+

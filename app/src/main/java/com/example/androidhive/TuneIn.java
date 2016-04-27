@@ -55,16 +55,17 @@ public class TuneIn extends Activity implements
     private TextView artist;
     private String old_uri = "No Track Yet";
     private String new_uri;
-    private String the_song;
-    private String the_album;
-    private String the_artist;
-    private boolean playing;
+    private String the_song = "Loading Song";
+    private String the_album = "Loading Album";
+    private String the_artist = "Loading Artist";
+    private boolean broadcaster_playing = false;
+    private boolean currently_playing =false;
     private String pid;
     private static final String TAG_PRODUCTS = "users";
 
     private static final String TAG_SUCCESS = "success";
 
-    private static String ip = "10.0.0.26";
+    private static String ip = "192.168.1.102";
     JSONParser jsonParser = new JSONParser();
     private static String url_get_uri = "http://" + ip + "/android_connect/get_uri.php";
 
@@ -133,7 +134,7 @@ public class TuneIn extends Activity implements
                                 the_song = product.getString("song");
                                 the_album = product.getString("album");
                                 the_artist = product.getString("artist");
-                                playing = product.getBoolean("playing");
+                                broadcaster_playing = product.getBoolean("playing");
                                 Log.d("URI", new_uri);
 
                             }else{
@@ -146,7 +147,16 @@ public class TuneIn extends Activity implements
                         if (new_uri.equals(old_uri) == false)
                         {
                             mPlayer.play(new_uri);
+                            currently_playing = true;
                             old_uri = new_uri;
+                        }
+                        if (currently_playing == false && broadcaster_playing == true)
+                        {
+                            mPlayer.resume();
+                        }
+                        if (currently_playing == true && broadcaster_playing == false)
+                        {
+                            mPlayer.pause();
                         }
                     }
                 }, 5, 2, TimeUnit.SECONDS);
