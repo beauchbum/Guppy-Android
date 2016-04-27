@@ -80,7 +80,7 @@ public class MainScreenActivity extends Activity {
 
 
 
-	private static String ip = "192.168.1.102";
+	private static String ip = "10.105.79.220";
 	// url to get all products list
 	private static String url_all_products = "http://" + ip + "/android_connect/get_all_products.php";
 	private static final String url_start_broadcast = "http://" + ip + "/android_connect/start_broadcast.php";

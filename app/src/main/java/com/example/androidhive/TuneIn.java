@@ -65,7 +65,7 @@ public class TuneIn extends Activity implements
 
     private static final String TAG_SUCCESS = "success";
 
-    private static String ip = "192.168.1.102";
+    private static String ip = "10.105.79.220";
     JSONParser jsonParser = new JSONParser();
     private static String url_get_uri = "http://" + ip + "/android_connect/get_uri.php";
 
@@ -134,8 +134,10 @@ public class TuneIn extends Activity implements
                                 the_song = product.getString("song");
                                 the_album = product.getString("album");
                                 the_artist = product.getString("artist");
-                                broadcaster_playing = product.getBoolean("playing");
+                                //broadcaster_playing = product.getBoolean("playing");
                                 Log.d("URI", new_uri);
+                                //String am_i_playing = String.valueOf(broadcaster_playing);
+                                //Log.d("broadcaster playing", am_i_playing);
 
                             }else{
                                 // product with pid not found
@@ -147,17 +149,22 @@ public class TuneIn extends Activity implements
                         if (new_uri.equals(old_uri) == false)
                         {
                             mPlayer.play(new_uri);
-                            currently_playing = true;
+                            //currently_playing = true;
                             old_uri = new_uri;
                         }
+                        /*
                         if (currently_playing == false && broadcaster_playing == true)
+
                         {
                             mPlayer.resume();
+                            currently_playing = true;
                         }
                         if (currently_playing == true && broadcaster_playing == false)
                         {
                             mPlayer.pause();
+                            currently_playing = false;
                         }
+                        */
                     }
                 }, 5, 2, TimeUnit.SECONDS);
 

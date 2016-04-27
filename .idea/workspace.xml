@@ -36,36 +36,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TuneIn.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TuneIn.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/androidhive/TuneIn.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="49" column="29" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.78177965">
+              <caret line="152" column="28" selection-start-line="152" selection-start-column="28" selection-end-line="152" selection-end-column="28" />
               <folding>
-                <element signature="e#4125#6500#0" expanded="true" />
-                <element signature="e#6499#6500#0" expanded="true" />
-                <element signature="e#6793#6794#0" expanded="true" />
-                <element signature="e#6849#6850#0" expanded="true" />
-                <element signature="e#6896#6897#0" expanded="true" />
-                <element signature="e#6953#6954#0" expanded="true" />
-                <element signature="e#7017#7018#0" expanded="true" />
-                <element signature="e#7071#7072#0" expanded="true" />
-                <element signature="e#7123#7124#0" expanded="true" />
-                <element signature="e#7189#7190#0" expanded="true" />
-                <element signature="class#Get_uri#0;class#TuneIn#0" expanded="false" />
+                <element signature="e#4125#6839#0" expanded="true" />
+                <element signature="e#6838#6839#0" expanded="true" />
+                <element signature="e#7132#7133#0" expanded="true" />
+                <element signature="e#7188#7189#0" expanded="true" />
+                <element signature="e#7235#7236#0" expanded="true" />
+                <element signature="e#7292#7293#0" expanded="true" />
+                <element signature="e#7356#7357#0" expanded="true" />
+                <element signature="e#7410#7411#0" expanded="true" />
+                <element signature="e#7462#7463#0" expanded="true" />
+                <element signature="e#7528#7529#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_tune_in.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="activity_tune_in.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tune_in.xml">
           <provider editor-type-id="android-designer">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.41724616">
-              <caret line="36" column="26" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
+            <state vertical-scroll-proportion="-3.2894738">
+              <caret line="29" column="11" selection-start-line="29" selection-start-column="11" selection-end-line="29" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -1707,9 +1706,9 @@
         <option value="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/main_screen.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/progress_bar.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_tune_in.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/androidhive/MainScreenActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/androidhive/TuneIn.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_tune_in.xml" />
       </list>
     </option>
   </component>
@@ -1874,7 +1873,7 @@
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="FA4B5Y805683" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="4f1777b4" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Nexus_5_API_23" />
     <property name="device.picker.selection" value="FA4B5Y805683" />
     <property name="FullScreen" value="false" />
@@ -2063,10 +2062,10 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.026960785" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32955772" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3762255" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32955772" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29411766" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.71936274" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2142,17 +2141,16 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="76" column="43" selection-start-line="76" selection-start-column="43" selection-end-line="76" selection-end-column="43" />
           <folding>
-            <element signature="e#4125#6500#0" expanded="true" />
-            <element signature="e#6499#6500#0" expanded="true" />
-            <element signature="e#6793#6794#0" expanded="true" />
-            <element signature="e#6849#6850#0" expanded="true" />
-            <element signature="e#6896#6897#0" expanded="true" />
-            <element signature="e#6953#6954#0" expanded="true" />
-            <element signature="e#7017#7018#0" expanded="true" />
-            <element signature="e#7071#7072#0" expanded="true" />
-            <element signature="e#7123#7124#0" expanded="true" />
-            <element signature="e#7189#7190#0" expanded="true" />
-            <element signature="class#Get_uri#0;class#TuneIn#0" expanded="false" />
+            <element signature="e#4125#6839#0" expanded="true" />
+            <element signature="e#6838#6839#0" expanded="true" />
+            <element signature="e#7132#7133#0" expanded="true" />
+            <element signature="e#7188#7189#0" expanded="true" />
+            <element signature="e#7235#7236#0" expanded="true" />
+            <element signature="e#7292#7293#0" expanded="true" />
+            <element signature="e#7356#7357#0" expanded="true" />
+            <element signature="e#7410#7411#0" expanded="true" />
+            <element signature="e#7462#7463#0" expanded="true" />
+            <element signature="e#7528#7529#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2202,17 +2200,16 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="52" column="28" selection-start-line="52" selection-start-column="28" selection-end-line="52" selection-end-column="28" />
           <folding>
-            <element signature="e#4125#6500#0" expanded="true" />
-            <element signature="e#6499#6500#0" expanded="true" />
-            <element signature="e#6793#6794#0" expanded="true" />
-            <element signature="e#6849#6850#0" expanded="true" />
-            <element signature="e#6896#6897#0" expanded="true" />
-            <element signature="e#6953#6954#0" expanded="true" />
-            <element signature="e#7017#7018#0" expanded="true" />
-            <element signature="e#7071#7072#0" expanded="true" />
-            <element signature="e#7123#7124#0" expanded="true" />
-            <element signature="e#7189#7190#0" expanded="true" />
-            <element signature="class#Get_uri#0;class#TuneIn#0" expanded="false" />
+            <element signature="e#4125#6839#0" expanded="true" />
+            <element signature="e#6838#6839#0" expanded="true" />
+            <element signature="e#7132#7133#0" expanded="true" />
+            <element signature="e#7188#7189#0" expanded="true" />
+            <element signature="e#7235#7236#0" expanded="true" />
+            <element signature="e#7292#7293#0" expanded="true" />
+            <element signature="e#7356#7357#0" expanded="true" />
+            <element signature="e#7410#7411#0" expanded="true" />
+            <element signature="e#7462#7463#0" expanded="true" />
+            <element signature="e#7528#7529#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2248,17 +2245,16 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#4125#6500#0" expanded="true" />
-            <element signature="e#6499#6500#0" expanded="true" />
-            <element signature="e#6793#6794#0" expanded="true" />
-            <element signature="e#6849#6850#0" expanded="true" />
-            <element signature="e#6896#6897#0" expanded="true" />
-            <element signature="e#6953#6954#0" expanded="true" />
-            <element signature="e#7017#7018#0" expanded="true" />
-            <element signature="e#7071#7072#0" expanded="true" />
-            <element signature="e#7123#7124#0" expanded="true" />
-            <element signature="e#7189#7190#0" expanded="true" />
-            <element signature="class#Get_uri#0;class#TuneIn#0" expanded="false" />
+            <element signature="e#4125#6839#0" expanded="true" />
+            <element signature="e#6838#6839#0" expanded="true" />
+            <element signature="e#7132#7133#0" expanded="true" />
+            <element signature="e#7188#7189#0" expanded="true" />
+            <element signature="e#7235#7236#0" expanded="true" />
+            <element signature="e#7292#7293#0" expanded="true" />
+            <element signature="e#7356#7357#0" expanded="true" />
+            <element signature="e#7410#7411#0" expanded="true" />
+            <element signature="e#7462#7463#0" expanded="true" />
+            <element signature="e#7528#7529#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2318,6 +2314,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tune_in.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.2894738">
+          <caret line="29" column="11" selection-start-line="29" selection-start-column="11" selection-end-line="29" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/androidhive/MainScreenActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2330,32 +2337,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/androidhive/TuneIn.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="49" column="29" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.78177965">
+          <caret line="152" column="28" selection-start-line="152" selection-start-column="28" selection-end-line="152" selection-end-column="28" />
           <folding>
-            <element signature="e#4125#6500#0" expanded="true" />
-            <element signature="e#6499#6500#0" expanded="true" />
-            <element signature="e#6793#6794#0" expanded="true" />
-            <element signature="e#6849#6850#0" expanded="true" />
-            <element signature="e#6896#6897#0" expanded="true" />
-            <element signature="e#6953#6954#0" expanded="true" />
-            <element signature="e#7017#7018#0" expanded="true" />
-            <element signature="e#7071#7072#0" expanded="true" />
-            <element signature="e#7123#7124#0" expanded="true" />
-            <element signature="e#7189#7190#0" expanded="true" />
-            <element signature="class#Get_uri#0;class#TuneIn#0" expanded="false" />
+            <element signature="e#4125#6839#0" expanded="true" />
+            <element signature="e#6838#6839#0" expanded="true" />
+            <element signature="e#7132#7133#0" expanded="true" />
+            <element signature="e#7188#7189#0" expanded="true" />
+            <element signature="e#7235#7236#0" expanded="true" />
+            <element signature="e#7292#7293#0" expanded="true" />
+            <element signature="e#7356#7357#0" expanded="true" />
+            <element signature="e#7410#7411#0" expanded="true" />
+            <element signature="e#7462#7463#0" expanded="true" />
+            <element signature="e#7528#7529#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tune_in.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41724616">
-          <caret line="36" column="26" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
