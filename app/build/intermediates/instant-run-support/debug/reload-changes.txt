@@ -1,0 +1,12 @@
+CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\MainScreenActivity$1$override.class
+CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\MainScreenActivity$StartBroadcast$override.class
+CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\MainScreenActivity$SetURI$override.class
+CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\MainScreenActivity$CreateNewProduct$override.class
+CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\android\tools\fd\runtime\AppPatchesLoaderImpl.class
+CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\MainScreenActivity$2$override.class
+CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\MainScreenActivity$LoadAllProducts$override.class
+CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\MainScreenActivity$LoadAllProducts$1$override.class
+CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\MainScreenActivity$override.class
+CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\MainScreenActivity$StopBroadcast$override.class
+CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\MainScreenActivity$3$override.class
+CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\MainScreenActivity$StartBroadcast$1$override.class

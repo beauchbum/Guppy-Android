@@ -33,6 +33,8 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -51,15 +53,19 @@ public class TuneIn extends Activity implements
     private TextView song;
     private TextView album;
     private TextView artist;
-    private Handler h;
     private String old_uri = "No Track Yet";
     private String new_uri;
+    private String the_song = "Loading Song";
+    private String the_album = "Loading Album";
+    private String the_artist = "Loading Artist";
+    private boolean broadcaster_playing = false;
+    private boolean currently_playing =false;
     private String pid;
     private static final String TAG_PRODUCTS = "users";
 
     private static final String TAG_SUCCESS = "success";
 
-    private static String ip = "10.214.238.84";
+    private static String ip = "10.105.79.220";
     JSONParser jsonParser = new JSONParser();
     private static String url_get_uri = "http://" + ip + "/android_connect/get_uri.php";
 
@@ -76,6 +82,20 @@ public class TuneIn extends Activity implements
         artist = (TextView) findViewById(R.id.artist);
 
         Intent intent = getIntent();
+
+        new Timer().schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        song.setText(the_song);
+                        album.setText(the_album);
+                        artist.setText(the_artist);
+                    }
+                });
+            }
+        }, 0, 1000);
 
         AuthenticationResponse response = intent.getParcelableExtra(MainScreenActivity.EXTRA_MESSAGE);
         pid = intent.getStringExtra(MainScreenActivity.TAG_PID);
@@ -111,7 +131,13 @@ public class TuneIn extends Activity implements
                                 // get first product object from JSON Array
                                 JSONObject product = productObj.getJSONObject(0);
                                 new_uri = product.getString("uri");
+                                the_song = product.getString("song");
+                                the_album = product.getString("album");
+                                the_artist = product.getString("artist");
+                                //broadcaster_playing = product.getBoolean("playing");
                                 Log.d("URI", new_uri);
+                                //String am_i_playing = String.valueOf(broadcaster_playing);
+                                //Log.d("broadcaster playing", am_i_playing);
 
                             }else{
                                 // product with pid not found
@@ -123,9 +149,22 @@ public class TuneIn extends Activity implements
                         if (new_uri.equals(old_uri) == false)
                         {
                             mPlayer.play(new_uri);
+                            //currently_playing = true;
                             old_uri = new_uri;
-
                         }
+                        /*
+                        if (currently_playing == false && broadcaster_playing == true)
+
+                        {
+                            mPlayer.resume();
+                            currently_playing = true;
+                        }
+                        if (currently_playing == true && broadcaster_playing == false)
+                        {
+                            mPlayer.pause();
+                            currently_playing = false;
+                        }
+                        */
                     }
                 }, 5, 2, TimeUnit.SECONDS);
 

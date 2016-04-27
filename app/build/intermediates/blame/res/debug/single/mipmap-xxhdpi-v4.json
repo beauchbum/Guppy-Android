@@ -1,18 +1,26 @@
 [
     {
-        "merged": "C:\\Users\\Ryan\\AndroidStudioProjects\\Garpy\\Garpy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\ic_launcher.png",
-        "source": "C:\\Users\\Ryan\\AndroidStudioProjects\\Garpy\\Garpy\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\dickbutt.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\mipmap-xxhdpi\\dickbutt.png"
     },
     {
-        "merged": "C:\\Users\\Ryan\\AndroidStudioProjects\\Garpy\\Garpy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\ic_guppy_launch.png",
-        "source": "C:\\Users\\Ryan\\AndroidStudioProjects\\Garpy\\Garpy\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_guppy_launch.png"
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\gradiant1.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\mipmap-xxhdpi\\gradiant1.png"
     },
     {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\ic_guppy_launch.png",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_guppy_launch.png"
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\stars.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\mipmap-xxhdpi\\stars.png"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\ic_launcher.png",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\steph.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\mipmap-xxhdpi\\steph.png"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\ic_guppy_launch.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_guppy_launch.png"
     }
 ]
