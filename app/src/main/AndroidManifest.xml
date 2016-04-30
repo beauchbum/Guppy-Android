@@ -17,7 +17,8 @@
         android:configChanges="keyboardHidden|orientation"
         android:icon="@drawable/ic_launcher_guppy"
         android:label="Guppy"
-        android:theme="@android:style/Theme.Light">
+        android:theme="@android:style/Theme.Light.NoTitleBar">
+
         <activity
             android:name=".MainScreenActivity"
             android:label="Guppy">
