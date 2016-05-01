@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="19"
-        android:targetSdkVersion="19" />
+        android:targetSdkVersion="21" />
 
     <!-- Internet Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,31 +19,16 @@
         android:configChanges="keyboardHidden|orientation"
         android:icon="@drawable/ic_launcher_guppy"
         android:label="Guppy"
-        android:theme="@android:style/Theme.Light.NoTitleBar" >
+        android:theme="@style/Theme.AppCompat.Light" >
         <activity
             android:name="com.example.androidhive.MainScreenActivity"
-            android:label="Guppy" >
+            android:label="Home" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- All Product Activity -->
-        <activity
-            android:name="com.example.androidhive.AllUsersActivity"
-            android:label="All Users" />
-
-        <!-- Add Product Activity -->
-        <activity
-            android:name="com.example.androidhive.NewUserActivity"
-            android:label="Add New User" />
-
-        <!-- Edit Product Activity -->
-        <activity
-            android:name="com.example.androidhive.EditUserActivity"
-            android:label="Edit User" />
         <activity
             android:name="com.spotify.sdk.android.authentication.LoginActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
@@ -57,7 +42,7 @@
 
         <activity
             android:name="com.example.androidhive.TuneIn"
-            android:label="@string/title_activity_tune_in" />
+            android:label="Tuning In" />
     </application>
 
 </manifest>

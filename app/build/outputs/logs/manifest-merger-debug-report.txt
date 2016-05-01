@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:2:1-62:12
+ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:2:1-49:12
 	xmlns:android
 		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:2:11-69
 	package
@@ -19,9 +19,17 @@ uses-sdk
 ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:7:5-44
 MERGED from [com.spotify.sdk:spotify-player:1.0.0-beta11] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.spotify.sdk\spotify-player\1.0.0-beta11\AndroidManifest.xml:26:5-28:41
 MERGED from [com.spotify.sdk:spotify-auth:1.0.0-beta11] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.spotify.sdk\spotify-auth\1.0.0-beta11\AndroidManifest.xml:26:5-28:41
+MERGED from [com.android.support:support-v4:23.2.1] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:23.2.1] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.2.1\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:23.2.1] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:animated-vector-drawable:23.2.1] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.2.1\AndroidManifest.xml:5:5-44
+MERGED from [com.android.support:support-vector-drawable:23.2.1] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.2.1\AndroidManifest.xml:5:5-43
+MERGED from [com.android.support:support-v4:23.2.1] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-vector-drawable:23.2.1] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.2.1\AndroidManifest.xml:5:5-43
+MERGED from [com.android.support:support-v4:23.2.1] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\AndroidManifest.xml:20:5-43
 MERGED from [com.google.android.gms:play-services-appindexing:8.1.0] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.1.0\AndroidManifest.xml:18:5-42
 MERGED from [com.google.android.gms:play-services-basement:8.1.0] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:support-v4:22.2.0] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.2.1] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\AndroidManifest.xml:20:5-43
 	android:targetSdkVersion
 		INJECTED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml
@@ -29,6 +37,8 @@ MERGED from [com.android.support:support-v4:22.2.0] C:\Users\Ryan\Documents\GitH
 		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:7:15-41
 		INJECTED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:23.2.1] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.2.1\AndroidManifest.xml:23:9-75
 uses-permission#android.permission.INTERNET
 ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:10:5-67
 	android:name
@@ -46,13 +56,21 @@ ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml
 	android:name
 		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:14:30-85
 application
-ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:16:5-60:19
+ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:16:5-47:19
 MERGED from [com.spotify.sdk:spotify-player:1.0.0-beta11] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.spotify.sdk\spotify-player\1.0.0-beta11\AndroidManifest.xml:30:5-20
 MERGED from [com.spotify.sdk:spotify-auth:1.0.0-beta11] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.spotify.sdk\spotify-auth\1.0.0-beta11\AndroidManifest.xml:30:5-20
 MERGED from [com.github.kaaes:spotify-web-api-android:0.2.0] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.github.kaaes\spotify-web-api-android\0.2.0\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-v4:23.2.1] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:23.2.1] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:23.2.1] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:animated-vector-drawable:23.2.1] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.2.1\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-vector-drawable:23.2.1] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.2.1\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-v4:23.2.1] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:23.2.1] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.2.1\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-v4:23.2.1] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.gms:play-services-appindexing:8.1.0] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.1.0\AndroidManifest.xml:19:5-20
 MERGED from [com.google.android.gms:play-services-basement:8.1.0] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:support-v4:22.2.0] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.2.1] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\AndroidManifest.xml:22:5-20
 	android:label
 		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:19:9-30
 	android:icon
@@ -60,11 +78,11 @@ MERGED from [com.android.support:support-v4:22.2.0] C:\Users\Ryan\Documents\GitH
 	android:configChanges
 		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:17:9-59
 	android:theme
-		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:20:9-62
+		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:20:9-53
 activity#com.example.androidhive.MainScreenActivity
 ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:22:9-30:20
 	android:label
-		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:24:13-34
+		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:24:13-33
 	android:name
 		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:23:13-47
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
@@ -77,40 +95,22 @@ category#android.intent.category.LAUNCHER
 ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:28:17-77
 	android:name
 		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:28:27-74
-activity#com.example.androidhive.AllUsersActivity
-ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:33:9-35:50
-	android:label
-		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:35:13-38
-	android:name
-		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:34:13-45
-activity#com.example.androidhive.NewUserActivity
-ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:38:9-40:53
-	android:label
-		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:40:13-41
-	android:name
-		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:39:13-44
-activity#com.example.androidhive.EditUserActivity
-ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:43:9-45:50
-	android:label
-		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:45:13-38
-	android:name
-		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:44:13-45
 activity#com.spotify.sdk.android.authentication.LoginActivity
-ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:46:9-48:75
+ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:33:9-35:75
 	android:theme
-		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:48:13-72
+		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:35:13-72
 	android:name
-		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:47:13-80
+		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:34:13-80
 meta-data#com.google.android.gms.version
-ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:53:9-55:69
+ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:40:9-42:69
 MERGED from [com.google.android.gms:play-services-basement:8.1.0] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\AndroidManifest.xml:21:9-23:69
 	android:name
-		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:54:13-58
+		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:41:13-58
 	android:value
-		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:55:13-66
+		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:42:13-66
 activity#com.example.androidhive.TuneIn
-ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:57:9-59:71
+ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:44:9-46:50
 	android:label
-		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:59:13-59
+		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:46:13-38
 	android:name
-		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:58:13-35
+		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:45:13-35

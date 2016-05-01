@@ -1,12 +1,17 @@
 package com.example.androidhive;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Log;
 import android.content.Intent;
 import android.widget.ImageView;
@@ -35,7 +40,7 @@ import java.util.concurrent.TimeUnit;
 import cz.msebera.android.httpclient.NameValuePair;
 import cz.msebera.android.httpclient.message.BasicNameValuePair;
 
-public class TuneIn extends Activity implements
+public class TuneIn extends AppCompatActivity implements
         PlayerNotificationCallback, ConnectionStateCallback {
 
     // TODO: Replace with your client ID
@@ -76,18 +81,23 @@ public class TuneIn extends Activity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tune_in);
 
-        username = (TextView) findViewById(R.id.username);
+        //username = (TextView) findViewById(R.id.username);
         song = (TextView) findViewById(R.id.song);
         album = (TextView) findViewById(R.id.album);
         artist = (TextView) findViewById(R.id.artist);
         imageViewRound=(ImageView)findViewById(R.id.imageView_round);
         Typeface custom_font = Typeface.createFromAsset(getAssets(), "fonts/Infinity.ttf");
-        username.setTypeface(custom_font, Typeface.BOLD);
-        song.setTypeface(custom_font);
-        album.setTypeface(custom_font);
-        artist.setTypeface(custom_font);
-        Bitmap icon = BitmapFactory.decodeResource(getResources(),R.drawable.steph);
+        //username.setTypeface(custom_font, Typeface.BOLD);
+        song.setTypeface(custom_font, Typeface.BOLD);
+        album.setTypeface(custom_font, Typeface.BOLD);
+        artist.setTypeface(custom_font, Typeface.BOLD);
+        Bitmap icon = BitmapFactory.decodeResource(getResources(),R.drawable.joe);
         imageViewRound.setImageBitmap(icon);
+
+        android.support.v7.app.ActionBar bar = getSupportActionBar();
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#209CF2")));
+        bar.setTitle(Html.fromHtml("<font color='#ffffff'>Joe Sauer</font>"));
+
 
         Intent intent = getIntent();
 
@@ -97,7 +107,8 @@ public class TuneIn extends Activity implements
             public void run() {
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        username.setText(the_username);
+                        //username.setText(the_username);
+
                         song.setText(the_song);
                         album.setText(the_album);
                         artist.setText(the_artist);
@@ -183,6 +194,8 @@ public class TuneIn extends Activity implements
                 Log.e("MainActivity", "Could not initialize player: " + throwable.getMessage());
             }
         });
+
+
 
     }
 
