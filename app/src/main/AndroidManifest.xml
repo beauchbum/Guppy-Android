@@ -17,11 +17,11 @@
         android:configChanges="keyboardHidden|orientation"
         android:icon="@drawable/ic_launcher_guppy"
         android:label="Guppy"
-        android:theme="@android:style/Theme.Light.NoTitleBar">
+        android:theme="@style/Theme.AppCompat.Light">
 
         <activity
             android:name=".MainScreenActivity"
-            android:label="Guppy">
+            android:label="Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,20 +29,7 @@
             </intent-filter>
         </activity>
 
-        <!-- All Product Activity -->
-        <activity
-            android:name=".AllUsersActivity"
-            android:label="All Users"></activity>
 
-        <!-- Add Product Activity -->
-        <activity
-            android:name=".NewUserActivity"
-            android:label="Add New User"></activity>
-
-        <!-- Edit Product Activity -->
-        <activity
-            android:name=".EditUserActivity"
-            android:label="Edit User"></activity>
         <activity
             android:name="com.spotify.sdk.android.authentication.LoginActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
@@ -56,7 +43,7 @@
 
         <activity
             android:name=".TuneIn"
-            android:label="@string/title_activity_tune_in"></activity>
+            android:label="Tuning In"></activity>
     </application>
 
 </manifest>

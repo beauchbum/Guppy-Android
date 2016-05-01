@@ -1,5 +1,6 @@
 package com.example.androidhive;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ExpandableListActivity;
 import android.app.ListActivity;
@@ -8,8 +9,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +65,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class MainScreenActivity extends Activity {
+public class MainScreenActivity extends AppCompatActivity {
 
 	// Progress Dialog
 
@@ -165,6 +169,10 @@ public class MainScreenActivity extends Activity {
 		builder.setScopes(new String[]{"user-read-private", "streaming"});
 		AuthenticationRequest request = builder.build();
 		AuthenticationClient.openLoginActivity(this, REQUEST_CODE, request);
+
+		android.support.v7.app.ActionBar bar = getSupportActionBar();
+		bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#209CF2")));
+		bar.setTitle(Html.fromHtml("<font color='#ffffff'>Following</font>"));
 
 		//loading products
 		productsList = new ArrayList<HashMap<String, String>>();
