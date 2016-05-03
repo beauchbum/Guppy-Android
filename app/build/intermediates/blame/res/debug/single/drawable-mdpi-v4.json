@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\allison_nicolai.jpg",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\allison_nicolai.jpg"
+    },
+    {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_list_longpressed_holo.9.png",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-mdpi-v4\\abc_list_longpressed_holo.9.png"
     },
@@ -20,6 +24,14 @@
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\stars.png"
     },
     {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\jessica_mindrum.jpg",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\jessica_mindrum.jpg"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_more.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\ic_more.png"
+    },
+    {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\plus.png",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\plus.png"
     },
@@ -32,6 +44,14 @@
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-mdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png"
     },
     {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\mj.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\mj.png"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\holla.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\holla.png"
+    },
+    {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_textfield_default_mtrl_alpha.9.png",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-mdpi-v4\\abc_textfield_default_mtrl_alpha.9.png"
     },
@@ -40,8 +60,20 @@
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-mdpi-v4\\abc_ic_go_search_api_mtrl_alpha.png"
     },
     {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_more_big.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\ic_more_big.png"
+    },
+    {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_spinner_mtrl_am_alpha.9.png",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-mdpi-v4\\abc_spinner_mtrl_am_alpha.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\jack_lansa.jpg",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\jack_lansa.jpg"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ronda.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\ronda.png"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\play.png",
@@ -80,6 +112,10 @@
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-mdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png"
     },
     {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_speaker.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\ic_speaker.png"
+    },
+    {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_btn_radio_to_on_mtrl_015.png",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-mdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
     },
@@ -92,8 +128,16 @@
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\joe.png"
     },
     {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\anthony_sacco.jpg",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\anthony_sacco.jpg"
+    },
+    {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-mdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_more_options.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\ic_more_options.png"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_btn_check_to_on_mtrl_000.png",
@@ -104,12 +148,20 @@
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-mdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\leo.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\leo.png"
+    },
+    {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\dots.png",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\dots.png"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_list_selector_disabled_holo_light.9.png",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-mdpi-v4\\abc_list_selector_disabled_holo_light.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\madison_claire.jpg",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\madison_claire.jpg"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png",
@@ -120,8 +172,8 @@
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-mdpi-v4\\abc_list_selector_disabled_holo_dark.9.png"
     },
     {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-mdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png"
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\mark_musial.jpg",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\mark_musial.jpg"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_list_divider_mtrl_alpha.9.png",
@@ -132,20 +184,16 @@
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-mdpi-v4\\abc_ic_voice_search_api_mtrl_alpha.png"
     },
     {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_launcher_guppy.png",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\ic_launcher_guppy.png"
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\amy.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\amy.png"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_list_pressed_holo_dark.9.png",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-mdpi-v4\\abc_list_pressed_holo_dark.9.png"
     },
     {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_switch_track_mtrl_alpha.9.png",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-mdpi-v4\\abc_switch_track_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-mdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\tom_leary.jpg",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\tom_leary.jpg"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png",
@@ -158,6 +206,30 @@
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_popup_background_mtrl_mult.9.png",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-mdpi-v4\\abc_popup_background_mtrl_mult.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-mdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_launcher_guppy.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\ic_launcher_guppy.png"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_switch_track_mtrl_alpha.9.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-mdpi-v4\\abc_switch_track_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-mdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\riri.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\riri.png"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\joe_sauer.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\joe_sauer.png"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png",
@@ -178,6 +250,10 @@
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_list_pressed_holo_light.9.png",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-mdpi-v4\\abc_list_pressed_holo_light.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\obama.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\obama.png"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png",
@@ -230,6 +306,10 @@
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_ic_clear_mtrl_alpha.png",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-mdpi-v4\\abc_ic_clear_mtrl_alpha.png"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\zac_bricta.jpg",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\zac_bricta.jpg"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\wham.png",

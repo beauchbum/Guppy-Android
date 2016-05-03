@@ -1,9 +1,6 @@
 package com.example.androidhive;
 
-import android.app.ActionBar;
 import android.app.Activity;
-import android.app.ExpandableListActivity;
-import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -15,37 +12,29 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.widget.PopupWindow;
 import android.widget.Switch;
 import android.widget.TextView;
-
-import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.ExpandableListView.OnGroupClickListener;
-import android.widget.ExpandableListView.OnGroupCollapseListener;
-import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-
 
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
-import com.spotify.sdk.android.player.Config;
-import com.spotify.sdk.android.player.Player;
-import com.spotify.sdk.android.player.Spotify;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -85,7 +74,7 @@ public class MainScreenActivity extends AppCompatActivity {
 	private boolean receiver_exists = false;
 
 
-	ExpandableListView lv;
+	ListView lv;
 	ExpandableListAdapter exp_adapter;
 
 
@@ -106,7 +95,6 @@ public class MainScreenActivity extends AppCompatActivity {
 	private Switch mDrawerSwitch;
 	private TextView drawerSwitchStatus;
 	private ArrayAdapter<String> mAdapter;
-
 
 	// JSON Node names
 
@@ -142,9 +130,11 @@ public class MainScreenActivity extends AppCompatActivity {
 	//Runs "LoadAllProducts" and begins the Spotify login
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+
+		//android:background="#209CF2"
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_screen);
-
 
 		listDataChild = new HashMap<String, List<String>>();
 		user_options = new ArrayList<String>();
@@ -162,6 +152,8 @@ public class MainScreenActivity extends AppCompatActivity {
 		mDrawerList = (ListView) findViewById(R.id.drawer_list);
 		addDrawerItems();
 
+
+
 		//Spotify Authentication
 		AuthenticationRequest.Builder builder = new AuthenticationRequest.Builder(CLIENT_ID,
 				AuthenticationResponse.Type.TOKEN,
@@ -178,40 +170,65 @@ public class MainScreenActivity extends AppCompatActivity {
 		productsList = new ArrayList<HashMap<String, String>>();
 
 		// Loading products in Background Thread
-		new LoadAllProducts().execute();
+		//NEED TO READD THIS SOON!!!!
+		//new LoadAllProducts().execute();
 
 		// Get listview
-		lv = (ExpandableListView) findViewById(R.id.exp_list);
+		lv = (ListView) findViewById(R.id.following_list);
 
-		lv.setOnChildClickListener(new OnChildClickListener() {
+		ArrayList<Broadcast> arrayOfBroadcasts = new ArrayList<Broadcast>();
+		arrayOfBroadcasts.add(new Broadcast("Madison Claire", 215, "Rock Your Body", "Justin Timberlake", "madison_claire"));
+		arrayOfBroadcasts.add(new Broadcast("Joe Sauer", 74, "Stayin' Alive", "Bee Gees", "joe_sauer"));
+		arrayOfBroadcasts.add(new Broadcast("Jack Lansa", 336, "This Love", "Maroon 5", "jack_lansa"));
+		arrayOfBroadcasts.add(new Broadcast("Anthony Sacco", 329, "Hey Ya!", "OutKast", "anthony_sacco"));
+		arrayOfBroadcasts.add(new Broadcast("Tom Leary", 383, "Work It", "Missy Elliott", "tom_leary"));
+		arrayOfBroadcasts.add(new Broadcast("Allison Nicolai", 221, "It's My Life", "No Doubt", "allison_nicolai"));
+		arrayOfBroadcasts.add(new Broadcast("Mark Musial", 386, "Calling All Angels", "Train", "mark_musial"));
+		arrayOfBroadcasts.add(new Broadcast("Jessica Mindrum", 296, "Cheap Thrills", "Sia", "jessica_mindrum"));
+		arrayOfBroadcasts.add(new Broadcast("Zac Bricta", 133, "Take It Easy", "Eagles", "zac_bricta"));
+		arrayOfBroadcasts.add(new Broadcast("Ryan Beauchamp", 1, "Teenage Dream", "Katy Perry", "ic_launcher_guppy"));
+		BroadcastAdapter adapter = new BroadcastAdapter(this, arrayOfBroadcasts);
+		lv.setAdapter(adapter);
+
+		ListView imageButtonContextMenu;
+		imageButtonContextMenu = (ListView) findViewById(R.id.following_list);
+		registerForContextMenu(imageButtonContextMenu);
+
+		/*lv.setOnChildClickListener(new OnChildClickListener() {
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 				if(childPosition == 0){
 					String pid = pid_list.get(groupPosition);
 					Intent in = new Intent(getApplicationContext(),
 							TuneIn.class);
-
 					in.putExtra(TAG_PID, pid);
 					in.putExtra(EXTRA_MESSAGE, response);
 					startActivity(in);
 				}
 				return true;
-
 			}
-		});
+		});*/
 
-		broad_button = (ToggleButton) findViewById(R.id.toggBtn);
-		broad_button.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				if(((ToggleButton) v).isChecked()) {
-					new StartBroadcast().execute();
-				}
-				else {
-					new StopBroadcast().execute();
-				}
-			}
-		});
 	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		MenuInflater menuInflater = getMenuInflater();
+		menuInflater.inflate(R.menu.menu, menu);
+		return true;
+	}
+
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+	{
+		super.onCreateContextMenu(menu, v, menuInfo);
+		MenuInflater inflater = getMenuInflater();
+		menu.setHeaderTitle("More Info");
+		menu.setHeaderIcon(R.drawable.ic_launcher_guppy);
+		inflater.inflate(R.menu.menu, menu);
+	}
+
 
 	//Receives a "success" code from Spotify login attempt
 	//Runs "CreateNewProduct" to add user to database
@@ -244,7 +261,6 @@ public class MainScreenActivity extends AppCompatActivity {
 		}
 	}
 
-
 	private void addDrawerItems(){
 		// More Drawer Stuff
 		String[] mDrawerTitles = {"Home", "Following", "Settings", "Logout"};
@@ -268,6 +284,10 @@ public class MainScreenActivity extends AppCompatActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Toast.makeText(MainScreenActivity.this, "Click", Toast.LENGTH_SHORT).show();
+				if(position == 1)
+				{
+					openExplore(view);
+				}
 			}
 		});
 
@@ -376,7 +396,7 @@ public class MainScreenActivity extends AppCompatActivity {
 					//System.out.println(listDataHeader);
 					//System.out.println(listDataChild);
 					exp_adapter = new ExpandableListAdapter(MainScreenActivity.this, listDataHeader, listDataChild);
-					lv.setAdapter(exp_adapter);
+					//lv.setAdapter(exp_adapter);
 
 				}
 			});
@@ -632,20 +652,10 @@ public class MainScreenActivity extends AppCompatActivity {
 		 * */
 		protected String doInBackground(String... args) {
 
-			/*
-			// getting updated data from EditTexts
-			String name = txtName.getText().toString();
-			String price = txtPrice.getText().toString();
-			String description = txtDesc.getText().toString();
-			*/
-
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair("id", id));
 			params.add(new BasicNameValuePair("uri", args[0]));
-			params.add(new BasicNameValuePair("song", args[1]));
-			params.add(new BasicNameValuePair("album", args[2]));
-			params.add(new BasicNameValuePair("artist", args[3]));
 
 			Log.d("Setting URI", params.toString());
 
@@ -683,6 +693,70 @@ public class MainScreenActivity extends AppCompatActivity {
 			// dismiss the dialog once product uupdated
 			pDialog.dismiss();
 		}
+	}
+
+	@Override
+	public void onDestroy(){
+		new StopBroadcast().execute();
+		super.onDestroy();
+	}
+
+	public class BroadcastAdapter extends ArrayAdapter<Broadcast> {
+
+		private final int VIEW_TYPE_SELECTED = 1;
+		private final int VIEW_TYPE_NORMAL = 0;
+
+		public BroadcastAdapter(Context context, ArrayList<Broadcast> broadcasts)
+		{
+			super(context, 0, broadcasts);
+		}
+
+		@Override
+		public int getViewTypeCount()
+		{
+			return 2;
+		}
+
+		@Override
+		public int getItemViewType(int position)
+		{
+			return (position == 1) ? VIEW_TYPE_SELECTED : VIEW_TYPE_NORMAL;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent)
+		{
+			Broadcast mBroadcast = getItem(position);
+			int viewType = getItemViewType(position);
+			int layoutId = -1;
+			if (convertView == null)
+			{
+				//if (viewType == VIEW_TYPE_SELECTED)
+				//{
+				//	layoutId = R.layout.list_item_selected;
+				//}
+				//else
+				//{
+					layoutId = R.layout.list_item;
+				//}
+				convertView = LayoutInflater.from(getContext()).inflate(layoutId, parent, false);
+			}
+			TextView userTextView = (TextView) convertView.findViewById(R.id.name);
+			TextView listenersTextView = (TextView) convertView.findViewById(R.id.text_view_listeners);
+			TextView songArtistTextView = (TextView) convertView.findViewById(R.id.song_text_view);
+			ImageView profilePicImage = (ImageView) convertView.findViewById(R.id.list_item_image);
+
+			int resId = getResources().getIdentifier(mBroadcast.image_title, "drawable", getPackageName());
+			profilePicImage.setImageResource(resId);
+
+			userTextView.setText(mBroadcast.username);
+			String listeners = mBroadcast.listeners + " Listeners";
+			listenersTextView.setText(listeners);
+			String songAndArtist = mBroadcast.song + " - " + mBroadcast.artist;
+			songArtistTextView.setText(songAndArtist);
+			return convertView;
+		}
+
 	}
 
 	class ChangePlayback extends AsyncTask<String, String, String> {
@@ -760,18 +834,34 @@ public class MainScreenActivity extends AppCompatActivity {
 		}
 	}
 
-	@Override
-	public void onDestroy(){
-		new StopBroadcast().execute();
-		super.onDestroy();
+	public void openExplore(View view) {
+
+		Intent exploreIntent = new Intent (this, Explore.class);
+		startActivity(exploreIntent);
+
 	}
+
+	/*public void showPopUp(View view) {
+		Toast.makeText(this, "Hello World", Toast.LENGTH_LONG).show();
+		/*MenuInflater menuInflater = getMenuInflater();
+		menuInflater.inflate(R.menu.menu, menu);*/
+
+		/*View popupView = getLayoutInflater().inflate(R.layout.popup_more, null);
+		PopupWindow popupWindow = new PopupWindow(popupView);
+		ListView popUpListView = (ListView) popupView.findViewById(R.id.popup_lv);
+		ArrayList<String> options = new ArrayList<String>();
+		options.add("Follow");
+		options.add("View Profile");
+		options.add("Cancel");
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, options);
+		popUpListView.setAdapter(adapter);
+		popupWindow.setTouchable(true);
+		//popupWindow.setFocusable(true);
+		popupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
+		//findViewById(android.R.id.content)
+		Log.v("Hello", "Hello");
+	}*/
+
+
+
 }
-
-
-
-
-
-
-
-
-

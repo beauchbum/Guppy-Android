@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_follow"
+        android:icon="@drawable/ic_speaker"
+        android:title="Follow"
+        ></item>
+
+    <item
+        android:id="@+id/menu_view_profile"
+        android:icon="@drawable/ic_speaker"
+        android:title="View Profile"
+        ></item>
+
+    <item
+        android:id="@+id/menu_cancel"
+        android:icon="@drawable/ic_speaker"
+        android:title="Cancel"
+        ></item>
+
+</menu>

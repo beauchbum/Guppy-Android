@@ -4,26 +4,26 @@
     api-level="21"
     density="xxhdpi"
     format="7"
-    timestamp="279875604968469" >
+    timestamp="347930037430772" >
 
     <task
         name="javac"
-        duration="0" />
+        duration="481" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="530" />
     <task
         name="verifier"
-        duration="0" />
+        duration="194" />
 
     <artifact
         location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\outputs\apk\app-debug.apk"
         type="MAIN" />
 
-    <build timestamp="279875604968469" >
+    <build timestamp="347930037430772" >
         <artifact
             location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
