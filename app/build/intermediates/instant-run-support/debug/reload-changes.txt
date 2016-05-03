@@ -1,7 +1,0 @@
-CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\TuneIn$2$1$override.class
-CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\TuneIn$1$override.class
-CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\TuneIn$2$override.class
-CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\android\tools\fd\runtime\AppPatchesLoaderImpl.class
-CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\TuneIn$1$1$override.class
-CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\TuneIn$override.class
-CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\TuneIn$Get_uri$override.class

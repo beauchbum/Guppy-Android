@@ -91,12 +91,12 @@ public class TuneIn extends AppCompatActivity implements
         song.setTypeface(custom_font, Typeface.BOLD);
         album.setTypeface(custom_font, Typeface.BOLD);
         artist.setTypeface(custom_font, Typeface.BOLD);
-        Bitmap icon = BitmapFactory.decodeResource(getResources(),R.drawable.joe);
+        Bitmap icon = BitmapFactory.decodeResource(getResources(),R.drawable.mj);
         imageViewRound.setImageBitmap(icon);
 
         android.support.v7.app.ActionBar bar = getSupportActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#209CF2")));
-        bar.setTitle(Html.fromHtml("<font color='#ffffff'>Joe Sauer</font>"));
+        bar.setTitle(Html.fromHtml("<font color='#ffffff'>Michael Jordan</font>"));
 
 
         Intent intent = getIntent();

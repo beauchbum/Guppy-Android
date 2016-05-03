@@ -18,18 +18,15 @@
         android:icon="@drawable/ic_launcher_guppy"
         android:label="Guppy"
         android:theme="@style/Theme.AppCompat.Light">
-
         <activity
             android:name=".MainScreenActivity"
-            android:label="Home">
+            android:label="Guppy">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name="com.spotify.sdk.android.authentication.LoginActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
@@ -43,7 +40,8 @@
 
         <activity
             android:name=".TuneIn"
-            android:label="Tuning In"></activity>
+            android:label="Tuning In" />
+        <activity android:name=".Explore"></activity>
     </application>
 
 </manifest>

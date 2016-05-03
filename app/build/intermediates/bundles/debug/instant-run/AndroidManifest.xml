@@ -23,7 +23,7 @@
         android:theme="@style/Theme.AppCompat.Light" >
         <activity
             android:name="com.example.androidhive.MainScreenActivity"
-            android:label="Home" >
+            android:label="Guppy" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,6 +44,7 @@
         <activity
             android:name="com.example.androidhive.TuneIn"
             android:label="Tuning In" />
+        <activity android:name="com.example.androidhive.Explore" />
     </application>
 
 </manifest>

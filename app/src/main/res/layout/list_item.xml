@@ -2,26 +2,76 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="horizontal"
+    android:padding="12dp">
 
-    <!-- Product id (pid) - will be HIDDEN - used to pass to other activity -->
-    <TextView
-        android:id="@+id/pid"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/list_item_image"
+        android:src="@drawable/ic_launcher_guppy" />
 
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
 
-    <!-- Name Label -->
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="6dip"
-        android:paddingBottom="6dip"
-        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
-        android:textSize="17dip"
-        android:textStyle="bold"
-        />
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp">
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Kanye West"
+                android:textSize="18dp"
+                android:layout_gravity="fill_vertical"/>
+
+            <TextView
+                android:id="@+id/text_view_listeners"
+                android:layout_height="18dp"
+                android:layout_width="wrap_content"
+                android:layout_weight="0"
+                android:text="1432 Listeners"
+                android:paddingRight="10dp"
+                android:textSize="12dp"/>
+
+            ></LinearLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Welcome to the Jungle - Guns N Roses"
+            android:id="@+id/song_text_view"
+            android:paddingLeft="16dp"
+            />
+
+        ></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center_vertical"
+        >
+
+        <ImageButton
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_more_big"
+            android:scaleType="fitXY"
+            android:background="@android:color/transparent"
+            android:id="@+id/button_more"
+            />
+    </LinearLayout>
+
+    ></LinearLayout>
