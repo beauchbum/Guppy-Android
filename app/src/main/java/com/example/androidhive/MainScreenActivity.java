@@ -79,15 +79,15 @@ public class MainScreenActivity extends AppCompatActivity {
 
 
 
-	private static String ip = "10.0.0.26";
+	private static String ip = "52.38.141.152";
 	// url to get all products list
-	private static String url_all_products = "http://" + ip + "/android_connect/get_all_products.php";
-	private static final String url_start_broadcast = "http://" + ip + "/android_connect/start_broadcast.php";
-	private static final String url_stop_broadcast = "http://" + ip + "/android_connect/stop_broadcast.php";
-	private static String url_create_product = "http://" + ip + "/android_connect/create_product.php";
-	private static String url_post_uri = "http://" + ip + "/android_connect/post_uri.php";
-	private static String url_play_playback = "http://" + ip + "/android_connect/play_playback.php";
-	private static String url_pause_playback = "http://" + ip + "/android_connect/pause_playback.php";
+	private static String url_all_products = "http://" + ip + "/get_all_products.php";
+	private static final String url_start_broadcast = "http://" + ip + "/start_broadcast.php";
+	private static final String url_stop_broadcast = "http://" + ip + "/stop_broadcast.php";
+	private static String url_create_product = "http://" + ip + "/create_product.php";
+	private static String url_post_uri = "http://" + ip + "/post_uri.php";
+	private static String url_play_playback = "http://" + ip + "/play_playback.php";
+	private static String url_pause_playback = "http://" + ip + "/pause_playback.php";
 
 	// Drawer List Stuff
 	private LinearLayout mDrawerLayout;
@@ -114,7 +114,7 @@ public class MainScreenActivity extends AppCompatActivity {
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
 
-	private String id;
+	private String current_user_id;
 	private Button broad_button;
 
 
@@ -169,6 +169,19 @@ public class MainScreenActivity extends AppCompatActivity {
 		//loading products
 		productsList = new ArrayList<HashMap<String, String>>();
 
+
+		broad_button = (ToggleButton) findViewById(R.id.toggBtn);
+		broad_button.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				if(((ToggleButton) v).isChecked()) {
+					new StartBroadcast().execute();
+				}
+				else {
+					new StopBroadcast().execute();
+				}
+			}
+		});
+
 		// Loading products in Background Thread
 		//NEED TO READD THIS SOON!!!!
 		//new LoadAllProducts().execute();
@@ -177,16 +190,16 @@ public class MainScreenActivity extends AppCompatActivity {
 		lv = (ListView) findViewById(R.id.following_list);
 
 		ArrayList<Broadcast> arrayOfBroadcasts = new ArrayList<Broadcast>();
-		arrayOfBroadcasts.add(new Broadcast("Madison Claire", 215, "Rock Your Body", "Justin Timberlake", "madison_claire"));
-		arrayOfBroadcasts.add(new Broadcast("Joe Sauer", 74, "Stayin' Alive", "Bee Gees", "joe_sauer"));
-		arrayOfBroadcasts.add(new Broadcast("Jack Lansa", 336, "This Love", "Maroon 5", "jack_lansa"));
-		arrayOfBroadcasts.add(new Broadcast("Anthony Sacco", 329, "Hey Ya!", "OutKast", "anthony_sacco"));
-		arrayOfBroadcasts.add(new Broadcast("Tom Leary", 383, "Work It", "Missy Elliott", "tom_leary"));
-		arrayOfBroadcasts.add(new Broadcast("Allison Nicolai", 221, "It's My Life", "No Doubt", "allison_nicolai"));
-		arrayOfBroadcasts.add(new Broadcast("Mark Musial", 386, "Calling All Angels", "Train", "mark_musial"));
-		arrayOfBroadcasts.add(new Broadcast("Jessica Mindrum", 296, "Cheap Thrills", "Sia", "jessica_mindrum"));
-		arrayOfBroadcasts.add(new Broadcast("Zac Bricta", 133, "Take It Easy", "Eagles", "zac_bricta"));
-		arrayOfBroadcasts.add(new Broadcast("Ryan Beauchamp", 1, "Teenage Dream", "Katy Perry", "ic_launcher_guppy"));
+		arrayOfBroadcasts.add(new Broadcast("Madison Claire", 215, "Rock Your Body", "Justin Timberlake", "guppy"));
+		arrayOfBroadcasts.add(new Broadcast("Joe Sauer", 74, "Stayin' Alive", "Bee Gees", "guppy"));
+		arrayOfBroadcasts.add(new Broadcast("Jack Lansa", 336, "This Love", "Maroon 5", "guppy"));
+		arrayOfBroadcasts.add(new Broadcast("Anthony Sacco", 329, "Hey Ya!", "OutKast", "guppy"));
+		arrayOfBroadcasts.add(new Broadcast("Tom Leary", 383, "Work It", "Missy Elliott", "guppy"));
+		arrayOfBroadcasts.add(new Broadcast("Allison Nicolai", 221, "It's My Life", "No Doubt", "guppy"));
+		arrayOfBroadcasts.add(new Broadcast("Mark Musial", 386, "Calling All Angels", "Train", "guppy"));
+		arrayOfBroadcasts.add(new Broadcast("Jessica Mindrum", 296, "Cheap Thrills", "Sia", "guppy"));
+		arrayOfBroadcasts.add(new Broadcast("Zac Bricta", 133, "Take It Easy", "Eagles", "guppy"));
+		arrayOfBroadcasts.add(new Broadcast("Ryan Beauchamp", 1, "Teenage Dream", "Katy Perry", "guppy"));
 		BroadcastAdapter adapter = new BroadcastAdapter(this, arrayOfBroadcasts);
 		lv.setAdapter(adapter);
 
@@ -225,7 +238,7 @@ public class MainScreenActivity extends AppCompatActivity {
 		super.onCreateContextMenu(menu, v, menuInfo);
 		MenuInflater inflater = getMenuInflater();
 		menu.setHeaderTitle("More Info");
-		menu.setHeaderIcon(R.drawable.ic_launcher_guppy);
+		menu.setHeaderIcon(R.drawable.guppy);
 		inflater.inflate(R.menu.menu, menu);
 	}
 
@@ -248,8 +261,8 @@ public class MainScreenActivity extends AppCompatActivity {
 				public void success(UserPrivate userPrivate, Response response) {
 					Log.d("User Success", userPrivate.id);
 					String name = userPrivate.display_name.toString();
-					id = userPrivate.id.toString();
-					new CreateNewProduct().execute(name, id);
+					current_user_id = userPrivate.id.toString();
+					new CreateNewProduct().execute(name, current_user_id);
 
 				}
 
@@ -286,12 +299,16 @@ public class MainScreenActivity extends AppCompatActivity {
 				Toast.makeText(MainScreenActivity.this, "Click", Toast.LENGTH_SHORT).show();
 				if(position == 1)
 				{
-					openExplore(view);
+					Intent in = new Intent(getApplicationContext(),
+							Explore.class);
+					in.putExtra(TAG_PID, current_user_id);
+					startActivity(in);
 				}
 			}
 		});
 
 	}
+
 
 
 	//Runs a PHP script to load all users from database
@@ -468,7 +485,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
 	//Registers Broadcast Receiver which will listen for changes in Spotify playback
 	//Then sets the broadcasting variable to "1"
-	class StartBroadcast extends AsyncTask<String, String, String> {
+	public class StartBroadcast extends AsyncTask<String, String, String> {
 
 		/**
 		 * Before starting background thread Show Progress Dialog
@@ -493,7 +510,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			params.add(new BasicNameValuePair("id", id));
+			params.add(new BasicNameValuePair("id", current_user_id));
 
 			Log.d("Broadcast", "Started");
 
@@ -595,7 +612,7 @@ public class MainScreenActivity extends AppCompatActivity {
 			}
 			receiver_exists = false;
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			params.add(new BasicNameValuePair("id", id));
+			params.add(new BasicNameValuePair("id", current_user_id));
 
 			Log.d("Broadcast", "Stopped");
 
@@ -654,7 +671,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			params.add(new BasicNameValuePair("id", id));
+			params.add(new BasicNameValuePair("id", current_user_id));
 			params.add(new BasicNameValuePair("uri", args[0]));
 
 			Log.d("Setting URI", params.toString());
@@ -695,11 +712,7 @@ public class MainScreenActivity extends AppCompatActivity {
 		}
 	}
 
-	@Override
-	public void onDestroy(){
-		new StopBroadcast().execute();
-		super.onDestroy();
-	}
+
 
 	public class BroadcastAdapter extends ArrayAdapter<Broadcast> {
 
@@ -785,7 +798,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			params.add(new BasicNameValuePair("id", id));
+			params.add(new BasicNameValuePair("id", current_user_id));
 
 
 			Log.d("Setting URI", params.toString());

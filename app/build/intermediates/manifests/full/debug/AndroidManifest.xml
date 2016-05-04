@@ -10,14 +10,15 @@
 
     <!-- Internet Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:configChanges="keyboardHidden|orientation"
-        android:icon="@drawable/ic_launcher_guppy"
+        android:icon="@drawable/guppy"
         android:label="Guppy"
         android:theme="@style/Theme.AppCompat.Light" >
         <activity
@@ -44,6 +45,7 @@
             android:name="com.example.androidhive.TuneIn"
             android:label="Tuning In" />
         <activity android:name="com.example.androidhive.Explore" />
+        <activity android:name="com.example.androidhive.Menu_Activity" />
     </application>
 
 </manifest>

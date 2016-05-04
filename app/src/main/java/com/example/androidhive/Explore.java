@@ -90,7 +90,7 @@ public class Explore extends AppCompatActivity {
     ExpandableListAdapter exp_adapter;
 
 
-    private static String ip = "10.0.0.26";
+    private static String ip = "52.38.141.152";
 
     //Explore List Stuff
     private ListView mExploreList;
@@ -141,14 +141,25 @@ public class Explore extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore);
 
+        AuthenticationRequest.Builder builder = new AuthenticationRequest.Builder(CLIENT_ID,
+                AuthenticationResponse.Type.TOKEN,
+                REDIRECT_URI);
+        builder.setScopes(new String[]{"user-read-private", "streaming"});
+        AuthenticationRequest request = builder.build();
+        AuthenticationClient.openLoginActivity(this, REQUEST_CODE, request);
+
+        Intent intent = getIntent();
+        id = intent.getStringExtra(MainScreenActivity.TAG_PID);
+        Log.d("Explore ID", id);
+
         //Explore Stuff
         //mExploreList = (ListView) findViewById(R.id.explore_list);
         //mExploreListviewElement = (LinearLayout) findViewById(R.id.explore_list_element);
         ArrayList<ExploreElement> explore_element_array= new ArrayList<ExploreElement>();
-        explore_element_array.add(new ExploreElement("amy", "leo"));
-        explore_element_array.add(new ExploreElement("mj", "ronda"));
-        explore_element_array.add(new ExploreElement("obama", "holla"));
-        explore_element_array.add(new ExploreElement("steph", "riri"));
+        explore_element_array.add(new ExploreElement("guppy", "guppy"));
+        explore_element_array.add(new ExploreElement("guppy", "guppy"));
+        explore_element_array.add(new ExploreElement("guppy", "guppy"));
+        explore_element_array.add(new ExploreElement("guppy", "guppy"));
 
         mExploreList = (ListView) findViewById(R.id.explore_list);
         ExploreAdapter adapter = new ExploreAdapter(this, explore_element_array);
@@ -164,8 +175,61 @@ public class Explore extends AppCompatActivity {
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#209CF2")));
         bar.setTitle(Html.fromHtml("<font color='#ffffff'>Explore Popular Streams</font>"));
 
+        broad_button = (ToggleButton) findViewById(R.id.toggBtn);
+        broad_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(((ToggleButton) v).isChecked()) {
+                    Intent in = new Intent(getApplicationContext(),
+                            Menu_Activity.class);
+                    in.putExtra(TAG_PID, id);
+                    in.putExtra(EXTRA_MESSAGE, true);
+                    startActivity(in);
+                }
+                else {
+                    Intent in = new Intent(getApplicationContext(),
+                            Menu_Activity.class);
+                    in.putExtra(TAG_PID, id);
+                    in.putExtra(EXTRA_MESSAGE, false);
+                    startActivity(in);
+                }
+            }
+        });
+
     }
 
+    /*
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+
+        // Check if result comes from the correct activity
+        if (requestCode == REQUEST_CODE) {
+            response = AuthenticationClient.getResponse(resultCode, intent);
+
+            SpotifyApi my_api = new SpotifyApi();
+            my_api.setAccessToken(response.getAccessToken());
+            SpotifyService spotify = my_api.getService();
+
+            spotify.getMe(new Callback<UserPrivate>() {
+                @Override
+                public void success(UserPrivate userPrivate, Response response) {
+                    Log.d("User Success", userPrivate.id);
+                    String name = userPrivate.display_name.toString();
+                    id = userPrivate.id.toString();
+
+                    new CreateNewProduct().execute(name, id);
+
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    Log.d("User Failure", error.toString());
+                }
+            });
+        }
+    }
+
+*/
 
     private void addDrawerItems() {
         // More Drawer Stuff
@@ -225,5 +289,7 @@ public class Explore extends AppCompatActivity {
         }
 
     }
+
+
 
 }
