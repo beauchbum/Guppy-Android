@@ -1,7 +1,9 @@
-CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\Menu_Activity$override.class
-CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\Menu_Activity$SetURI$override.class
+CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\Explore$1$override.class
+CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\Explore$ExploreAdapter$override.class
+CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\Explore$4$override.class
+CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\Explore$CreateNewProduct$override.class
 CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\android\tools\fd\runtime\AppPatchesLoaderImpl.class
-CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\Menu_Activity$StopBroadcast$override.class
-CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\Menu_Activity$ChangePlayback$override.class
-CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\Menu_Activity$StartBroadcast$override.class
-CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\Menu_Activity$StartBroadcast$1$override.class
+CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\BaseActivity$override.class
+CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\Explore$override.class
+CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\Explore$3$override.class
+CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\Explore$2$override.class

@@ -12,8 +12,8 @@ public final class R {
 		public static final int com_spotify_sdk_login_webview_container = 0x7f0c005b;
 	}
 	public static final class layout {
-		public static final int com_spotify_sdk_login_activity = 0x7f03001b;
-		public static final int com_spotify_sdk_login_dialog = 0x7f03001c;
+		public static final int com_spotify_sdk_login_activity = 0x7f03001c;
+		public static final int com_spotify_sdk_login_dialog = 0x7f03001d;
 	}
 	public static final class string {
 		public static final int com_spotify_sdk_login_progress = 0x7f060035;

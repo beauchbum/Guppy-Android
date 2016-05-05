@@ -22,15 +22,16 @@
         android:icon="@drawable/guppy"
         android:label="Guppy"
         android:theme="@style/Theme.AppCompat.Light" >
-        <activity
-            android:name="com.example.androidhive.MainScreenActivity"
-            android:label="Guppy" >
+        <activity android:name="com.example.androidhive.Explore" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.androidhive.MainScreenActivity"
+            android:label="Guppy" />
         <activity
             android:name="com.spotify.sdk.android.authentication.LoginActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
@@ -45,8 +46,7 @@
         <activity
             android:name="com.example.androidhive.TuneIn"
             android:label="Tuning In" />
-        <activity android:name="com.example.androidhive.Explore" />
-        <activity android:name="com.example.androidhive.Menu_Activity" />
+        <activity android:name="com.example.androidhive.BaseActivity" />
     </application>
 
 </manifest>
