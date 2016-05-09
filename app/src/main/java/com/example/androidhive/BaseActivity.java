@@ -4,8 +4,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,6 +45,9 @@ public class BaseActivity extends AppCompatActivity {
     public ArrayAdapter<String> mAdapter;
     public ToggleButton broad_button;
     public boolean currently_broadcasting = false;
+    public boolean broadcast_status = false;
+    public static final String TAG_PID = "id";
+
 
     public static String ip = "52.38.141.152";
 
@@ -55,6 +60,9 @@ public class BaseActivity extends AppCompatActivity {
     public static String url_play_playback = "http://" + ip + "/play_playback.php";
     public static String url_pause_playback = "http://" + ip + "/pause_playback.php";
 
+    public SharedPreferences.Editor editor;
+    public SharedPreferences sharedPref;
+
 
 
 
@@ -65,7 +73,88 @@ public class BaseActivity extends AppCompatActivity {
         mDrawerLayout = (LinearLayout) findViewById(R.id.drawer_linear_layout);
         //mDrawerSwitch = (Switch) findViewById(R.id.drawer_switch);
         mDrawerList = (ListView) findViewById(R.id.drawer_list);
+        addDrawerItems();
+        broad_button = (ToggleButton) findViewById(R.id.toggBtn);
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        editor = sharedPref.edit();
 
+
+
+
+        broad_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(((ToggleButton) v).isChecked()) {
+                    currently_broadcasting = true;
+                    //editor.clear();
+                    editor.putBoolean("broadcast_status", true);
+                    editor.commit();
+                    new StartBroadcast().execute();
+                }
+                else {
+                    currently_broadcasting = false;
+                    //editor.clear();
+                    editor.putBoolean("broadcast_status", false);
+                    editor.commit();
+                    new StopBroadcast().execute();
+                }
+            }
+        });
+
+    }
+
+    private void addDrawerItems() {
+        // More Drawer Stuff
+        String[] mDrawerTitles = {"Home", "Following", "Settings", "Logout"};
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mDrawerTitles) {
+            @Override
+            public View getView(int position, View convertView,
+                                ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+
+                TextView textView = (TextView) view.findViewById(android.R.id.text1);
+
+            /*YOUR CHOICE OF COLOR*/
+                textView.setTextColor(Color.WHITE);
+
+                return view;
+            }
+        };
+
+        mDrawerList.setAdapter(mAdapter);
+
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0)
+                {
+                    Intent in = new Intent(getApplicationContext(),
+                            Explore.class);
+                    //in.putExtra(TAG_PID, current_user_id);
+                    startActivity(in);
+                }
+                if (position == 1)
+                {
+                    Intent in = new Intent(getApplicationContext(),
+                            MainScreenActivity.class);
+                    //in.putExtra(TAG_PID, current_user_id);
+                    startActivity(in);
+                }
+                if(position == 2)
+                {
+                    Intent in = new Intent(getApplicationContext(),
+                            SettingsActivity.class);
+                    startActivity(in);
+                }
+                if (position == 3) {
+                    //AuthenticationClient.logout(getApplicationContext());
+                    Intent i = getBaseContext().getPackageManager()
+                            .getLaunchIntentForPackage(getBaseContext().getPackageName());
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    finish();
+                    startActivity(i);
+                }
+            }
+        });
     }
 
 

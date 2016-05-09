@@ -5,10 +5,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
@@ -54,12 +56,10 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class MainScreenActivity extends Explore {
+public class MainScreenActivity extends BaseActivity {
 
 	// Progress Dialog
 
-	// Creating JSON Parser object
-	JSONParser jParser = new JSONParser();
 
 	ArrayList<HashMap<String, String>> productsList;
 	HashMap<String, List<String>> listDataChild;
@@ -71,28 +71,10 @@ public class MainScreenActivity extends Explore {
 	ExpandableListAdapter exp_adapter;
 
 
-
-	private static String ip = "52.38.141.152";
-	// url to get all products list
-	private static String url_all_products = "http://" + ip + "/get_all_products.php";
-	private static final String url_start_broadcast = "http://" + ip + "/start_broadcast.php";
-	private static final String url_stop_broadcast = "http://" + ip + "/stop_broadcast.php";
-	private static String url_create_product = "http://" + ip + "/create_product.php";
-	private static String url_post_uri = "http://" + ip + "/post_uri.php";
-	private static String url_play_playback = "http://" + ip + "/play_playback.php";
-	private static String url_pause_playback = "http://" + ip + "/pause_playback.php";
-
-	// Drawer List Stuff
-	private LinearLayout mDrawerLayout;
-	private ListView mDrawerList;
-	private Switch mDrawerSwitch;
-	private TextView drawerSwitchStatus;
-	private ArrayAdapter<String> mAdapter;
-
 	// JSON Node names
 
 	private static final String TAG_PRODUCTS = "users";
-	public static final String TAG_PID = "id";
+
 	private static final String TAG_NAME = "name";
 
 	// products JSONArray
@@ -104,16 +86,12 @@ public class MainScreenActivity extends Explore {
 
 	// Progress Dialog
 	private ProgressDialog pDialog;
-	JSONParser jsonParser = new JSONParser();
 	// url to create new product
 
-	private boolean currently_broadcasting = false;
 
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
 
-	private String current_user_id;
-	private ToggleButton broad_button;
 
 
 	public final static String EXTRA_MESSAGE = "com.mycompany.app.MESSAGE";
@@ -128,11 +106,9 @@ public class MainScreenActivity extends Explore {
 	//Runs "LoadAllProducts" and begins the Spotify login
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-
-		//android:background="#209CF2"
-
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_screen);
+		super.onCreateDrawer();
 
 		listDataChild = new HashMap<String, List<String>>();
 		user_options = new ArrayList<String>();
@@ -147,11 +123,11 @@ public class MainScreenActivity extends Explore {
 		arrayOfBroadcasts = new ArrayList<Broadcast>();
 		new LoadAllProducts().execute();
 
+		Intent in = getIntent();
+		current_user_id = sharedPref.getString("user_id", "nothing returned");
+		broadcast_status = sharedPref.getBoolean("broadcast_status", false);
+
 		//Set ListView for Drawer
-		mDrawerLayout = (LinearLayout) findViewById(R.id.drawer_linear_layout);
-		//mDrawerSwitch = (Switch) findViewById(R.id.drawer_switch);
-		mDrawerList = (ListView) findViewById(R.id.drawer_list);
-		addDrawerItems();
 
 
 		android.support.v7.app.ActionBar bar = getSupportActionBar();
@@ -160,19 +136,7 @@ public class MainScreenActivity extends Explore {
 
 
 
-		broad_button = (ToggleButton) findViewById(R.id.toggBtn);
-		broad_button.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				if(((ToggleButton) v).isChecked()) {
-					currently_broadcasting = true;
-					new StartBroadcast().execute();
-				}
-				else {
-					currently_broadcasting = false;
-					new StopBroadcast().execute();
-				}
-			}
-		});
+
 
 		// Loading products in Background Thread
 		//NEED TO READD THIS SOON!!!!
@@ -211,11 +175,16 @@ public class MainScreenActivity extends Explore {
 	}
 
 	@Override
-	public void onStart()
+	public void onNewIntent(Intent in)
 	{
-		super.onStart();
-		Intent in = getIntent();
-		current_user_id = in.getStringExtra(Explore.TAG_PID);
+		super.onNewIntent(in);
+		setIntent(in);
+		current_user_id = sharedPref.getString("user_id", "nothing returned");
+		broadcast_status = sharedPref.getBoolean("broadcast_status", false);
+		Log.d("User ID Following", current_user_id);
+		Log.d("Broadcast Following", Boolean.toString(broadcast_status));
+
+
 	}
 
 	@Override
@@ -234,51 +203,6 @@ public class MainScreenActivity extends Explore {
 		menu.setHeaderTitle("More Info");
 		menu.setHeaderIcon(R.drawable.guppy);
 		inflater.inflate(R.menu.menu, menu);
-	}
-
-
-
-
-	private void addDrawerItems(){
-		// More Drawer Stuff
-		String[] mDrawerTitles = {"Home", "Following", "Settings", "Logout"};
-		mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mDrawerTitles) {
-			@Override
-			public View getView(int position, View convertView,
-								ViewGroup parent) {
-				View view =super.getView(position, convertView, parent);
-
-				TextView textView=(TextView) view.findViewById(android.R.id.text1);
-
-            /*YOUR CHOICE OF COLOR*/
-				textView.setTextColor(Color.WHITE);
-
-				return view;
-			}
-		};
-		mDrawerList.setAdapter(mAdapter);
-
-		mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				if(position == 0)
-				{
-					Intent in = new Intent(MainScreenActivity.this,
-							Explore.class);
-					startActivity(in);
-				}
-				if(position == 3)
-				{
-					//AuthenticationClient.logout(getApplicationContext());
-					Intent i = getBaseContext().getPackageManager()
-							.getLaunchIntentForPackage( getBaseContext().getPackageName() );
-					i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					finish();
-					startActivity(i);
-				}
-			}
-		});
-
 	}
 
 
@@ -303,7 +227,7 @@ public class MainScreenActivity extends Explore {
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			// getting JSON string from URL
-			JSONObject json = jParser.makeHttpRequest(url_all_products, "GET", params);
+			JSONObject json = jsonParser.makeHttpRequest(url_all_products, "GET", params);
 
 			// Check your log cat for JSON reponse
 			Log.d("All Products: ", json.toString());

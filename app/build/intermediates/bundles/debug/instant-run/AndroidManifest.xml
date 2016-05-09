@@ -22,7 +22,9 @@
         android:icon="@drawable/guppy"
         android:label="Guppy"
         android:theme="@style/Theme.AppCompat.Light" >
-        <activity android:name="com.example.androidhive.Explore" >
+        <activity
+            android:name="com.example.androidhive.Explore"
+            android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,7 +33,8 @@
         </activity>
         <activity
             android:name="com.example.androidhive.MainScreenActivity"
-            android:label="Guppy" />
+            android:label="Guppy"
+            android:launchMode="singleTask" />
         <activity
             android:name="com.spotify.sdk.android.authentication.LoginActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
@@ -39,14 +42,15 @@
              ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
 
         <activity
             android:name="com.example.androidhive.TuneIn"
             android:label="Tuning In" />
         <activity android:name="com.example.androidhive.BaseActivity" />
+        <activity
+            android:name="com.example.androidhive.SettingsActivity"
+            android:launchMode="singleTask" >
+        </activity>
     </application>
 
 </manifest>

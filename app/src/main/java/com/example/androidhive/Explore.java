@@ -5,10 +5,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
@@ -63,8 +65,11 @@ public class Explore extends BaseActivity {
 
 
 
-    public static final String TAG_PID = "id";
+
     private static final String TAG_NAME = "name";
+
+
+
 
     // products JSONArray
     JSONArray products = null;
@@ -102,22 +107,6 @@ public class Explore extends BaseActivity {
         pdialog.setCancelable(false);
         pdialog.show();
 
-        addDrawerItems();
-
-
-        broad_button = (ToggleButton) findViewById(R.id.toggBtn);
-        broad_button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if(((ToggleButton) v).isChecked()) {
-                    currently_broadcasting = true;
-                    new StartBroadcast().execute();
-                }
-                else {
-                    currently_broadcasting = false;
-                    new StopBroadcast().execute();
-                }
-            }
-        });
 
 
         AuthenticationRequest.Builder builder = new AuthenticationRequest.Builder(CLIENT_ID,
@@ -149,6 +138,34 @@ public class Explore extends BaseActivity {
 
     }
 
+    @Override
+    public void onNewIntent(Intent intent)
+    {
+        super.onNewIntent(intent);
+        // = getIntent();
+        setIntent(intent);
+        broadcast_status = sharedPref.getBoolean("broadcast_status", false);
+        current_user_id = sharedPref.getString("user_id", "nothing returned");
+        Log.d("Broadcast Explore", Boolean.toString(broadcast_status));
+        //try {
+            Log.d("User Id Explore", current_user_id);
+       // } catch (NullPointerException e)
+        {
+
+        }
+        //Log.d("User Id Explore", current_user_id);
+
+        if(broadcast_status == true)
+        {
+            broad_button.setChecked(true);
+        }
+        else
+        {
+            broad_button.setChecked(false);
+        }
+
+    }
+
 
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
@@ -167,7 +184,8 @@ public class Explore extends BaseActivity {
                     Log.d("User Success", userPrivate.id);
                     String name = userPrivate.display_name.toString();
                     current_user_id = userPrivate.id.toString();
-
+                    editor.putString("user_id", current_user_id);
+                    editor.commit();
                     new CreateNewProduct().execute(name, current_user_id);
 
 
@@ -182,45 +200,7 @@ public class Explore extends BaseActivity {
     }
 
 
-    private void addDrawerItems() {
-        // More Drawer Stuff
-        String[] mDrawerTitles = {"Home", "Following", "Settings", "Logout"};
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mDrawerTitles) {
-            @Override
-            public View getView(int position, View convertView,
-                                ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
 
-                TextView textView = (TextView) view.findViewById(android.R.id.text1);
-
-            /*YOUR CHOICE OF COLOR*/
-                textView.setTextColor(Color.WHITE);
-
-                return view;
-            }
-        };
-
-        mDrawerList.setAdapter(mAdapter);
-
-        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    Intent in = new Intent(Explore.this,
-                            Explore.class);
-                    startActivity(in);
-                }
-                if (position == 3) {
-                    //AuthenticationClient.logout(getApplicationContext());
-                    Intent i = getBaseContext().getPackageManager()
-                            .getLaunchIntentForPackage(getBaseContext().getPackageName());
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    finish();
-                    startActivity(i);
-                }
-            }
-        });
-    }
 
 
         class CreateNewProduct extends AsyncTask<String, String, String> {
@@ -314,6 +294,8 @@ public class Explore extends BaseActivity {
         public void onDestroy ()
         {
             new StopBroadcast().execute();
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+            sharedPref.edit().clear().commit();
             super.onDestroy();
         }
 
