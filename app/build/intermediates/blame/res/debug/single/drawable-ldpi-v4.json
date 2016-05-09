@@ -1,99 +1,27 @@
 [
     {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\amy.png",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\amy.png"
-    },
-    {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\zac_bricta.jpg",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\zac_bricta.jpg"
-    },
-    {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\mark_musial.jpg",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\mark_musial.jpg"
-    },
-    {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\plus.png",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\plus.png"
-    },
-    {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\snf.png",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\snf.png"
-    },
-    {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\madison_claire.jpg",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\madison_claire.jpg"
-    },
-    {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\obama.png",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\obama.png"
-    },
-    {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\mj.png",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\mj.png"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ic_more.png",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\ic_more.png"
     },
     {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\guppy.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\guppy.png"
+    },
+    {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\dots.png",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\dots.png"
-    },
-    {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\allison_nicolai.jpg",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\allison_nicolai.jpg"
-    },
-    {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\jack_lansa.jpg",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\jack_lansa.jpg"
-    },
-    {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\joe.png",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\joe.png"
-    },
-    {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ic_launcher_guppy.png",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\ic_launcher_guppy.png"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ic_launcher.png",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\joe_sauer.png",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\joe_sauer.png"
-    },
-    {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\jessica_mindrum.jpg",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\jessica_mindrum.jpg"
-    },
-    {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\mountains.png",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\mountains.png"
-    },
-    {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\tom_leary.jpg",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\tom_leary.jpg"
-    },
-    {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\holla.png",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\holla.png"
-    },
-    {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\anthony_sacco.jpg",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\anthony_sacco.jpg"
-    },
-    {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ronda.png",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\ronda.png"
-    },
-    {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\riri.png",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\riri.png"
-    },
-    {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\steph.png",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\steph.png"
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ic_more_options.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\ic_more_options.png"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\wham.png",
@@ -104,12 +32,8 @@
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\ic_more_big.png"
     },
     {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\leo.png",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\leo.png"
-    },
-    {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\spice.png",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\spice.png"
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ic_speaker.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-ldpi\\ic_speaker.png"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\play.png",

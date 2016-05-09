@@ -66,9 +66,9 @@ public class TuneIn extends AppCompatActivity implements
 
     private static final String TAG_SUCCESS = "success";
 
-    private static String ip = "10.0.0.26";
+    private static String ip = "52.38.141.152";
     JSONParser jsonParser = new JSONParser();
-    private static String url_get_uri = "http://" + ip + "/android_connect/get_uri.php";
+    private static String url_get_uri = "http://" + ip + "/get_uri.php";
 
     private ImageView imageViewRound;
 
@@ -91,7 +91,7 @@ public class TuneIn extends AppCompatActivity implements
         song.setTypeface(custom_font, Typeface.BOLD);
         album.setTypeface(custom_font, Typeface.BOLD);
         artist.setTypeface(custom_font, Typeface.BOLD);
-        Bitmap icon = BitmapFactory.decodeResource(getResources(),R.drawable.mj);
+        Bitmap icon = BitmapFactory.decodeResource(getResources(),R.drawable.guppy);
         imageViewRound.setImageBitmap(icon);
 
         android.support.v7.app.ActionBar bar = getSupportActionBar();
@@ -99,7 +99,7 @@ public class TuneIn extends AppCompatActivity implements
         bar.setTitle(Html.fromHtml("<font color='#ffffff'>Michael Jordan</font>"));
 
 
-        Intent intent = getIntent();
+
 
         new Timer().schedule(new TimerTask() {
 
@@ -117,6 +117,7 @@ public class TuneIn extends AppCompatActivity implements
             }
         }, 0, 1000);
 
+        Intent intent = getIntent();
         AuthenticationResponse response = intent.getParcelableExtra(MainScreenActivity.EXTRA_MESSAGE);
         pid = intent.getStringExtra(MainScreenActivity.TAG_PID);
 

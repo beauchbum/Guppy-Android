@@ -11,7 +11,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:id="@+id/list_item_image"
-        android:src="@drawable/ic_launcher_guppy" />
+        android:src="@drawable/guppy" />
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"

@@ -8,19 +8,20 @@
 
     <!-- Internet Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:configChanges="keyboardHidden|orientation"
-        android:icon="@drawable/ic_launcher_guppy"
+        android:icon="@drawable/guppy"
         android:label="Guppy"
         android:theme="@style/Theme.AppCompat.Light">
         <activity
-            android:name=".MainScreenActivity"
-            android:label="Guppy">
+            android:name=".Explore"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,20 +29,26 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".MainScreenActivity"
+            android:label="Guppy"
+            android:launchMode="singleTask" />
+        <activity
             android:name="com.spotify.sdk.android.authentication.LoginActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!--
              ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
 
         <activity
             android:name=".TuneIn"
             android:label="Tuning In" />
-        <activity android:name=".Explore"></activity>
+        <activity android:name=".BaseActivity" />
+        <activity
+            android:name=".SettingsActivity"
+            android:launchMode="singleTask">
+
+        </activity>
     </application>
 
 </manifest>

@@ -14,7 +14,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:src="@drawable/snf"
+        android:src="@drawable/wham"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"/>
 

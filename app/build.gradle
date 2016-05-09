@@ -26,19 +26,19 @@ repositories {
     }
 }
 
+
 dependencies {
-   
-    
+
     // This library handles authentication and authorization
-    
+
     compile group: 'cz.msebera.android', name: 'httpclient', version: '4.4.1.1'
     // This library handles music playback
+
+
+
     compile 'com.spotify.sdk:spotify-player:1.0.0-beta11@aar'
     compile 'com.spotify.sdk:spotify-auth:1.0.0-beta11@aar'
     compile 'com.github.kaaes:spotify-web-api-android:0.2.0'
-	compile "com.android.support:support-v4:23.2.1"
-	compile "com.android.support:appcompat-v7:23.2.1"
-	compile "com.android.support:support-annotations:23.1.1"
-
-    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    compile 'com.android.support:support-v4:23.3.0'
+    compile 'com.android.support:appcompat-v7:23.3.0'
 }
