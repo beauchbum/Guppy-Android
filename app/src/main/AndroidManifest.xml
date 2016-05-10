@@ -43,7 +43,6 @@
         <activity
             android:name=".TuneIn"
             android:label="Tuning In" />
-        <activity android:name=".BaseActivity" />
         <activity
             android:name=".SettingsActivity"
             android:launchMode="singleTask">
