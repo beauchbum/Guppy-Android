@@ -117,9 +117,11 @@ public class TuneIn extends AppCompatActivity implements
             }
         }, 0, 1000);
 
+
         Intent intent = getIntent();
-        AuthenticationResponse response = intent.getParcelableExtra(MainScreenActivity.EXTRA_MESSAGE);
-        pid = intent.getStringExtra(MainScreenActivity.TAG_PID);
+        AuthenticationResponse response = intent.getParcelableExtra(Explore.EXTRA_MESSAGE);
+        pid = intent.getStringExtra(Explore.TAG_PID);
+
 
 
         //if (response.getType() == AuthenticationResponse.Type.TOKEN) {
