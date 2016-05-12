@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import cz.msebera.android.httpclient.NameValuePair;
+import cz.msebera.android.httpclient.message.BasicNameValuePair;
 
 /**
  * Created by Ryan on 5/9/2016.
@@ -150,13 +151,13 @@ public class Following_Fragment extends Fragment {
 
 
 
-                    main_activity.adapter = new BroadcastAdapter(getActivity().getApplicationContext(), main_activity.arrayOfBroadcasts);
+                    main_activity.adapter = new BroadcastAdapter(main_activity.getApplicationContext(), main_activity.arrayOfBroadcasts);
                     main_activity.lv.setAdapter(main_activity.adapter);
                     main_activity.lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Log.d("Clicked", "shit happened");
                             main_activity.current_following_id = main_activity.pid_list.get(position);
+                            new Increment_Listeners().execute(main_activity.current_following_id);
                             main_activity.TuneIn();
                         }
                     });
@@ -186,7 +187,63 @@ public class Following_Fragment extends Fragment {
     }
 
 
+    class Increment_Listeners extends AsyncTask<String, String, String> {
 
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        /**
+         * Creating product
+         */
+        protected String doInBackground(String... args) {
+
+
+            // Building Parameters
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("id", args[0]));
+
+
+
+            // getting JSON Object
+            // Note that create product url accepts POST method
+
+            JSONObject json = main_activity.jsonParser.makeHttpRequest(main_activity.url_increment_listeners,
+                    "POST", params);
+
+            // check log cat fro response
+            Log.d("Create Response", json.toString());
+
+            // check for success tag
+            try {
+                int success = json.getInt(main_activity.TAG_SUCCESS);
+
+                if (success == 1) {
+
+                } else {
+                    // failed to create product
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+
+
+        }
+    }
 
 
 

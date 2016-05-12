@@ -91,9 +91,9 @@ public class Explore extends AppCompatActivity{
     public static String url_play_playback = "http://" + ip + "/play_playback.php";
     public static String url_pause_playback = "http://" + ip + "/pause_playback.php";
     public static String url_get_uri = "http://" + ip + "/get_uri.php";
+    public static String url_increment_listeners = "http://" + ip + "/increment_listeners.php";
+    public static String url_decrement_listeners = "http://" + ip + "/decrement_listeners.php";
 
-    public SharedPreferences.Editor editor;
-    public SharedPreferences sharedPref;
 
 
     //Explore List Stuff
@@ -163,7 +163,7 @@ public class Explore extends AppCompatActivity{
 
             Explore_Fragment firstFragment = new Explore_Fragment();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, firstFragment).addToBackStack(null).commit();
+                    .add(R.id.fragment_container, firstFragment, "Explore").commit();
         }
 
         pdialog = new ProgressDialog(Explore.this);
@@ -181,23 +181,15 @@ public class Explore extends AppCompatActivity{
         addDrawerItems();
 
         broad_button = (ToggleButton) findViewById(R.id.toggBtn);
-        sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        editor = sharedPref.edit();
 
         broad_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(((ToggleButton) v).isChecked()) {
                     currently_broadcasting = true;
-                    //editor.clear();
-                    editor.putBoolean("broadcast_status", true);
-                    editor.commit();
                     new StartBroadcast().execute();
                 }
                 else {
                     currently_broadcasting = false;
-                    //editor.clear();
-                    editor.putBoolean("broadcast_status", false);
-                    editor.commit();
                     new StopBroadcast().execute();
                 }
             }
@@ -225,9 +217,7 @@ public class Explore extends AppCompatActivity{
         //new LoadAllProducts().execute();
 
 
-        android.support.v7.app.ActionBar bar = getSupportActionBar();
-        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#209CF2")));
-        bar.setTitle(Html.fromHtml("<font color='#ffffff'>Explore Popular Streams</font>"));
+
 
 
     }
@@ -265,23 +255,42 @@ public class Explore extends AppCompatActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-                    android.support.v4.app.FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                    fr = new Explore_Fragment();
-                    fragmentTransaction.replace(R.id.fragment_container, fr);
-                    fragmentTransaction.commit();
+                    Explore_Fragment my_otherfragment = (Explore_Fragment) getSupportFragmentManager().findFragmentByTag("Explore");
+                    if (my_otherfragment != null && my_otherfragment.isVisible())
+                    {
+
+                    }
+                    else
+                    {
+                        android.support.v4.app.FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                        fr = new Explore_Fragment();
+                        fragmentTransaction.replace(R.id.fragment_container, fr, "Explore");
+                        fragmentTransaction.commit();
+                    }
                     Drawer.closeDrawers();
                 }
                 if (position == 1) {
-                    android.support.v4.app.FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                    fr = new Following_Fragment();
-                    fragmentTransaction.replace(R.id.fragment_container, fr);
-                    fragmentTransaction.commit();
+                    Following_Fragment my_otherfragment = (Following_Fragment)getSupportFragmentManager().findFragmentByTag("Following");
+                    if (my_otherfragment != null && my_otherfragment.isVisible())
+                    {
+
+                    }
+                    else
+                    {
+                        android.support.v4.app.FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                        fr = new Following_Fragment();
+                        fragmentTransaction.replace(R.id.fragment_container, fr, "Following");
+                        Explore_Fragment myFragment = (Explore_Fragment) getSupportFragmentManager().findFragmentByTag("Explore");
+                        if (myFragment != null && myFragment.isVisible()) {
+                            fragmentTransaction.addToBackStack(null);
+                        }
+                        fragmentTransaction.commit();
+                    }
+
                     Drawer.closeDrawers();
                 }
                 if (position == 2) {
-                    Intent in = new Intent(getApplicationContext(),
-                            Explore.class);
-                    startActivity(in);
+
                 }
                 if (position == 3) {
                     //AuthenticationClient.logout(getApplicationContext());
@@ -315,7 +324,6 @@ public class Explore extends AppCompatActivity{
                     String name = userPrivate.display_name.toString();
                     current_user_id = userPrivate.id.toString();
                     new CreateNewProduct().execute(name, current_user_id);
-
 
                 }
 
@@ -716,12 +724,11 @@ public class Explore extends AppCompatActivity{
         }
     }
 
-        @Override
-        public void onDestroy ()
-        {
-            new StopBroadcast().execute();
-            super.onDestroy();
-        }
-
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        new StopBroadcast().execute();
     }
+}
 

@@ -216,14 +216,6 @@ public class TuneIn_Fragment extends Fragment implements
     }
 
 
-    @Override
-    public void onDestroy() {
-        Spotify.destroyPlayer(this);
-
-
-        super.onDestroy();
-    }
-
     private boolean convert_string(String original)
     {
         if (original.contains("1")){
@@ -231,6 +223,64 @@ public class TuneIn_Fragment extends Fragment implements
         }
         else{
             return false;
+        }
+    }
+
+    class Decrement_Listeners extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        /**
+         * Creating product
+         */
+        protected String doInBackground(String... args) {
+
+
+            // Building Parameters
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("id", args[0]));
+
+
+
+            // getting JSON Object
+            // Note that create product url accepts POST method
+
+            JSONObject json = main_activity.jsonParser.makeHttpRequest(main_activity.url_decrement_listeners,
+                    "POST", params);
+
+            // check log cat fro response
+            Log.d("Create Response", json.toString());
+
+            // check for success tag
+            try {
+                int success = json.getInt(main_activity.TAG_SUCCESS);
+
+                if (success == 1) {
+
+                } else {
+                    // failed to create product
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+
+
         }
     }
 
@@ -296,6 +346,14 @@ public class TuneIn_Fragment extends Fragment implements
             // dismiss the dialog once got all details
 
         }
+    }
+
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        Spotify.destroyPlayer(this);
+        new Decrement_Listeners().execute(main_activity.current_following_id);
     }
 
 }

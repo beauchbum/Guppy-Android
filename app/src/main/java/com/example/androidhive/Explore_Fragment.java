@@ -1,10 +1,13 @@
 package com.example.androidhive;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v4.view.ViewGroupCompat;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +25,7 @@ import java.util.ArrayList;
 public class Explore_Fragment extends Fragment {
 
     private ListView mExploreList;
+    public Explore main_activity;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
@@ -32,9 +36,15 @@ public class Explore_Fragment extends Fragment {
         explore_element_array.add(new ExploreElement("guppy", "guppy"));
         explore_element_array.add(new ExploreElement("guppy", "guppy"));
 
+        main_activity = (Explore) getActivity();
+
         mExploreList = (ListView) rootview.findViewById(R.id.explore_list);
         Explore_Fragment.ExploreAdapter adapter = new Explore_Fragment.ExploreAdapter(getActivity().getApplicationContext(), explore_element_array);
         mExploreList.setAdapter(adapter);
+
+        android.support.v7.app.ActionBar bar = main_activity.getSupportActionBar();
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#209CF2")));
+        bar.setTitle(Html.fromHtml("<font color='#ffffff'>Explore Popular Streams</font>"));
 
         return rootview;
 
