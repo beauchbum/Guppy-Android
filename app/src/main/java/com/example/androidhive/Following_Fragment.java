@@ -161,23 +161,7 @@ public class Following_Fragment extends Fragment {
                             main_activity.TuneIn();
                         }
                     });
-                    /**
-                     * Updating parsed JSON data into ListView
-                     * */
-/*
-					ListAdapter adapter = new SimpleAdapter(
-							MainScreenActivity.this, productsList,
-							R.layout.list_item, new String[] {TAG_NAME, TAG_PID},
-							new int[] {R.id.name ,R.id.pid});
-					// updating listview
-					setListAdapter(adapter);
 
-
-*/
-
-                    //System.out.println(listDataHeader);
-                    //System.out.println(listDataChild);
-                    //lv.setAdapter(exp_adapter);
 
                 }
             });
