@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.hardware.Camera;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,8 +15,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
 import com.spotify.sdk.android.player.Config;
@@ -36,6 +39,7 @@ import java.util.TimerTask;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+
 import cz.msebera.android.httpclient.NameValuePair;
 import cz.msebera.android.httpclient.message.BasicNameValuePair;
 
@@ -53,6 +57,7 @@ public class TuneIn_Fragment extends Fragment implements
     private TextView song;
     private TextView album;
     private TextView artist;
+    private ImageButton follow_button;
     private Player mPlayer;
     private String old_uri = "No Track Yet";
     private String new_uri;
@@ -78,6 +83,12 @@ public class TuneIn_Fragment extends Fragment implements
         artist.setTypeface(custom_font, Typeface.BOLD);
         Bitmap icon = BitmapFactory.decodeResource(getResources(),R.drawable.guppy);
         imageViewRound.setImageBitmap(icon);
+
+        follow_button = (ImageButton) rootview.findViewById(R.id.plus_button);
+        //follow_button.setOnClickListener(listener);
+
+
+
 
         android.support.v7.app.ActionBar bar = main_activity.getSupportActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#209CF2")));
@@ -179,6 +190,19 @@ public class TuneIn_Fragment extends Fragment implements
         });
         return rootview;
     }
+
+
+
+    ImageButton.OnClickListener listener = new ImageButton.OnClickListener()
+    {
+        @Override
+        public void onClick(View arg0)
+        {
+            new FollowUser().execute(main_activity.current_following_id, main_activity.current_user_id);
+            follow_button.setImageResource(R.drawable.dickbutt);
+            Log.d("Plus Button", "Clicked");
+        }
+    };
 
     @Override
     public void onLoggedIn() {
@@ -344,6 +368,124 @@ public class TuneIn_Fragment extends Fragment implements
          * **/
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once got all details
+
+        }
+    }
+
+    class FollowUser extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        /**
+         * Creating product
+         */
+        protected String doInBackground(String... args) {
+
+
+            // Building Parameters
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("followed_id", args[0]));
+            params.add(new BasicNameValuePair("follower_id", args[1]));
+
+
+
+            // getting JSON Object
+            // Note that create product url accepts POST method
+
+            JSONObject json = main_activity.jsonParser.makeHttpRequest(main_activity.url_follow_user,
+                    "POST", params);
+
+            // check log cat fro response
+            Log.d("Create Response", json.toString());
+
+            // check for success tag
+            try {
+                int success = json.getInt(main_activity.TAG_SUCCESS);
+
+                if (success == 1) {
+
+                } else {
+                    // failed to create product
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+
+
+        }
+    }
+
+    class UnfollowUser extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        /**
+         * Creating product
+         */
+        protected String doInBackground(String... args) {
+
+
+            // Building Parameters
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("followed_id", args[0]));
+            params.add(new BasicNameValuePair("follower_id", args[1]));
+
+
+
+            // getting JSON Object
+            // Note that create product url accepts POST method
+
+            JSONObject json = main_activity.jsonParser.makeHttpRequest(main_activity.url_unfollow_user,
+                    "POST", params);
+
+            // check log cat fro response
+            Log.d("Create Response", json.toString());
+
+            // check for success tag
+            try {
+                int success = json.getInt(main_activity.TAG_SUCCESS);
+
+                if (success == 1) {
+
+                } else {
+                    // failed to create product
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+
 
         }
     }

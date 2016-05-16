@@ -52,7 +52,10 @@ import java.util.List;
 import cz.msebera.android.httpclient.NameValuePair;
 import cz.msebera.android.httpclient.message.BasicNameValuePair;
 import kaaes.spotify.webapi.android.SpotifyApi;
+import kaaes.spotify.webapi.android.SpotifyError;
 import kaaes.spotify.webapi.android.SpotifyService;
+import kaaes.spotify.webapi.android.models.ErrorDetails;
+import kaaes.spotify.webapi.android.models.Track;
 import kaaes.spotify.webapi.android.models.UserPrivate;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -93,6 +96,9 @@ public class Explore extends AppCompatActivity{
     public static String url_get_uri = "http://" + ip + "/get_uri.php";
     public static String url_increment_listeners = "http://" + ip + "/increment_listeners.php";
     public static String url_decrement_listeners = "http://" + ip + "/decrement_listeners.php";
+    public static String url_follow_user = "http://" + ip + "/follow_user.php";
+    public static String url_unfollow_user = "http://" + ip + "/unfollow_user.php";
+
 
 
 
@@ -106,6 +112,7 @@ public class Explore extends AppCompatActivity{
 
     ListView lv;
 
+
     ArrayList<Broadcast> arrayOfBroadcasts;
     Following_Fragment.BroadcastAdapter adapter;
     public ArrayList<String> pid_list;
@@ -117,6 +124,16 @@ public class Explore extends AppCompatActivity{
     public static final String TAG_SUCCESS = "success";
 
 
+
+    //Album Art Stuff
+    public String albumArt;
+    public SpotifyApi my_api;
+    public SpotifyService spotify;
+    public Boolean albumArtDone = false;
+    String trackId;
+    String artistName;
+    String albumName;
+    String trackName;
 
 
 
@@ -313,9 +330,9 @@ public class Explore extends AppCompatActivity{
         if (requestCode == REQUEST_CODE) {
             response = AuthenticationClient.getResponse(resultCode, intent);
 
-            SpotifyApi my_api = new SpotifyApi();
+            my_api = new SpotifyApi();
             my_api.setAccessToken(response.getAccessToken());
-            SpotifyService spotify = my_api.getService();
+            spotify = my_api.getService();
 
             spotify.getMe(new Callback<UserPrivate>() {
                 @Override
@@ -339,7 +356,7 @@ public class Explore extends AppCompatActivity{
 
 
 
-        class CreateNewProduct extends AsyncTask<String, String, String> {
+    class CreateNewProduct extends AsyncTask<String, String, String> {
 
             /**
              * Before starting background thread Show Progress Dialog
@@ -483,17 +500,48 @@ public class Explore extends AppCompatActivity{
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     long timeSentInMs = intent.getLongExtra("timeSent", 0L);
-                    String action = intent.getAction();
 
-                    String trackId = intent.getStringExtra("id");
-                    String artistName = intent.getStringExtra("artist");
-                    String albumName = intent.getStringExtra("album");
-                    String trackName = intent.getStringExtra("track");
+                    String action = intent.getAction();
+                    trackId = intent.getStringExtra("id");
+                    artistName = intent.getStringExtra("artist");
+                    albumName = intent.getStringExtra("album");
+                    trackName = intent.getStringExtra("track");
                     Log.d("trackId", trackId);
                     int trackLengthInSec = intent.getIntExtra("length", 0);
-                    if (action.equals(BroadcastTypes.METADATA_CHANGED)){
-                        new SetURI().execute(trackId, trackName, albumName, artistName);
+                    if (action.equals(BroadcastTypes.METADATA_CHANGED)) {
+                        //GetAlbumArt running_task = new GetAlbumArt();
+                        //running_task.execute(trackId);
+                        albumArtDone = false;
+                        String newTrackId = trackId.substring(14);
+
+
+                        try {
+
+                            spotify.getTrack(newTrackId, new Callback<Track>() {
+                                @Override
+                                public void success(Track track, Response response) {
+                                    Log.d("Track success", track.name);
+                                    albumArt = track.album.images.get(0).url;
+                                    new SetURI().execute(trackId, trackName, albumName, artistName, albumArt);
+
+                                }
+
+                                @Override
+                                public void failure(RetrofitError error) {
+                                    Log.d("Album failure", error.toString());
+                                }
+
+                            });
+
+
+                        } catch (RetrofitError error) {
+                            ErrorDetails details = SpotifyError.fromRetrofitError(error).getErrorDetails();
+                            System.out.println(details.status + ":" + details.message);
+                        }
+
+
                     }
+
                     if (action.equals(BroadcastTypes.PLAYBACK_STATE_CHANGED)) {
                         playing = intent.getBooleanExtra("playing", false);
                         //int positionInMs = intent.getIntExtra("playbackPosition", 0);
@@ -685,6 +733,7 @@ public class Explore extends AppCompatActivity{
             params.add(new BasicNameValuePair("song", args[1]));
             params.add(new BasicNameValuePair("album", args[2]));
             params.add(new BasicNameValuePair("artist", args[3]));
+            params.add(new BasicNameValuePair("album_art_large", args[4]));
 
             Log.d("Setting URI", params.toString());
 
@@ -724,11 +773,15 @@ public class Explore extends AppCompatActivity{
         }
     }
 
+
+
     @Override
     public void onDestroy()
     {
         super.onDestroy();
         new StopBroadcast().execute();
+        new ChangePlayback().execute("false");
+        new SetURI().execute(null, null, null, null, null);
     }
 }
 
