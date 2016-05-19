@@ -43,9 +43,6 @@
         -->
 
         <activity
-            android:name="com.example.androidhive.TuneIn"
-            android:label="Tuning In" />
-        <activity
             android:name="com.example.androidhive.SettingsActivity"
             android:launchMode="singleTask" >
         </activity>

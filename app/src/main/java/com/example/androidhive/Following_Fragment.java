@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SearchViewCompat;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -35,6 +37,7 @@ import cz.msebera.android.httpclient.message.BasicNameValuePair;
 public class Following_Fragment extends Fragment {
 
     public Explore main_activity;
+    public SearchView search_box;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,14 +55,45 @@ public class Following_Fragment extends Fragment {
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#209CF2")));
         bar.setTitle(Html.fromHtml("<font color='#ffffff'>Following</font>"));
 
+        new LoadFollowingUsers().execute(main_activity.current_user_id);
 
-        new LoadAllProducts().execute();
+
+        //new SearchUsers().execute("'%" + search_box.getQuery().toString() + "%'");
+
+
+
+        search_box = (SearchView) rootview.findViewById(R.id.search_bar);
+        search_box.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.d("Searching", "'%" + search_box.getQuery().toString() + "%'");
+                new SearchUsers().execute("'%" + search_box.getQuery().toString() + "%'", main_activity.current_user_id);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+
 
         return rootview;
 
     }
 
-    class LoadAllProducts extends AsyncTask<String, String, String> {
+    /*
+    @Override
+    public void onClick(View v)
+    {
+        Log.d("Searching", "Doing Stuff");
+        new SearchUsers().execute(search_box.getQuery().toString());
+
+    }
+    */
+
+    class LoadFollowingUsers extends AsyncTask<String, String, String> {
 
         /**
          * Before starting background thread Show Progress Dialog
@@ -77,10 +111,11 @@ public class Following_Fragment extends Fragment {
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             // getting JSON string from URL
-            JSONObject json = main_activity.jsonParser.makeHttpRequest(main_activity.url_all_products, "GET", params);
+            params.add(new BasicNameValuePair("current_user_id", args[0]));
+            JSONObject json = main_activity.jsonParser.makeHttpRequest(main_activity.url_get_following, "GET", params);
 
             // Check your log cat for JSON reponse
-            Log.d("All Products: ", json.toString());
+            Log.d("Following Users: ", json.toString());
 
             try {
                 // Checking for SUCCESS TAG
@@ -170,6 +205,115 @@ public class Following_Fragment extends Fragment {
 
     }
 
+    class SearchUsers extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         * */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        /**
+         * getting All products from url
+         * */
+        protected String doInBackground(String... args) {
+            // Building Parameters
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            // getting JSON string from URL
+            params.add(new BasicNameValuePair("search_term", args[0]));
+            params.add(new BasicNameValuePair("current_user_id", args[1]));
+            JSONObject json = main_activity.jsonParser.makeHttpRequest(main_activity.url_search_users, "GET", params);
+
+            // Check your log cat for JSON reponse
+            Log.d("Searched Users: ", json.toString());
+
+            try {
+                // Checking for SUCCESS TAG
+                int success = json.getInt(main_activity.TAG_SUCCESS);
+                main_activity.arrayOfBroadcasts.clear();
+                main_activity.pid_list.clear();
+
+                if (success == 1) {
+                    // products found
+                    // Getting Array of Products
+                    main_activity.products = json.getJSONArray(main_activity.TAG_PRODUCTS);
+
+
+                    // looping through All Products
+                    for (int i = 0; i < main_activity.products.length(); i++) {
+                        JSONObject c = main_activity.products.getJSONObject(i);
+                        boolean exists = false;
+
+                        // Storing each json item in variable
+                        String id = c.getString(main_activity.TAG_PID);
+                        String name = c.getString(main_activity.TAG_NAME);
+                        String song = c.getString("song");
+                        String artist = c.getString("artist");
+                        String listeners = c.getString("listeners");
+                        int real_listeners = Integer.parseInt(listeners);
+
+
+                        main_activity.arrayOfBroadcasts.add(new Broadcast(name, real_listeners, song, artist, "guppy"));
+                        main_activity.pid_list.add(i, id);
+                        Log.d("array of broadcasts", main_activity.arrayOfBroadcasts.toString());
+
+
+
+                        System.out.println(name);
+
+                        for (String str: main_activity.listDataHeader){
+                            if(str.trim().contains(name))
+                                exists = true;
+                        }
+                        if(!exists) {
+                            main_activity.listDataHeader.add(name);
+                            main_activity.listDataChild.put(name, main_activity.user_options);
+                            main_activity.pid_list.add(id);
+                        }
+
+
+
+                    }
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog after getting all products
+
+            // updating UI from Background Thread
+            main_activity.runOnUiThread(new Runnable() {
+                public void run() {
+
+                    main_activity.adapter = new BroadcastAdapter(main_activity.getApplicationContext(), main_activity.arrayOfBroadcasts);
+                    main_activity.lv.setAdapter(main_activity.adapter);
+                    main_activity.lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            main_activity.current_following_id = main_activity.pid_list.get(position);
+                            new Increment_Listeners().execute(main_activity.current_following_id);
+                            main_activity.TuneIn();
+                        }
+                    });
+
+
+                }
+            });
+
+        }
+
+    }
 
     class Increment_Listeners extends AsyncTask<String, String, String> {
 
