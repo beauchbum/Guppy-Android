@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:2:1-53:12
+ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:2:1-50:12
 	xmlns:android
 		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:2:11-69
 	package
@@ -61,7 +61,7 @@ ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml
 	android:name
 		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:15:22-73
 application
-ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:17:5-51:19
+ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:17:5-48:19
 MERGED from [com.spotify.sdk:spotify-player:1.0.0-beta11] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.spotify.sdk\spotify-player\1.0.0-beta11\AndroidManifest.xml:30:5-20
 MERGED from [com.spotify.sdk:spotify-auth:1.0.0-beta11] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.spotify.sdk\spotify-auth\1.0.0-beta11\AndroidManifest.xml:30:5-20
 MERGED from [com.github.kaaes:spotify-web-api-android:0.2.0] C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.github.kaaes\spotify-web-api-android\0.2.0\AndroidManifest.xml:7:5-20
@@ -111,15 +111,9 @@ ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml
 		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:37:13-72
 	android:name
 		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:36:13-80
-activity#com.example.androidhive.TuneIn
-ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:43:9-45:41
-	android:label
-		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:45:13-38
-	android:name
-		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:44:13-35
 activity#com.example.androidhive.SettingsActivity
-ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:46:9-50:20
+ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:43:9-47:20
 	android:name
-		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:47:13-45
+		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:44:13-45
 	android:launchMode
-		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:48:13-44
+		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:45:13-44

@@ -47,7 +47,7 @@ import cz.msebera.android.httpclient.message.BasicNameValuePair;
  * Created by Ryan on 5/9/2016.
  */
 public class TuneIn_Fragment extends Fragment implements
-        PlayerNotificationCallback, ConnectionStateCallback {
+        View.OnClickListener ,PlayerNotificationCallback, ConnectionStateCallback {
 
     public Explore main_activity;
 
@@ -63,6 +63,8 @@ public class TuneIn_Fragment extends Fragment implements
     private String new_uri;
     private boolean broadcaster_playing = false;
     private boolean currently_playing = false;
+    private boolean following;
+    private ScheduledThreadPoolExecutor exec;
 
     private ImageView imageViewRound;
 
@@ -85,9 +87,7 @@ public class TuneIn_Fragment extends Fragment implements
         imageViewRound.setImageBitmap(icon);
 
         follow_button = (ImageButton) rootview.findViewById(R.id.plus_button);
-        //follow_button.setOnClickListener(listener);
-
-
+        follow_button.setOnClickListener(this);
 
 
         android.support.v7.app.ActionBar bar = main_activity.getSupportActionBar();
@@ -123,7 +123,7 @@ public class TuneIn_Fragment extends Fragment implements
                 mPlayer = player;
 
                 //Non UI Thread that runs continuosly to check for new song URI/play/pause
-                ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(1);
+                exec = new ScheduledThreadPoolExecutor(1);
                 exec.scheduleAtFixedRate(new Runnable() {
                     @Override
                     public void run() {
@@ -192,7 +192,16 @@ public class TuneIn_Fragment extends Fragment implements
     }
 
 
+    @Override
+    public void onClick(View v)
+    {
 
+        new FollowUser().execute(main_activity.current_following_id, main_activity.current_user_id);
+        follow_button.setImageResource(R.drawable.dickbutt);
+        Log.d("Plus Button", "Clicked");
+    }
+
+    /*
     ImageButton.OnClickListener listener = new ImageButton.OnClickListener()
     {
         @Override
@@ -203,6 +212,7 @@ public class TuneIn_Fragment extends Fragment implements
             Log.d("Plus Button", "Clicked");
         }
     };
+    */
 
     @Override
     public void onLoggedIn() {
@@ -308,6 +318,13 @@ public class TuneIn_Fragment extends Fragment implements
         }
     }
 
+    public void onStop()
+    {
+        super.onStop();
+        exec.shutdown();
+
+    }
+
     //Runs PHP script to grab the song URI from the database
     class Get_uri extends AsyncTask<String, String, String> {
 
@@ -317,7 +334,7 @@ public class TuneIn_Fragment extends Fragment implements
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            /*pDialog = new ProgressDialog(TuneIn.this);
+            /*
             pDialog.setMessage("Creating Product..");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);

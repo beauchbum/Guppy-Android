@@ -86,7 +86,8 @@ public class Explore extends AppCompatActivity{
     public static String ip = "52.38.141.152";
 
     // url to get all products list
-    public static String url_all_products = "http://" + ip + "/get_all_products.php";
+    public static String url_get_following = "http://" + ip + "/get_following.php";
+    public static String url_search_users = "http://" + ip + "/search_users.php";
     public static final String url_start_broadcast = "http://" + ip + "/start_broadcast.php";
     public static final String url_stop_broadcast = "http://" + ip + "/stop_broadcast.php";
     public static String url_create_product = "http://" + ip + "/create_product.php";
@@ -778,10 +779,13 @@ public class Explore extends AppCompatActivity{
     @Override
     public void onDestroy()
     {
-        super.onDestroy();
+
         new StopBroadcast().execute();
         new ChangePlayback().execute("false");
+        super.onDestroy();
         new SetURI().execute(null, null, null, null, null);
     }
+
+
 }
 
