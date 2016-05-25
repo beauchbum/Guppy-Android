@@ -56,6 +56,7 @@ public class TuneIn_Fragment extends Fragment implements
     private String the_song = "Loading Song";
     private String the_album = "Loading Album";
     private String the_artist = "Loading Artist";
+    private String the_art;
     private TextView song;
     private TextView album;
     private TextView artist;
@@ -184,10 +185,12 @@ public class TuneIn_Fragment extends Fragment implements
                         the_song = product.getString("song");
                         the_album = product.getString("album");
                         the_artist = product.getString("artist");
+                        the_art = product.getString("artwork");
                         broadcaster_playing = convert_string(product.getString("playing"));
                         Log.d("Received Value", product.getString("playing"));
                         Log.d("URI", new_uri);
                         Log.d("Playing", String.valueOf(broadcaster_playing));
+                        Log.d("ARtwork", the_art); 
                         //String am_i_playing = String.valueOf(broadcaster_playing);
                         //Log.d("broadcaster playing", am_i_playing);
 
