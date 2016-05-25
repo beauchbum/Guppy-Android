@@ -1,5 +1,6 @@
 package com.example.androidhive;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.hardware.Camera;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -58,15 +60,20 @@ public class TuneIn_Fragment extends Fragment implements
     private TextView album;
     private TextView artist;
     private ImageButton follow_button;
+    private ImageButton pause_play;
     private Player mPlayer;
     private String old_uri = "No Track Yet";
     private String new_uri;
     private boolean broadcaster_playing = false;
     private boolean currently_playing = false;
+    private boolean following_or_nah = false;
     private boolean following;
     private ScheduledThreadPoolExecutor exec;
+    public ProgressDialog pdialog;
+
 
     private ImageView imageViewRound;
+    private String currently_following;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,14 +92,20 @@ public class TuneIn_Fragment extends Fragment implements
         artist.setTypeface(custom_font, Typeface.BOLD);
         Bitmap icon = BitmapFactory.decodeResource(getResources(),R.drawable.guppy);
         imageViewRound.setImageBitmap(icon);
+        new Get_Following_Or_Nah().execute();
+
+        currently_following = main_activity.current_following_id;
 
         follow_button = (ImageButton) rootview.findViewById(R.id.plus_button);
         follow_button.setOnClickListener(this);
 
+        pause_play = (ImageButton) rootview.findViewById(R.id.plus_button);
+        pause_play.setOnClickListener(this);
+
 
         android.support.v7.app.ActionBar bar = main_activity.getSupportActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#209CF2")));
-        bar.setTitle(Html.fromHtml("<font color='#ffffff'>Michael Jordan</font>"));
+        bar.setTitle(Html.fromHtml("<font color='#ffffff'>" + main_activity.current_following_name + "</font>"));
 
 
 
@@ -104,6 +117,14 @@ public class TuneIn_Fragment extends Fragment implements
                 main_activity.runOnUiThread(new Runnable() {
                     public void run() {
                         //username.setText(the_username);
+                        if(following_or_nah)
+                        {
+                            follow_button.setImageResource(R.drawable.dickbutt);
+                        }
+                        else
+                        {
+                            follow_button.setImageResource(R.drawable.plus);
+                        }
 
                         song.setText(the_song);
                         album.setText(the_album);
@@ -123,63 +144,7 @@ public class TuneIn_Fragment extends Fragment implements
                 mPlayer = player;
 
                 //Non UI Thread that runs continuosly to check for new song URI/play/pause
-                exec = new ScheduledThreadPoolExecutor(1);
-                exec.scheduleAtFixedRate(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        //JSON making the HTTP request
-                        List<NameValuePair> params = new ArrayList<NameValuePair>();
-                        params.add(new BasicNameValuePair("id", main_activity.current_following_id));
-                        JSONObject json = main_activity.jsonParser.makeHttpRequest(
-                                main_activity.url_get_uri, "GET", params);
-
-                        try {
-
-                            int success = json.getInt(main_activity.TAG_SUCCESS);
-                            if (success == 1) {
-                                // successfully received product details
-                                JSONArray productObj = json
-                                        .getJSONArray("user"); // JSON Array
-
-                                // get first product object from JSON Array
-                                JSONObject product = productObj.getJSONObject(0);
-                                new_uri = product.getString("uri");
-                                //the_username = product.getString("name");
-                                the_song = product.getString("song");
-                                the_album = product.getString("album");
-                                the_artist = product.getString("artist");
-                                broadcaster_playing = convert_string(product.getString("playing"));
-                                Log.d("Received Value", product.getString("playing"));
-                                Log.d("URI", new_uri);
-                                Log.d("Playing", String.valueOf(broadcaster_playing));
-                                //String am_i_playing = String.valueOf(broadcaster_playing);
-                                //Log.d("broadcaster playing", am_i_playing);
-
-                            }else{
-                                // product with pid not found
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        if (new_uri.equals(old_uri) == false) {
-                            mPlayer.play(new_uri);
-                            currently_playing = true;
-                            old_uri = new_uri;
-                        }
-                        if (currently_playing == false && broadcaster_playing == true)
-                        {
-                            mPlayer.resume();
-                            currently_playing = true;
-                        }
-                        if (currently_playing == true && broadcaster_playing == false)
-                        {
-                            mPlayer.pause();
-                            currently_playing = false;
-                        }
-
-                    }
-                }, 0, 1, TimeUnit.SECONDS);
+                PlayMusic();
 
             }
 
@@ -191,14 +156,84 @@ public class TuneIn_Fragment extends Fragment implements
         return rootview;
     }
 
+    public void PlayMusic()
+    {
+        exec = new ScheduledThreadPoolExecutor(1);
+        exec.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+
+                //JSON making the HTTP request
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                params.add(new BasicNameValuePair("id", main_activity.current_following_id));
+                JSONObject json = main_activity.jsonParser.makeHttpRequest(
+                        main_activity.url_get_uri, "GET", params);
+
+                try {
+
+                    int success = json.getInt(main_activity.TAG_SUCCESS);
+                    if (success == 1) {
+                        // successfully received product details
+                        JSONArray productObj = json
+                                .getJSONArray("user"); // JSON Array
+
+                        // get first product object from JSON Array
+                        JSONObject product = productObj.getJSONObject(0);
+                        new_uri = product.getString("uri");
+                        //the_username = product.getString("name");
+                        the_song = product.getString("song");
+                        the_album = product.getString("album");
+                        the_artist = product.getString("artist");
+                        broadcaster_playing = convert_string(product.getString("playing"));
+                        Log.d("Received Value", product.getString("playing"));
+                        Log.d("URI", new_uri);
+                        Log.d("Playing", String.valueOf(broadcaster_playing));
+                        //String am_i_playing = String.valueOf(broadcaster_playing);
+                        //Log.d("broadcaster playing", am_i_playing);
+
+                    }else{
+                        // product with pid not found
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (new_uri.equals(old_uri) == false) {
+                    mPlayer.play(new_uri);
+                    currently_playing = true;
+                    old_uri = new_uri;
+                }
+                if (currently_playing == false && broadcaster_playing == true)
+                {
+                    mPlayer.resume();
+                    currently_playing = true;
+                }
+                if (currently_playing == true && broadcaster_playing == false)
+                {
+                    mPlayer.pause();
+                    currently_playing = false;
+                }
+
+            }
+        }, 0, 1, TimeUnit.SECONDS);
+    }
+
 
     @Override
     public void onClick(View v)
     {
-
-        new FollowUser().execute(main_activity.current_following_id, main_activity.current_user_id);
-        follow_button.setImageResource(R.drawable.dickbutt);
-        Log.d("Plus Button", "Clicked");
+        if(following_or_nah == false)
+        {
+            new FollowUser().execute(main_activity.current_following_id, main_activity.current_user_id);
+            following_or_nah = true;
+            follow_button.setImageResource(R.drawable.dickbutt);
+            Log.d("Plus Button", "Clicked");
+        }
+        else
+        {
+            new UnfollowUser().execute(main_activity.current_following_id, main_activity.current_user_id);
+            following_or_nah = false;
+            follow_button.setImageResource(R.drawable.plus);
+        }
     }
 
     /*
@@ -260,6 +295,8 @@ public class TuneIn_Fragment extends Fragment implements
         }
     }
 
+
+
     class Decrement_Listeners extends AsyncTask<String, String, String> {
 
         /**
@@ -280,7 +317,7 @@ public class TuneIn_Fragment extends Fragment implements
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("id", args[0]));
-
+            params.add(new BasicNameValuePair("listener_id", args[1]));
 
 
             // getting JSON Object
@@ -321,8 +358,82 @@ public class TuneIn_Fragment extends Fragment implements
     public void onStop()
     {
         super.onStop();
+        new Decrement_Listeners().execute(currently_following, main_activity.current_user_id);
         exec.shutdown();
 
+    }
+
+    class Get_Following_Or_Nah extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pdialog = new ProgressDialog(getActivity());
+            pdialog.setMessage("Loading" + main_activity.current_following_name + ". Please wait...");
+            pdialog.setIndeterminate(false);
+            pdialog.setCancelable(false);
+            pdialog.show();
+        }
+
+        /**
+         * Getting product details in background thread
+         * */
+        protected String doInBackground(String... args) {
+
+
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("current_user_id", main_activity.current_user_id));
+            params.add(new BasicNameValuePair("current_following_id", main_activity.current_following_id));
+
+
+            Log.d("PID", main_activity.current_following_id);
+
+            // getting product details by making HTTP request
+            // Note that product details url will use GET request
+            JSONObject json = main_activity.jsonParser.makeHttpRequest(
+                    main_activity.url_get_following_or_nah, "GET", params);
+            try {
+
+                int success = json.getInt(main_activity.TAG_SUCCESS);
+                if (success == 1) {
+                    // successfully received product details
+                    JSONArray productObj = json
+                            .getJSONArray("user"); // JSON Array
+
+                    // get first product object from JSON Array
+                    JSONObject product = productObj.getJSONObject(0);
+                    String result = product.getString("result");
+                    if (result.equals("true"))
+                    {
+                        following_or_nah = true;
+                    }
+                    else
+                    {
+                        following_or_nah = false;
+                    }
+                    Log.d("Following Or Nah", result);
+
+                }else{
+                    // product with pid not found
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once got all details
+            pdialog.dismiss();
+
+        }
     }
 
     //Runs PHP script to grab the song URI from the database
@@ -512,7 +623,7 @@ public class TuneIn_Fragment extends Fragment implements
     {
         super.onDestroy();
         Spotify.destroyPlayer(this);
-        new Decrement_Listeners().execute(main_activity.current_following_id);
+        new Decrement_Listeners().execute(currently_following, main_activity.current_user_id);
     }
 
 }

@@ -67,6 +67,7 @@ public class Explore extends AppCompatActivity{
 
     public String current_user_id;
     public String current_following_id;
+    public String current_following_name;
     public JSONParser jsonParser = new JSONParser();
     public BroadcastReceiver receiver;
     public boolean playing;
@@ -99,6 +100,7 @@ public class Explore extends AppCompatActivity{
     public static String url_decrement_listeners = "http://" + ip + "/decrement_listeners.php";
     public static String url_follow_user = "http://" + ip + "/follow_user.php";
     public static String url_unfollow_user = "http://" + ip + "/unfollow_user.php";
+    public static String url_get_following_or_nah = "http://" + ip + "/get_following_or_not.php";
 
 
 
@@ -117,6 +119,7 @@ public class Explore extends AppCompatActivity{
     ArrayList<Broadcast> arrayOfBroadcasts;
     Following_Fragment.BroadcastAdapter adapter;
     public ArrayList<String> pid_list;
+    public ArrayList<String> name_list;
 
 
 
@@ -146,7 +149,7 @@ public class Explore extends AppCompatActivity{
     // Progress Dialog
 
 
-    private ProgressDialog pdialog;
+    public ProgressDialog pdialog;
     // url to create new product
 
     android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
@@ -228,7 +231,7 @@ public class Explore extends AppCompatActivity{
 
         listDataHeader = new ArrayList<String>();
         pid_list = new ArrayList<String>();
-        pid_list = new ArrayList<String>();
+        name_list = new ArrayList<String>();
 
 
         arrayOfBroadcasts = new ArrayList<Broadcast>();
@@ -311,7 +314,7 @@ public class Explore extends AppCompatActivity{
 
                 }
                 if (position == 3) {
-                    //AuthenticationClient.logout(getApplicationContext());
+                    AuthenticationClient.logout(getApplicationContext());
                     Intent i = getBaseContext().getPackageManager()
                             .getLaunchIntentForPackage(getBaseContext().getPackageName());
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -1,5 +1,6 @@
 package com.example.androidhive;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -8,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SearchViewCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,10 +36,13 @@ import cz.msebera.android.httpclient.message.BasicNameValuePair;
 /**
  * Created by Ryan on 5/9/2016.
  */
-public class Following_Fragment extends Fragment {
+public class Following_Fragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     public Explore main_activity;
     public SearchView search_box;
+    public ProgressDialog pdialog;
+    public SwipeRefreshLayout mySwipe;
+    public boolean refresh = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,8 +51,8 @@ public class Following_Fragment extends Fragment {
 
         main_activity = (Explore) getActivity();
         ListView imageButtonContextMenu;
-        imageButtonContextMenu = (ListView) rootview.findViewById(R.id.following_list);
-        registerForContextMenu(imageButtonContextMenu);
+        //imageButtonContextMenu = (ListView) rootview.findViewById(R.id.following_list);
+        //registerForContextMenu(imageButtonContextMenu);
         main_activity.lv = (ListView) rootview.findViewById(R.id.following_list);
         main_activity.listDataChild = new HashMap<String, List<String>>();
 
@@ -66,20 +71,35 @@ public class Following_Fragment extends Fragment {
         search_box.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Log.d("Searching", "'%" + search_box.getQuery().toString() + "%'");
+
+                Log.d("Search Submitted", "'%" + search_box.getQuery().toString() + "%'");
                 new SearchUsers().execute("'%" + search_box.getQuery().toString() + "%'", main_activity.current_user_id);
+                search_box.clearFocus();
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                return false;
+                Log.d("Searching", "'%" + search_box.getQuery().toString() + "%'");
+                new SearchUsers().execute("'%" + search_box.getQuery().toString() + "%'", main_activity.current_user_id);
+                return true;
             }
         });
+
+        mySwipe = (SwipeRefreshLayout) rootview.findViewById(R.id.swiperfresh);
+        mySwipe.setOnRefreshListener(this);
+
+
 
 
 
         return rootview;
+
+    }
+
+    public void onRefresh() {
+        refresh = true;
+        new LoadFollowingUsers().execute(main_activity.current_user_id);
 
     }
 
@@ -101,6 +121,14 @@ public class Following_Fragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
+            if(refresh == false) {
+                pdialog = new ProgressDialog(getActivity());
+                pdialog.setMessage("Loading Following Users. Please wait...");
+                pdialog.setIndeterminate(false);
+                pdialog.setCancelable(false);
+                pdialog.show();
+            }
 
         }
 
@@ -139,12 +167,13 @@ public class Following_Fragment extends Fragment {
                         String name = c.getString(main_activity.TAG_NAME);
                         String song = c.getString("song");
                         String artist = c.getString("artist");
-                        String listeners = c.getString("listeners");
-                        int real_listeners = Integer.parseInt(listeners);
+                        //String listeners = c.getString("listeners");
+                        //int real_listeners = Integer.parseInt(listeners);
 
 
-                        main_activity.arrayOfBroadcasts.add(new Broadcast(name, real_listeners, song, artist, "guppy"));
+                        main_activity.arrayOfBroadcasts.add(new Broadcast(name, 0, song, artist, "guppy"));
                         main_activity.pid_list.add(i, id);
+                        main_activity.name_list.add(i, name);
                         Log.d("array of broadcasts", main_activity.arrayOfBroadcasts.toString());
 
 
@@ -192,7 +221,9 @@ public class Following_Fragment extends Fragment {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             main_activity.current_following_id = main_activity.pid_list.get(position);
-                            new Increment_Listeners().execute(main_activity.current_following_id);
+                            main_activity.current_following_name = main_activity.name_list.get(position);
+                            new Increment_Listeners().execute(main_activity.current_following_id, main_activity.current_user_id);
+                            search_box.clearFocus();
                             main_activity.TuneIn();
                         }
                     });
@@ -200,6 +231,15 @@ public class Following_Fragment extends Fragment {
 
                 }
             });
+
+            if(refresh)
+            {
+                mySwipe.setRefreshing(false);
+                refresh = false;
+            }
+            else {
+                pdialog.dismiss();
+            }
 
         }
 
@@ -252,12 +292,13 @@ public class Following_Fragment extends Fragment {
                         String name = c.getString(main_activity.TAG_NAME);
                         String song = c.getString("song");
                         String artist = c.getString("artist");
-                        String listeners = c.getString("listeners");
-                        int real_listeners = Integer.parseInt(listeners);
+                        //String listeners = c.getString("listeners");
+                        //int real_listeners = Integer.parseInt(listeners);
 
 
-                        main_activity.arrayOfBroadcasts.add(new Broadcast(name, real_listeners, song, artist, "guppy"));
+                        main_activity.arrayOfBroadcasts.add(new Broadcast(name, 0, song, artist, "guppy"));
                         main_activity.pid_list.add(i, id);
+                        main_activity.name_list.add(i, name);
                         Log.d("array of broadcasts", main_activity.arrayOfBroadcasts.toString());
 
 
@@ -302,7 +343,9 @@ public class Following_Fragment extends Fragment {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             main_activity.current_following_id = main_activity.pid_list.get(position);
-                            new Increment_Listeners().execute(main_activity.current_following_id);
+                            main_activity.current_following_name = main_activity.name_list.get(position);
+                            new Increment_Listeners().execute(main_activity.current_following_id, main_activity.current_following_id);
+                            search_box.clearFocus();
                             main_activity.TuneIn();
                         }
                     });
@@ -310,6 +353,8 @@ public class Following_Fragment extends Fragment {
 
                 }
             });
+
+
 
         }
 
@@ -335,6 +380,7 @@ public class Following_Fragment extends Fragment {
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("id", args[0]));
+            params.add(new BasicNameValuePair("listener_id", args[1]));
 
 
 
