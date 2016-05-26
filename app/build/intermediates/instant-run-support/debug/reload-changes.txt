@@ -1,11 +1,7 @@
-CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\TuneIn_Fragment$3$override.class
-CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\TuneIn_Fragment$1$1$override.class
 CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\TuneIn_Fragment$UnfollowUser$override.class
-CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\TuneIn_Fragment$1$override.class
 CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\android\tools\fd\runtime\AppPatchesLoaderImpl.class
 CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\TuneIn_Fragment$override.class
 CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\TuneIn_Fragment$Get_Following_Or_Nah$override.class
 CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\TuneIn_Fragment$Get_uri$override.class
 CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\TuneIn_Fragment$Decrement_Listeners$override.class
-CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\TuneIn_Fragment$2$override.class
 CHANGED,C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\example\androidhive\TuneIn_Fragment$FollowUser$override.class

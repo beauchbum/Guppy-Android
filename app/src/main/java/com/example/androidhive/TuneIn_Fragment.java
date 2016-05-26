@@ -68,6 +68,7 @@ public class TuneIn_Fragment extends Fragment implements
     private boolean broadcaster_playing = false;
     private boolean currently_playing = false;
     private boolean following_or_nah = false;
+    private boolean playing = true;
     private boolean following;
     private ScheduledThreadPoolExecutor exec;
     public ProgressDialog pdialog;
@@ -100,7 +101,7 @@ public class TuneIn_Fragment extends Fragment implements
         follow_button = (ImageButton) rootview.findViewById(R.id.plus_button);
         follow_button.setOnClickListener(this);
 
-        pause_play = (ImageButton) rootview.findViewById(R.id.plus_button);
+        pause_play = (ImageButton) rootview.findViewById(R.id.dots_button);
         pause_play.setOnClickListener(this);
 
 
@@ -190,7 +191,7 @@ public class TuneIn_Fragment extends Fragment implements
                         Log.d("Received Value", product.getString("playing"));
                         Log.d("URI", new_uri);
                         Log.d("Playing", String.valueOf(broadcaster_playing));
-                        Log.d("ARtwork", the_art); 
+                        Log.d("ARtwork", the_art);
                         //String am_i_playing = String.valueOf(broadcaster_playing);
                         //Log.d("broadcaster playing", am_i_playing);
 
@@ -224,19 +225,39 @@ public class TuneIn_Fragment extends Fragment implements
     @Override
     public void onClick(View v)
     {
-        if(following_or_nah == false)
-        {
-            new FollowUser().execute(main_activity.current_following_id, main_activity.current_user_id);
-            following_or_nah = true;
-            follow_button.setImageResource(R.drawable.dickbutt);
-            Log.d("Plus Button", "Clicked");
+
+        switch (v.getId()) {
+            case R.id.plus_button:
+                if(following_or_nah == false)
+                {
+                    new FollowUser().execute(main_activity.current_following_id, main_activity.current_user_id);
+                    following_or_nah = true;
+                    follow_button.setImageResource(R.drawable.dickbutt);
+                    Log.d("Plus Button", "Clicked");
+                }
+                else
+                {
+                    new UnfollowUser().execute(main_activity.current_following_id, main_activity.current_user_id);
+                    following_or_nah = false;
+                    follow_button.setImageResource(R.drawable.plus);
+                }
+                break;
+            case R.id.dots_button:
+                if (playing)
+                {
+                    exec.shutdown();
+                    pause_play.setImageResource(R.drawable.dickbutt);
+                    playing = false;
+                }
+                else
+                {
+                    PlayMusic();
+                    pause_play.setImageResource(R.drawable.dots);
+                    playing = true;
+                }
+
         }
-        else
-        {
-            new UnfollowUser().execute(main_activity.current_following_id, main_activity.current_user_id);
-            following_or_nah = false;
-            follow_button.setImageResource(R.drawable.plus);
-        }
+
     }
 
     /*

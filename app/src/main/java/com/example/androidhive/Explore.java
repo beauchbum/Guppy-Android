@@ -66,6 +66,7 @@ public class Explore extends AppCompatActivity{
 
 
     public String current_user_id;
+    public String spotify_id;
     public String current_following_id;
     public String current_following_name;
     public JSONParser jsonParser = new JSONParser();
@@ -101,6 +102,8 @@ public class Explore extends AppCompatActivity{
     public static String url_follow_user = "http://" + ip + "/follow_user.php";
     public static String url_unfollow_user = "http://" + ip + "/unfollow_user.php";
     public static String url_get_following_or_nah = "http://" + ip + "/get_following_or_not.php";
+    public static String url_get_guppy_id = "http://" + ip + "/get_guppy_id.php";
+
 
 
 
@@ -343,8 +346,9 @@ public class Explore extends AppCompatActivity{
                 public void success(UserPrivate userPrivate, Response response) {
                     Log.d("User Success", userPrivate.id);
                     String name = userPrivate.display_name.toString();
-                    current_user_id = userPrivate.id.toString();
-                    new CreateNewProduct().execute(name, current_user_id);
+                    spotify_id = userPrivate.id.toString();
+                    new CreateNewProduct().execute(name, spotify_id);
+
 
                 }
 
@@ -414,6 +418,7 @@ public class Explore extends AppCompatActivity{
             protected void onPostExecute(String file_url) {
                 // dismiss the dialog once done
                 pdialog.dismiss();
+                new Get_guppy_id().execute();
 
             }
         }
@@ -515,32 +520,37 @@ public class Explore extends AppCompatActivity{
                     if (action.equals(BroadcastTypes.METADATA_CHANGED)) {
                         //GetAlbumArt running_task = new GetAlbumArt();
                         //running_task.execute(trackId);
-                        albumArtDone = false;
-                        String newTrackId = trackId.substring(14);
-
 
                         try {
-
-                            spotify.getTrack(newTrackId, new Callback<Track>() {
-                                @Override
-                                public void success(Track track, Response response) {
-                                    Log.d("Track success", track.name);
-                                    albumArt = track.album.images.get(0).url;
-                                    new SetURI().execute(trackId, trackName, albumName, artistName, albumArt);
-
-                                }
-
-                                @Override
-                                public void failure(RetrofitError error) {
-                                    Log.d("Album failure", error.toString());
-                                }
-
-                            });
+                            albumArtDone = false;
+                            String newTrackId = trackId.substring(14);
 
 
-                        } catch (RetrofitError error) {
-                            ErrorDetails details = SpotifyError.fromRetrofitError(error).getErrorDetails();
-                            System.out.println(details.status + ":" + details.message);
+                            try {
+
+                                spotify.getTrack(newTrackId, new Callback<Track>() {
+                                    @Override
+                                    public void success(Track track, Response response) {
+                                        Log.d("Track success", track.name);
+                                        albumArt = track.album.images.get(0).url;
+                                        new SetURI().execute(trackId, trackName, albumName, artistName, albumArt);
+
+                                    }
+
+                                    @Override
+                                    public void failure(RetrofitError error) {
+                                        Log.d("Album failure", error.toString());
+                                    }
+
+                                });
+
+
+                            } catch (RetrofitError error) {
+                                ErrorDetails details = SpotifyError.fromRetrofitError(error).getErrorDetails();
+                                System.out.println(details.status + ":" + details.message);
+                            }
+                        }catch (StringIndexOutOfBoundsException error){
+
                         }
 
 
@@ -774,6 +784,64 @@ public class Explore extends AppCompatActivity{
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once product uupdated
             //pDialog.dismiss();
+        }
+    }
+
+    class Get_guppy_id extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        /**
+         * Getting product details in background thread
+         * */
+        protected String doInBackground(String... args) {
+
+
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("spotify_id", spotify_id));
+
+
+
+            // getting product details by making HTTP request
+            // Note that product details url will use GET request
+            JSONObject json = jsonParser.makeHttpRequest(
+                    url_get_guppy_id, "GET", params);
+            try {
+
+                int success = json.getInt(TAG_SUCCESS);
+                if (success == 1) {
+                    // successfully received product details
+                    JSONArray productObj = json
+                            .getJSONArray("user"); // JSON Array
+
+                    // get first product object from JSON Array
+                    JSONObject product = productObj.getJSONObject(0);
+                    current_user_id = product.getString("guppy_id");
+
+
+                }else{
+                    // product with pid not found
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once got all details
+            Log.d("GUppy ID", current_user_id);
         }
     }
 
