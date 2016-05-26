@@ -163,7 +163,7 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                         boolean exists = false;
 
                         // Storing each json item in variable
-                        String id = c.getString(main_activity.TAG_PID);
+                        String id = c.getString("guppy_id");
                         String name = c.getString(main_activity.TAG_NAME);
                         String song = c.getString("song");
                         String artist = c.getString("artist");
@@ -288,8 +288,8 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                         boolean exists = false;
 
                         // Storing each json item in variable
-                        String id = c.getString(main_activity.TAG_PID);
-                        String name = c.getString(main_activity.TAG_NAME);
+                        String id = c.getString("guppy_id");
+                        String name = c.getString("name");
                         String song = c.getString("song");
                         String artist = c.getString("artist");
                         //String listeners = c.getString("listeners");
