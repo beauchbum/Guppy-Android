@@ -23,6 +23,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -220,11 +221,22 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                     main_activity.lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            main_activity.current_following_id = main_activity.pid_list.get(position);
-                            main_activity.current_following_name = main_activity.name_list.get(position);
-                            new Increment_Listeners().execute(main_activity.current_following_id, main_activity.current_user_id);
-                            search_box.clearFocus();
-                            main_activity.TuneIn();
+                            String temp = main_activity.pid_list.get(position);
+                            if(temp.equals(main_activity.current_following_id) == false) {
+                                main_activity.current_following_id = temp;
+                                main_activity.current_following_name = main_activity.name_list.get(position);
+                                new Increment_Listeners().execute(main_activity.current_following_id, main_activity.current_user_id);
+                                new Get_Following_Or_Nah().execute();
+                                search_box.clearFocus();
+                                main_activity.TuneIn();
+                            }
+
+                            else{
+                                android.support.v4.app.FragmentTransaction fragmentTransaction = main_activity.fm.beginTransaction();
+                                fragmentTransaction.replace(R.id.fragment_container, main_activity.tuning_in_fragment);
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.commit();
+                            }
                         }
                     });
 
@@ -342,11 +354,23 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                     main_activity.lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            main_activity.current_following_id = main_activity.pid_list.get(position);
-                            main_activity.current_following_name = main_activity.name_list.get(position);
-                            new Increment_Listeners().execute(main_activity.current_following_id, main_activity.current_following_id);
-                            search_box.clearFocus();
-                            main_activity.TuneIn();
+                            String temp = main_activity.pid_list.get(position);
+                            if(temp.equals(main_activity.current_following_id) == false) {
+                                main_activity.current_following_id = temp;
+                                main_activity.current_following_name = main_activity.name_list.get(position);
+                                new Increment_Listeners().execute(main_activity.current_following_id, main_activity.current_user_id);
+                                new Get_Following_Or_Nah().execute();
+                                search_box.clearFocus();
+                                main_activity.TuneIn();
+                            }
+
+                            else{
+                                search_box.clearFocus();
+                                android.support.v4.app.FragmentTransaction fragmentTransaction = main_activity.fm.beginTransaction();
+                                fragmentTransaction.replace(R.id.fragment_container, main_activity.tuning_in_fragment);
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.commit();
+                            }
                         }
                     });
 
@@ -415,6 +439,79 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
 
+
+        }
+    }
+
+    class Get_Following_Or_Nah extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pdialog = new ProgressDialog(getActivity());
+            pdialog.setMessage("Loading" + main_activity.current_following_name + ". Please wait...");
+            pdialog.setIndeterminate(false);
+            pdialog.setCancelable(false);
+            pdialog.show();
+        }
+
+        /**
+         * Getting product details in background thread
+         * */
+        protected String doInBackground(String... args) {
+
+
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("current_user_id", main_activity.current_user_id));
+            params.add(new BasicNameValuePair("current_following_id", main_activity.current_following_id));
+
+
+            Log.d("PID", main_activity.current_following_id);
+
+            // getting product details by making HTTP request
+            // Note that product details url will use GET request
+            JSONObject json = main_activity.jsonParser.makeHttpRequest(
+                    main_activity.url_get_following_or_nah, "GET", params);
+            try {
+
+                int success = json.getInt(main_activity.TAG_SUCCESS);
+                if (success == 1) {
+                    // successfully received product details
+                    JSONArray productObj = json
+                            .getJSONArray("user"); // JSON Array
+
+                    // get first product object from JSON Array
+                    JSONObject product = productObj.getJSONObject(0);
+                    String result = product.getString("result");
+                    if (result.equals("true"))
+                    {
+                        main_activity.following_or_nah = true;
+                    }
+                    else
+                    {
+                        main_activity.following_or_nah = false;
+                    }
+                    Log.d("Following Or Nah", result);
+
+                }else{
+                    // product with pid not found
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once got all details
+            pdialog.dismiss();
 
         }
     }

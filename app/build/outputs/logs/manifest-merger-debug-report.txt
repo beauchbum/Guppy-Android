@@ -80,7 +80,7 @@ MERGED from [com.android.support:support-v4:23.3.0] C:\Users\Ryan\Documents\GitH
 	android:configChanges
 		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:18:9-59
 	android:theme
-		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:21:9-53
+		ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:21:9-65
 activity#com.example.androidhive.Explore
 ADDED from C:\Users\Ryan\Documents\GitHub\Guppy\app\src\main\AndroidManifest.xml:22:9-30:20
 	android:name
