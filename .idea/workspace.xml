@@ -71,18 +71,12 @@
       <file leaf-file-name="Explore.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/androidhive/Explore.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.75">
+            <state vertical-scroll-proportion="0.0">
               <caret line="293" column="0" selection-start-line="293" selection-start-column="0" selection-end-line="293" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#7850#7870#0" expanded="true" />
-                <element signature="e#7921#7942#0" expanded="true" />
-                <element signature="e#8775#9187#0" expanded="true" />
-                <element signature="e#9186#9187#0" expanded="true" />
                 <element signature="method#onCreateOptionsMenu#0;class#Explore#0" expanded="false" />
                 <element signature="method#onCreateContextMenu#0;class#Explore#0" expanded="false" />
-                <element signature="e#19554#22222#0" expanded="true" />
-                <element signature="e#22221#22222#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -91,7 +85,7 @@
       <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.0270271">
+            <state vertical-scroll-proportion="0.0">
               <caret line="6" column="45" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
               <folding />
             </state>
@@ -101,18 +95,10 @@
       <file leaf-file-name="Following_Fragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/androidhive/Following_Fragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.681818">
+            <state vertical-scroll-proportion="0.0">
               <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#7514#9263#0" expanded="true" />
-                <element signature="e#7841#9227#0" expanded="true" />
-                <element signature="e#9226#9227#0" expanded="true" />
-                <element signature="e#9262#9263#0" expanded="true" />
-                <element signature="e#12920#14723#0" expanded="true" />
-                <element signature="e#13244#14687#0" expanded="true" />
-                <element signature="e#14686#14687#0" expanded="true" />
-                <element signature="e#14722#14723#0" expanded="true" />
                 <element signature="class#BroadcastAdapter#0;class#Following_Fragment#0" expanded="false" />
               </folding>
             </state>
@@ -122,20 +108,13 @@
       <file leaf-file-name="TuneIn_Fragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/androidhive/TuneIn_Fragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7518382">
-              <caret line="270" column="60" selection-start-line="270" selection-start-column="60" selection-end-line="270" selection-end-column="60" />
+            <state vertical-scroll-proportion="1.6802721">
+              <caret line="679" column="5" selection-start-line="679" selection-start-column="5" selection-end-line="679" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#10302#10303#0" expanded="true" />
-                <element signature="e#10358#10359#0" expanded="true" />
-                <element signature="e#10405#10406#0" expanded="true" />
-                <element signature="e#10462#10463#0" expanded="true" />
-                <element signature="e#10526#10527#0" expanded="true" />
-                <element signature="e#10580#10581#0" expanded="true" />
-                <element signature="e#10632#10633#0" expanded="true" />
-                <element signature="e#10698#10699#0" expanded="true" />
-                <element signature="e#16547#16562#0" expanded="true" />
                 <element signature="class#UnfollowUser#0;class#TuneIn_Fragment#0" expanded="false" />
+                <element signature="e#21470#21471#0" expanded="true" />
+                <element signature="e#21514#21515#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -144,8 +123,8 @@
       <file leaf-file-name="tunein_fragment.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/tunein_fragment.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-30.902779">
-              <caret line="89" column="27" selection-start-line="89" selection-start-column="27" selection-end-line="89" selection-end-column="27" />
+            <state vertical-scroll-proportion="-1.7361112">
+              <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -157,7 +136,7 @@
       <file leaf-file-name="explore_fragment.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/explore_fragment.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.75">
+            <state vertical-scroll-proportion="0.0">
               <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding />
             </state>
@@ -170,7 +149,7 @@
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.705882">
+            <state vertical-scroll-proportion="0.0">
               <caret line="20" column="63" selection-start-line="20" selection-start-column="63" selection-end-line="20" selection-end-column="63" />
               <folding />
             </state>
@@ -1812,13 +1791,13 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/androidhive/TuneIn.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/androidhive/Explore_Fragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/tunein_fragment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/following_fragment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_base.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/androidhive/Following_Fragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/androidhive/Explore.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/tunein_fragment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/androidhive/TuneIn_Fragment.java" />
       </list>
     </option>
@@ -1870,28 +1849,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="Scope" />
-      <pane id="AndroidView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Guppy" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Guppy" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -2078,7 +2038,26 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="AndroidView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Guppy" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Guppy" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2381,7 +2360,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6625767" sideWeight="0.50323623" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23312883" sideWeight="0.49676377" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23312883" sideWeight="0.49676377" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20479302" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.116564415" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.57300615" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -2478,14 +2457,8 @@
           <caret line="313" column="20" selection-start-line="313" selection-start-column="20" selection-end-line="313" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7850#7870#0" expanded="true" />
-            <element signature="e#7921#7942#0" expanded="true" />
-            <element signature="e#8775#9187#0" expanded="true" />
-            <element signature="e#9186#9187#0" expanded="true" />
             <element signature="method#onCreateOptionsMenu#0;class#Explore#0" expanded="false" />
             <element signature="method#onCreateContextMenu#0;class#Explore#0" expanded="false" />
-            <element signature="e#19554#22222#0" expanded="true" />
-            <element signature="e#22221#22222#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2496,14 +2469,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7514#9263#0" expanded="true" />
-            <element signature="e#7841#9227#0" expanded="true" />
-            <element signature="e#9226#9227#0" expanded="true" />
-            <element signature="e#9262#9263#0" expanded="true" />
-            <element signature="e#12920#14723#0" expanded="true" />
-            <element signature="e#13244#14687#0" expanded="true" />
-            <element signature="e#14686#14687#0" expanded="true" />
-            <element signature="e#14722#14723#0" expanded="true" />
             <element signature="class#BroadcastAdapter#0;class#Following_Fragment#0" expanded="false" />
           </folding>
         </state>
@@ -2515,10 +2480,9 @@
           <caret line="326" column="94" selection-start-line="326" selection-start-column="94" selection-end-line="326" selection-end-column="94" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="class#Get_uri#0;class#TuneIn_Fragment#0" expanded="false" />
-            <element signature="class#FollowUser#0;class#TuneIn_Fragment#0" expanded="false" />
             <element signature="class#UnfollowUser#0;class#TuneIn_Fragment#0" expanded="false" />
-            <element signature="method#onDestroy#0;class#TuneIn_Fragment#0" expanded="false" />
+            <element signature="e#21470#21471#0" expanded="true" />
+            <element signature="e#21514#21515#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2581,14 +2545,8 @@
           <caret line="143" column="33" selection-start-line="143" selection-start-column="33" selection-end-line="143" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7850#7870#0" expanded="true" />
-            <element signature="e#7921#7942#0" expanded="true" />
-            <element signature="e#8775#9187#0" expanded="true" />
-            <element signature="e#9186#9187#0" expanded="true" />
             <element signature="method#onCreateOptionsMenu#0;class#Explore#0" expanded="false" />
             <element signature="method#onCreateContextMenu#0;class#Explore#0" expanded="false" />
-            <element signature="e#19554#22222#0" expanded="true" />
-            <element signature="e#22221#22222#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2640,14 +2598,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7850#7870#0" expanded="true" />
-            <element signature="e#7921#7942#0" expanded="true" />
-            <element signature="e#8775#9187#0" expanded="true" />
-            <element signature="e#9186#9187#0" expanded="true" />
             <element signature="method#onCreateOptionsMenu#0;class#Explore#0" expanded="false" />
             <element signature="method#onCreateContextMenu#0;class#Explore#0" expanded="false" />
-            <element signature="e#19554#22222#0" expanded="true" />
-            <element signature="e#22221#22222#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2825,7 +2777,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33179724">
           <caret line="455" column="0" selection-start-line="455" selection-start-column="0" selection-end-line="455" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2863,7 +2814,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15481171">
           <caret line="1973" column="0" selection-start-line="1973" selection-start-column="0" selection-end-line="1973" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2891,7 +2841,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.705882">
+        <state vertical-scroll-proportion="0.0">
           <caret line="20" column="63" selection-start-line="20" selection-start-column="63" selection-end-line="20" selection-end-column="63" />
           <folding />
         </state>
@@ -2899,7 +2849,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/explore_fragment.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.75">
+        <state vertical-scroll-proportion="0.0">
           <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
@@ -2919,31 +2869,12 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/tunein_fragment.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-30.902779">
-          <caret line="89" column="27" selection-start-line="89" selection-start-column="27" selection-end-line="89" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/androidhive/Following_Fragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.681818">
+        <state vertical-scroll-proportion="0.0">
           <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7514#9263#0" expanded="true" />
-            <element signature="e#7841#9227#0" expanded="true" />
-            <element signature="e#9226#9227#0" expanded="true" />
-            <element signature="e#9262#9263#0" expanded="true" />
-            <element signature="e#12920#14723#0" expanded="true" />
-            <element signature="e#13244#14687#0" expanded="true" />
-            <element signature="e#14686#14687#0" expanded="true" />
-            <element signature="e#14722#14723#0" expanded="true" />
             <element signature="class#BroadcastAdapter#0;class#Following_Fragment#0" expanded="false" />
           </folding>
         </state>
@@ -2951,7 +2882,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.0270271">
+        <state vertical-scroll-proportion="0.0">
           <caret line="6" column="45" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
           <folding />
         </state>
@@ -2959,38 +2890,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/androidhive/Explore.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.75">
+        <state vertical-scroll-proportion="0.0">
           <caret line="293" column="0" selection-start-line="293" selection-start-column="0" selection-end-line="293" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7850#7870#0" expanded="true" />
-            <element signature="e#7921#7942#0" expanded="true" />
-            <element signature="e#8775#9187#0" expanded="true" />
-            <element signature="e#9186#9187#0" expanded="true" />
             <element signature="method#onCreateOptionsMenu#0;class#Explore#0" expanded="false" />
             <element signature="method#onCreateContextMenu#0;class#Explore#0" expanded="false" />
-            <element signature="e#19554#22222#0" expanded="true" />
-            <element signature="e#22221#22222#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/tunein_fragment.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.7361112">
+          <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/androidhive/TuneIn_Fragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7518382">
-          <caret line="270" column="60" selection-start-line="270" selection-start-column="60" selection-end-line="270" selection-end-column="60" />
+        <state vertical-scroll-proportion="1.6802721">
+          <caret line="679" column="5" selection-start-line="679" selection-start-column="5" selection-end-line="679" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10302#10303#0" expanded="true" />
-            <element signature="e#10358#10359#0" expanded="true" />
-            <element signature="e#10405#10406#0" expanded="true" />
-            <element signature="e#10462#10463#0" expanded="true" />
-            <element signature="e#10526#10527#0" expanded="true" />
-            <element signature="e#10580#10581#0" expanded="true" />
-            <element signature="e#10632#10633#0" expanded="true" />
-            <element signature="e#10698#10699#0" expanded="true" />
-            <element signature="e#16547#16562#0" expanded="true" />
             <element signature="class#UnfollowUser#0;class#TuneIn_Fragment#0" expanded="false" />
+            <element signature="e#21470#21471#0" expanded="true" />
+            <element signature="e#21514#21515#0" expanded="true" />
           </folding>
         </state>
       </provider>

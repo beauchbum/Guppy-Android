@@ -1,3 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\jars\libs\internal_impl-23.3.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="4da5a4d697d32497c6f85567a5112e62fdfd0676">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-23.3.0_3d88b041ecd972e3116a1a4e25548e4a07950d80\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.spotify.sdk\spotify-auth\1.0.0-beta11\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="b3863b278fa29b48c4eb316dea792d659e5e5aa7">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.spotify.sdk-spotify-auth-1.0.0-beta11_84ea2408a6e2b02116b8851ee4a4e0a3242bdb8e\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.github.kaaes\spotify-web-api-android\0.2.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="f6058539eefdd79c58dd287dce8346f78978947f">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.github.kaaes-spotify-web-api-android-0.2.0_94b122897ce446654b36e96638e632abe867a273\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Ryan\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.3.1\ecb6e1f8e4b0e84c4b886c2f14a1500caf309757\gson-2.3.1.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\gson-2.3.1_75766f7b275865b8da21cbe341203b4033f2d1d6\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.spotify.sdk\spotify-player\1.0.0-beta11\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="38fd1f0aba035dd5a960f37af891a8ad144782d2">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.spotify.sdk-spotify-player-1.0.0-beta11_f09b6cba3ef2463a4f4687ec958b84ae3871df7d\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="8a034dd16c0dfd75fe86c52c2cd581592acc684a">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-23.3.0_af7aa4e30c9639cb2415ed41332eb0f82fdf6ed4\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Ryan\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.3.0\support-annotations-23.3.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="db7791d75a07fef9844d06236c1c59ba7bf6997c">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-23.3.0_f3369c60bec355507614e88855679e3bfe1a60d2\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Ryan\.gradle\caches\modules-2\files-2.1\cz.msebera.android\httpclient\4.4.1.1\c8d96f6fd2bcc179c312da33ee670a71188cc60d\httpclient-4.4.1.1.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="c8d96f6fd2bcc179c312da33ee670a71188cc60d">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\httpclient-4.4.1.1_349ea115c7ee321e030d2d7829a19daa1e38c7da\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Ryan\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit\retrofit\1.9.0\a681c044244d9fc375198588297a39ba78028423\retrofit-1.9.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="a681c044244d9fc375198588297a39ba78028423">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\retrofit-1.9.0_79e4a95fb6d83fae609b891c34b3c0133ceb009c\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="ac28f1d554c769dd9ced6d29b1da5c1d7b57494e">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_7124a0e3efae57dd9a307657d72b2b9897809ec8\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.spotify.sdk\spotify-player\1.0.0-beta11\jars\libs\jnihelpers-1.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="69282b403869c13d701fde63d2971fe46efe796a">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\jnihelpers-1.0_cfa841c03d7578a0556a998d41919c9f3d2c3c01\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="1b8e03daaa43fb0a4cd57e378167c2fd70454c1e">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-23.3.0_d0f89b08928c29a6284cf9acd2ad84c0b1ce1a34\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="9f8f49ec88b9fb06413ef40ac2b2d92757bb8223">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_110084b987d6db9640b81f646f06ec7a733a7127\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="a0b5d60246cd9d4f3f2443611b3b4c25265840b5">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-23.3.0_b1023095d748ad4be128eff28f6fbc247932646c\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="23be6993826b8fd88bbc8d14928bb3b8960d3d4e">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-23.3.0_0dee85f36e3295571b07d67d8065fe86055eaa9c\classes.dex" />
+    </item>
+
+</items>

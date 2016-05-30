@@ -34,6 +34,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -70,7 +71,7 @@ public class TuneIn_Fragment extends Fragment implements
     private ScheduledThreadPoolExecutor exec;
     public ProgressDialog pdialog;
 
-
+    private ImageView albumImageView;
     private ImageView imageViewRound;
     private String currently_following;
 
@@ -104,6 +105,9 @@ public class TuneIn_Fragment extends Fragment implements
 
         pause_play = (ImageButton) rootview.findViewById(R.id.dots_button);
         pause_play.setOnClickListener(this);
+
+        albumImageView = (ImageView) rootview.findViewById(R.id.album_ImageView);
+
 
         if(main_activity.following_or_nah)
         {
@@ -220,6 +224,8 @@ public class TuneIn_Fragment extends Fragment implements
                     main_activity.mPlayer.play(new_uri);
                     currently_playing = true;
                     old_uri = new_uri;
+                    new DownloadImageTask().execute(the_art);
+
                 }
                 if (currently_playing == false && broadcaster_playing == true)
                 {
@@ -646,6 +652,32 @@ public class TuneIn_Fragment extends Fragment implements
         }
     }
 
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        //ImageView bmImage;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            albumImageView.setImageBitmap(result);
+
+        }
+    }
     @Override
     public void onDestroy()
     {
