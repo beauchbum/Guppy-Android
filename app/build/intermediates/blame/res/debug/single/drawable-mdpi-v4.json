@@ -1,11 +1,11 @@
 [
     {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_launcher.png",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\ic_launcher.png"
-    },
-    {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_list_longpressed_holo.9.png",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable-mdpi-v4\\abc_list_longpressed_holo.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_launcher.png",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\drawable-mdpi\\ic_launcher.png"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png",

@@ -1,15 +1,15 @@
 [
     {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\list_item_selected.xml",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\layout\\list_item_selected.xml"
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_bar_title_item.xml"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_expanded_menu_layout.xml",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_expanded_menu_layout.xml"
     },
     {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_bar_title_item.xml"
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\list_item_selected.xml",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\layout\\list_item_selected.xml"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
@@ -28,12 +28,12 @@
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\layout\\list_item.xml"
     },
     {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_chronometer.xml",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\notification_template_part_chronometer.xml"
-    },
-    {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_dialog_title_material.xml",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_chronometer.xml",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\notification_template_part_chronometer.xml"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
@@ -60,52 +60,52 @@
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\layout\\activity_settings.xml"
     },
     {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_mode_bar.xml"
-    },
-    {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_radio.xml",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_list_menu_item_radio.xml"
     },
     {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\list_group.xml",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\layout\\list_group.xml"
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_mode_bar.xml"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_bar_up_container.xml"
     },
     {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\list_group.xml",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\layout\\list_group.xml"
+    },
+    {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_menu_layout.xml"
-    },
-    {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view.xml",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_activity_chooser_view.xml"
-    },
-    {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\main_screen.xml",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\layout\\main_screen.xml"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_multichoice_material.xml",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\select_dialog_multichoice_material.xml"
     },
     {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_toolbar.xml",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_screen_toolbar.xml"
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\main_screen.xml",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\layout\\main_screen.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view.xml",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_activity_chooser_view.xml"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_checkbox.xml",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_list_menu_item_checkbox.xml"
     },
     {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_item_layout.xml",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_menu_item_layout.xml"
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_toolbar.xml",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_screen_toolbar.xml"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_item_layout.xml",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_item_layout.xml",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_menu_item_layout.xml"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\explore_fragment.xml",
@@ -116,12 +116,12 @@
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\src\\main\\res\\layout\\tunein_fragment.xml"
     },
     {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_search_view.xml"
-    },
-    {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_search_view.xml"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media_narrow.xml",
@@ -184,12 +184,12 @@
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\notification_media_cancel_action.xml"
     },
     {
-        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
-        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_mode_close_item_material.xml"
-    },
-    {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\com_spotify_sdk_login_activity.xml",
         "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.spotify.sdk\\spotify-auth\\1.0.0-beta11\\res\\layout\\com_spotify_sdk_login_activity.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
+        "source": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_mode_close_item_material.xml"
     },
     {
         "merged": "C:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_material.xml",

@@ -1648,10 +1648,11 @@ containing a value of this type.
         public static final int action_mode_bar_stub=0x7f0d003d;
         public static final int action_mode_close_button=0x7f0d0023;
         public static final int activity_chooser_view_content=0x7f0d0024;
-        public static final int album=0x7f0d0071;
+        public static final int album=0x7f0d0072;
+        public static final int album_ImageView=0x7f0d006f;
         public static final int alertTitle=0x7f0d0030;
         public static final int always=0x7f0d001c;
-        public static final int artist=0x7f0d0072;
+        public static final int artist=0x7f0d0073;
         public static final int beginning=0x7f0d0019;
         public static final int buttonPanel=0x7f0d002b;
         public static final int button_more=0x7f0d0061;
@@ -1667,7 +1668,7 @@ containing a value of this type.
         public static final int decor_content_parent=0x7f0d003f;
         public static final int default_activity_button=0x7f0d0027;
         public static final int disableHome=0x7f0d000c;
-        public static final int dots_button=0x7f0d0074;
+        public static final int dots_button=0x7f0d0075;
         public static final int drawer_layout=0x7f0d0050;
         public static final int drawer_linear_layout=0x7f0d0052;
         public static final int drawer_list=0x7f0d0054;
@@ -1684,7 +1685,7 @@ containing a value of this type.
         public static final int icon=0x7f0d0029;
         public static final int ifRoom=0x7f0d001e;
         public static final int image=0x7f0d0026;
-        public static final int imageView_round=0x7f0d006f;
+        public static final int imageView_round=0x7f0d0070;
         public static final int info=0x7f0d006d;
         public static final int lblListHeader=0x7f0d005c;
         public static final int line1=0x7f0d0067;
@@ -1693,9 +1694,9 @@ containing a value of this type.
         public static final int list_item=0x7f0d0028;
         public static final int list_item_image=0x7f0d005d;
         public static final int media_actions=0x7f0d0065;
-        public static final int menu_cancel=0x7f0d0077;
-        public static final int menu_follow=0x7f0d0075;
-        public static final int menu_view_profile=0x7f0d0076;
+        public static final int menu_cancel=0x7f0d0078;
+        public static final int menu_follow=0x7f0d0076;
+        public static final int menu_view_profile=0x7f0d0077;
         public static final int middle=0x7f0d001b;
         public static final int multiply=0x7f0d0014;
         public static final int name=0x7f0d005e;
@@ -1705,7 +1706,7 @@ containing a value of this type.
         public static final int parentPanel=0x7f0d002d;
         public static final int picture_button1=0x7f0d0058;
         public static final int picture_button2=0x7f0d0059;
-        public static final int plus_button=0x7f0d0073;
+        public static final int plus_button=0x7f0d0074;
         public static final int progress_circular=0x7f0d0005;
         public static final int progress_horizontal=0x7f0d0006;
         public static final int radio=0x7f0d003b;
@@ -1728,7 +1729,7 @@ containing a value of this type.
         public static final int showCustom=0x7f0d000f;
         public static final int showHome=0x7f0d0010;
         public static final int showTitle=0x7f0d0011;
-        public static final int song=0x7f0d0070;
+        public static final int song=0x7f0d0071;
         public static final int song_text_view=0x7f0d0060;
         public static final int spacer=0x7f0d002c;
         public static final int split_action_bar=0x7f0d0007;

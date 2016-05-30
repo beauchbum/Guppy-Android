@@ -34,6 +34,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -73,7 +74,7 @@ public class TuneIn_Fragment extends Fragment implements
     private ScheduledThreadPoolExecutor exec;
     public ProgressDialog pdialog;
 
-
+    private ImageView albumImageView;
     private ImageView imageViewRound;
     private String currently_following;
 
@@ -108,6 +109,9 @@ public class TuneIn_Fragment extends Fragment implements
         android.support.v7.app.ActionBar bar = main_activity.getSupportActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#209CF2")));
         bar.setTitle(Html.fromHtml("<font color='#ffffff'>" + main_activity.current_following_name + "</font>"));
+
+        albumImageView = (ImageView) rootview.findViewById(R.id.album_ImageView);
+
 
 
 
@@ -188,10 +192,7 @@ public class TuneIn_Fragment extends Fragment implements
                         the_artist = product.getString("artist");
                         the_art = product.getString("artwork");
                         broadcaster_playing = convert_string(product.getString("playing"));
-                        Log.d("Received Value", product.getString("playing"));
-                        Log.d("URI", new_uri);
-                        Log.d("Playing", String.valueOf(broadcaster_playing));
-                        Log.d("ARtwork", the_art);
+
                         //String am_i_playing = String.valueOf(broadcaster_playing);
                         //Log.d("broadcaster playing", am_i_playing);
 
@@ -210,6 +211,7 @@ public class TuneIn_Fragment extends Fragment implements
                 {
                     mPlayer.resume();
                     currently_playing = true;
+                    new DownloadImageTask().execute(the_art);
                 }
                 if (currently_playing == true && broadcaster_playing == false)
                 {
@@ -638,6 +640,33 @@ public class TuneIn_Fragment extends Fragment implements
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
 
+
+        }
+    }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        //ImageView bmImage;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            albumImageView.setImageBitmap(result);
 
         }
     }
