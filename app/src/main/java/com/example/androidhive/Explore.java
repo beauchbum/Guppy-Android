@@ -16,13 +16,16 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -39,6 +42,7 @@ import android.widget.ToggleButton;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
+import com.spotify.sdk.android.player.Player;
 
 
 import org.json.JSONArray;
@@ -71,7 +75,9 @@ public class Explore extends AppCompatActivity{
     public String current_following_name;
     public JSONParser jsonParser = new JSONParser();
     public BroadcastReceiver receiver;
-    public boolean playing;
+    public boolean paused_playback;
+    public boolean broadcaster_playing;
+    public boolean tuning_in = false;
     public String is_playing;
     public boolean receiver_exists = false;
     public LinearLayout mDrawerLayout;
@@ -141,6 +147,8 @@ public class Explore extends AppCompatActivity{
     String artistName;
     String albumName;
     String trackName;
+    public boolean following_or_nah = false;
+    public Player mPlayer;
 
 
 
@@ -153,10 +161,13 @@ public class Explore extends AppCompatActivity{
 
 
     public ProgressDialog pdialog;
+    private ActionBarDrawerToggle mDrawerToggle;
+
     // url to create new product
 
     android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
     public Fragment fr;
+    public Fragment tuning_in_fragment;
 
 
 
@@ -176,6 +187,8 @@ public class Explore extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
+
+
         if (findViewById(R.id.fragment_container) != null) {
 
             // However, if we're being restored from a previous state,
@@ -190,6 +203,8 @@ public class Explore extends AppCompatActivity{
                     .add(R.id.fragment_container, firstFragment, "Explore").commit();
         }
 
+
+
         pdialog = new ProgressDialog(Explore.this);
         pdialog.setMessage("Loading profile. Please wait...");
         pdialog.setIndeterminate(false);
@@ -197,12 +212,43 @@ public class Explore extends AppCompatActivity{
         pdialog.show();
 
 
-        //Set ListView for Drawer
+
         mDrawerLayout = (LinearLayout) findViewById(R.id.drawer_linear_layout);
         //mDrawerSwitch = (Switch) findViewById(R.id.drawer_switch);
         Drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.drawer_list);
         addDrawerItems();
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this,                  /* host Activity */
+                Drawer,         /* DrawerLayout object */
+                //R.drawable.ic_drawer,  /* nav drawer icon to replace 'Up' caret */
+                R.string.drawer_open,  /* "open drawer" description */
+                R.string.drawer_close  /* "close drawer" description */
+        ) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                //getActionBar().setTitle(mTitle);
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                //().setTitle(mDrawerTitle);
+            }
+        };
+
+        Drawer.addDrawerListener(mDrawerToggle);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+
+
 
         broad_button = (ToggleButton) findViewById(R.id.toggBtn);
 
@@ -246,10 +292,26 @@ public class Explore extends AppCompatActivity{
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
     public void TuneIn(){
         android.support.v4.app.FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fr = new TuneIn_Fragment();
-        fragmentTransaction.replace(R.id.fragment_container, fr);
+        tuning_in_fragment = new TuneIn_Fragment();
+        fragmentTransaction.replace(R.id.fragment_container, tuning_in_fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
@@ -257,7 +319,7 @@ public class Explore extends AppCompatActivity{
 
     private void addDrawerItems() {
         // More Drawer Stuff
-        String[] mDrawerTitles = {"Home", "Following", "Settings", "Logout"};
+        String[] mDrawerTitles = {"Home", "Following", "Currently Listening", "Settings", "Logout"};
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mDrawerTitles) {
             @Override
             public View getView(int position, View convertView,
@@ -314,9 +376,20 @@ public class Explore extends AppCompatActivity{
                     Drawer.closeDrawers();
                 }
                 if (position == 2) {
+                    if(tuning_in)
+                    {
+                        android.support.v4.app.FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container, tuning_in_fragment);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+                    }
+                    Drawer.closeDrawers();
+                }
+                if (position == 3){
+                    Drawer.closeDrawers();
 
                 }
-                if (position == 3) {
+                if (position == 4) {
                     AuthenticationClient.logout(getApplicationContext());
                     Intent i = getBaseContext().getPackageManager()
                             .getLaunchIntentForPackage(getBaseContext().getPackageName());
@@ -344,7 +417,6 @@ public class Explore extends AppCompatActivity{
             spotify.getMe(new Callback<UserPrivate>() {
                 @Override
                 public void success(UserPrivate userPrivate, Response response) {
-                    Log.d("User Success", userPrivate.id);
                     String name = userPrivate.display_name.toString();
                     spotify_id = userPrivate.id.toString();
                     new CreateNewProduct().execute(name, spotify_id);
@@ -354,7 +426,6 @@ public class Explore extends AppCompatActivity{
 
                 @Override
                 public void failure(RetrofitError error) {
-                    Log.d("User Failure", error.toString());
                 }
             });
         }
@@ -389,12 +460,12 @@ public class Explore extends AppCompatActivity{
 
                 // getting JSON Object
                 // Note that create product url accepts POST method
-                Log.d("URL", url_create_product);
+
                 JSONObject json = jsonParser.makeHttpRequest(url_create_product,
                         "POST", params);
 
                 // check log cat fro response
-                Log.d("Create Response", json.toString());
+
 
                 // check for success tag
                 try {
@@ -471,7 +542,6 @@ public class Explore extends AppCompatActivity{
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("id", current_user_id));
 
-            Log.d("Broadcast", "Started");
 
 
             // sending modified data through http request
@@ -515,7 +585,7 @@ public class Explore extends AppCompatActivity{
                     artistName = intent.getStringExtra("artist");
                     albumName = intent.getStringExtra("album");
                     trackName = intent.getStringExtra("track");
-                    Log.d("trackId", trackId);
+
                     int trackLengthInSec = intent.getIntExtra("length", 0);
                     if (action.equals(BroadcastTypes.METADATA_CHANGED)) {
                         //GetAlbumArt running_task = new GetAlbumArt();
@@ -531,7 +601,6 @@ public class Explore extends AppCompatActivity{
                                 spotify.getTrack(newTrackId, new Callback<Track>() {
                                     @Override
                                     public void success(Track track, Response response) {
-                                        Log.d("Track success", track.name);
                                         albumArt = track.album.images.get(0).url;
                                         new SetURI().execute(trackId, trackName, albumName, artistName, albumArt);
 
@@ -539,7 +608,6 @@ public class Explore extends AppCompatActivity{
 
                                     @Override
                                     public void failure(RetrofitError error) {
-                                        Log.d("Album failure", error.toString());
                                     }
 
                                 });
@@ -557,9 +625,9 @@ public class Explore extends AppCompatActivity{
                     }
 
                     if (action.equals(BroadcastTypes.PLAYBACK_STATE_CHANGED)) {
-                        playing = intent.getBooleanExtra("playing", false);
+                        broadcaster_playing = intent.getBooleanExtra("playing", false);
                         //int positionInMs = intent.getIntExtra("playbackPosition", 0);
-                        if (playing){
+                        if (broadcaster_playing){
                             is_playing = "true";
                         }
                         else{
@@ -611,7 +679,6 @@ public class Explore extends AppCompatActivity{
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("id", current_user_id));
 
-            Log.d("Broadcast", "Stopped");
 
 
             // sending modified data through http request
@@ -678,7 +745,6 @@ public class Explore extends AppCompatActivity{
             params.add(new BasicNameValuePair("id", current_user_id));
 
 
-            Log.d("Setting URI", params.toString());
             JSONObject json;
 
 
@@ -749,7 +815,6 @@ public class Explore extends AppCompatActivity{
             params.add(new BasicNameValuePair("artist", args[3]));
             params.add(new BasicNameValuePair("album_art_large", args[4]));
 
-            Log.d("Setting URI", params.toString());
 
 
             // sending modified data through http request
@@ -841,7 +906,6 @@ public class Explore extends AppCompatActivity{
          * **/
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once got all details
-            Log.d("GUppy ID", current_user_id);
         }
     }
 

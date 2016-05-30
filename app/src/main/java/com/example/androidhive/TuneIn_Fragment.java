@@ -62,13 +62,10 @@ public class TuneIn_Fragment extends Fragment implements
     private TextView artist;
     private ImageButton follow_button;
     private ImageButton pause_play;
-    private Player mPlayer;
     private String old_uri = "No Track Yet";
     private String new_uri;
     private boolean broadcaster_playing = false;
     private boolean currently_playing = false;
-    private boolean following_or_nah = false;
-    private boolean playing = true;
     private boolean following;
     private ScheduledThreadPoolExecutor exec;
     public ProgressDialog pdialog;
@@ -94,15 +91,37 @@ public class TuneIn_Fragment extends Fragment implements
         artist.setTypeface(custom_font, Typeface.BOLD);
         Bitmap icon = BitmapFactory.decodeResource(getResources(),R.drawable.guppy);
         imageViewRound.setImageBitmap(icon);
-        new Get_Following_Or_Nah().execute();
+        //new Get_Following_Or_Nah().execute();
+
+        Log.d("Tune In", "Fragment Started");
+
 
         currently_following = main_activity.current_following_id;
+        main_activity.tuning_in = true;
 
         follow_button = (ImageButton) rootview.findViewById(R.id.plus_button);
         follow_button.setOnClickListener(this);
 
         pause_play = (ImageButton) rootview.findViewById(R.id.dots_button);
         pause_play.setOnClickListener(this);
+
+        if(main_activity.following_or_nah)
+        {
+            follow_button.setImageResource(R.drawable.dickbutt);
+        }
+        else
+        {
+            follow_button.setImageResource(R.drawable.plus);
+        }
+
+        if(main_activity.paused_playback)
+        {
+            pause_play.setImageResource(R.drawable.dickbutt);
+        }
+        else
+        {
+            pause_play.setImageResource(R.drawable.dots);
+        }
 
 
         android.support.v7.app.ActionBar bar = main_activity.getSupportActionBar();
@@ -119,7 +138,7 @@ public class TuneIn_Fragment extends Fragment implements
                 main_activity.runOnUiThread(new Runnable() {
                     public void run() {
                         //username.setText(the_username);
-                        if(following_or_nah)
+                        if(main_activity.following_or_nah)
                         {
                             follow_button.setImageResource(R.drawable.dickbutt);
                         }
@@ -143,7 +162,7 @@ public class TuneIn_Fragment extends Fragment implements
         Spotify.getPlayer(playerConfig, this, new Player.InitializationObserver() {
             @Override
             public void onInitialized(Player player) {
-                mPlayer = player;
+                main_activity.mPlayer = player;
 
                 //Non UI Thread that runs continuosly to check for new song URI/play/pause
                 PlayMusic();
@@ -188,10 +207,6 @@ public class TuneIn_Fragment extends Fragment implements
                         the_artist = product.getString("artist");
                         the_art = product.getString("artwork");
                         broadcaster_playing = convert_string(product.getString("playing"));
-                        Log.d("Received Value", product.getString("playing"));
-                        Log.d("URI", new_uri);
-                        Log.d("Playing", String.valueOf(broadcaster_playing));
-                        Log.d("ARtwork", the_art);
                         //String am_i_playing = String.valueOf(broadcaster_playing);
                         //Log.d("broadcaster playing", am_i_playing);
 
@@ -202,18 +217,18 @@ public class TuneIn_Fragment extends Fragment implements
                     e.printStackTrace();
                 }
                 if (new_uri.equals(old_uri) == false) {
-                    mPlayer.play(new_uri);
+                    main_activity.mPlayer.play(new_uri);
                     currently_playing = true;
                     old_uri = new_uri;
                 }
                 if (currently_playing == false && broadcaster_playing == true)
                 {
-                    mPlayer.resume();
+                    main_activity.mPlayer.resume();
                     currently_playing = true;
                 }
                 if (currently_playing == true && broadcaster_playing == false)
                 {
-                    mPlayer.pause();
+                    main_activity.mPlayer.pause();
                     currently_playing = false;
                 }
 
@@ -228,50 +243,39 @@ public class TuneIn_Fragment extends Fragment implements
 
         switch (v.getId()) {
             case R.id.plus_button:
-                if(following_or_nah == false)
+                if(main_activity.following_or_nah == false)
                 {
                     new FollowUser().execute(main_activity.current_following_id, main_activity.current_user_id);
-                    following_or_nah = true;
+                    main_activity.following_or_nah = true;
                     follow_button.setImageResource(R.drawable.dickbutt);
-                    Log.d("Plus Button", "Clicked");
                 }
                 else
                 {
                     new UnfollowUser().execute(main_activity.current_following_id, main_activity.current_user_id);
-                    following_or_nah = false;
+                    main_activity.following_or_nah = false;
                     follow_button.setImageResource(R.drawable.plus);
                 }
                 break;
             case R.id.dots_button:
-                if (playing)
+                if (main_activity.paused_playback == false)
                 {
-                    exec.shutdown();
+                    //exec.shutdown();
+                    main_activity.mPlayer.pause();
                     pause_play.setImageResource(R.drawable.dickbutt);
-                    playing = false;
+                    main_activity.paused_playback = true;
                 }
                 else
                 {
-                    PlayMusic();
+                    main_activity.mPlayer.resume();
                     pause_play.setImageResource(R.drawable.dots);
-                    playing = true;
+                    main_activity.paused_playback = false;  
                 }
 
         }
 
     }
 
-    /*
-    ImageButton.OnClickListener listener = new ImageButton.OnClickListener()
-    {
-        @Override
-        public void onClick(View arg0)
-        {
-            new FollowUser().execute(main_activity.current_following_id, main_activity.current_user_id);
-            follow_button.setImageResource(R.drawable.dickbutt);
-            Log.d("Plus Button", "Clicked");
-        }
-    };
-    */
+
 
     @Override
     public void onLoggedIn() {
@@ -382,8 +386,8 @@ public class TuneIn_Fragment extends Fragment implements
     public void onStop()
     {
         super.onStop();
-        new Decrement_Listeners().execute(currently_following, main_activity.current_user_id);
-        exec.shutdown();
+        //new Decrement_Listeners().execute(currently_following, main_activity.current_user_id);
+        //exec.shutdown();
 
     }
 
@@ -432,11 +436,11 @@ public class TuneIn_Fragment extends Fragment implements
                     String result = product.getString("result");
                     if (result.equals("true"))
                     {
-                        following_or_nah = true;
+                        main_activity.following_or_nah = true;
                     }
                     else
                     {
-                        following_or_nah = false;
+                        main_activity.following_or_nah = false;
                     }
                     Log.d("Following Or Nah", result);
 
@@ -646,8 +650,8 @@ public class TuneIn_Fragment extends Fragment implements
     public void onDestroy()
     {
         super.onDestroy();
-        Spotify.destroyPlayer(this);
-        new Decrement_Listeners().execute(currently_following, main_activity.current_user_id);
+        //Spotify.destroyPlayer(this);
+        //new Decrement_Listeners().execute(currently_following, main_activity.current_user_id);
     }
 
 }

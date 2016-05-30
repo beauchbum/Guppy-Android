@@ -21,7 +21,7 @@
         android:configChanges="keyboardHidden|orientation"
         android:icon="@drawable/guppy"
         android:label="Guppy"
-        android:theme="@style/Theme.AppCompat.Light" >
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
         <activity
             android:name="com.example.androidhive.Explore"
             android:launchMode="singleTask" >
