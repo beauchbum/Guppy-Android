@@ -2,21 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/menu_follow"
+        android:id="@+id/menu_stop_tune_in"
         android:icon="@drawable/ic_speaker"
-        android:title="Follow"
+        android:title="Stop Tuning In"
         ></item>
 
     <item
         android:id="@+id/menu_view_profile"
         android:icon="@drawable/ic_speaker"
-        android:title="View Profile"
-        ></item>
-
-    <item
-        android:id="@+id/menu_cancel"
-        android:icon="@drawable/ic_speaker"
-        android:title="Cancel"
+        android:title="View Tuning In Profile"
         ></item>
 
 </menu>

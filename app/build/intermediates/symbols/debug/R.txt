@@ -530,8 +530,7 @@ int id listMode 0x7f0d0009
 int id list_item 0x7f0d0028
 int id list_item_image 0x7f0d005e
 int id media_actions 0x7f0d0066
-int id menu_cancel 0x7f0d0079
-int id menu_follow 0x7f0d0077
+int id menu_stop_tune_in 0x7f0d0077
 int id menu_view_profile 0x7f0d0078
 int id middle 0x7f0d001b
 int id multiply 0x7f0d0014

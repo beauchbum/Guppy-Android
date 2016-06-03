@@ -22,6 +22,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,6 +37,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 
@@ -52,6 +54,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 import cz.msebera.android.httpclient.NameValuePair;
 import cz.msebera.android.httpclient.message.BasicNameValuePair;
@@ -129,6 +132,8 @@ public class Explore extends AppCompatActivity{
     Following_Fragment.BroadcastAdapter adapter;
     public ArrayList<String> pid_list;
     public ArrayList<String> name_list;
+    public ArrayList<String> broadcasting_list;
+
 
 
 
@@ -149,6 +154,8 @@ public class Explore extends AppCompatActivity{
     String trackName;
     public boolean following_or_nah = false;
     public Player mPlayer;
+    public ScheduledThreadPoolExecutor exec;
+
 
 
 
@@ -162,12 +169,16 @@ public class Explore extends AppCompatActivity{
 
     public ProgressDialog pdialog;
     private ActionBarDrawerToggle mDrawerToggle;
+    public Menu my_menu;
+    public MenuItem stop_tune_in;
+    public MenuItem see_profile;
 
     // url to create new product
 
     android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
     public Fragment fr;
     public Fragment tuning_in_fragment;
+    public Toast broadcasting_toast;
 
 
 
@@ -211,7 +222,8 @@ public class Explore extends AppCompatActivity{
         pdialog.setCancelable(false);
         pdialog.show();
 
-
+        broadcasting_toast = Toast.makeText(getApplicationContext(), "User Not Broadcasting", Toast.LENGTH_SHORT);
+        broadcasting_toast.setGravity(Gravity.CENTER, 0, 0);
 
         mDrawerLayout = (LinearLayout) findViewById(R.id.drawer_linear_layout);
         //mDrawerSwitch = (Switch) findViewById(R.id.drawer_switch);
@@ -281,6 +293,9 @@ public class Explore extends AppCompatActivity{
         listDataHeader = new ArrayList<String>();
         pid_list = new ArrayList<String>();
         name_list = new ArrayList<String>();
+        broadcasting_list = new ArrayList<String>();
+
+
 
 
         arrayOfBroadcasts = new ArrayList<Broadcast>();
@@ -292,10 +307,41 @@ public class Explore extends AppCompatActivity{
 
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
+        }
+
+        switch(item.getItemId()){
+            case R.id.menu_stop_tune_in:
+                Log.d("Item Selected", "Shit");
+                current_following_id = null;
+                current_following_name = null;
+                tuning_in = false;
+                mPlayer.shutdown();
+                broadcaster_playing = false;
+                exec.shutdown();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fm.beginTransaction();
+
+                TuneIn_Fragment my_otherfragment = (TuneIn_Fragment) getSupportFragmentManager().findFragmentByTag("Tune In");
+                if (my_otherfragment != null && my_otherfragment.isVisible())
+                {
+                    fragmentTransaction.remove(tuning_in_fragment);
+                    fr = new Following_Fragment();
+                    fragmentTransaction.add(R.id.fragment_container, fr, "Following").commit();
+                }
+                else
+                {
+                    fragmentTransaction.remove(tuning_in_fragment).commit();
+                }
+                see_profile.setVisible(false);
+                stop_tune_in.setVisible(false);
+                break;
+            case R.id.menu_view_profile:
+
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -310,8 +356,9 @@ public class Explore extends AppCompatActivity{
 
     public void TuneIn(){
         android.support.v4.app.FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        Log.d(" ")
         tuning_in_fragment = new TuneIn_Fragment();
-        fragmentTransaction.replace(R.id.fragment_container, tuning_in_fragment);
+        fragmentTransaction.replace(R.id.fragment_container, tuning_in_fragment, "Tune In");
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
@@ -379,11 +426,19 @@ public class Explore extends AppCompatActivity{
                     if(tuning_in)
                     {
                         android.support.v4.app.FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment_container, tuning_in_fragment);
+                        fragmentTransaction.replace(R.id.fragment_container, tuning_in_fragment, "Tune In");
                         fragmentTransaction.addToBackStack(null);
                         fragmentTransaction.commit();
+                        Drawer.closeDrawers();
                     }
-                    Drawer.closeDrawers();
+                    else
+                    {
+                        Toast my_toast = Toast.makeText(getApplicationContext(), "Not Tuning Into Any Broadcast", Toast.LENGTH_SHORT);
+                        my_toast.setGravity(Gravity.CENTER, 0, 0);
+                        my_toast.show();
+
+                    }
+
                 }
                 if (position == 3){
                     Drawer.closeDrawers();
@@ -430,10 +485,6 @@ public class Explore extends AppCompatActivity{
             });
         }
     }
-
-
-
-
 
     class CreateNewProduct extends AsyncTask<String, String, String> {
 
@@ -501,6 +552,11 @@ public class Explore extends AppCompatActivity{
     {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu, menu);
+        my_menu = menu;
+        see_profile = my_menu.findItem(R.id.menu_view_profile);
+        stop_tune_in = my_menu.findItem(R.id.menu_stop_tune_in);
+        see_profile.setVisible(false);
+        stop_tune_in.setVisible(false);
         return true;
     }
 

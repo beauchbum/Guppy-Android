@@ -61,6 +61,7 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#209CF2")));
         bar.setTitle(Html.fromHtml("<font color='#ffffff'>Following</font>"));
 
+
         new LoadFollowingUsers().execute(main_activity.current_user_id);
 
 
@@ -168,13 +169,16 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                         String name = c.getString(main_activity.TAG_NAME);
                         String song = c.getString("song");
                         String artist = c.getString("artist");
+                        String broadcasting = c.getString("broadcasting");
                         //String listeners = c.getString("listeners");
                         //int real_listeners = Integer.parseInt(listeners);
 
 
-                        main_activity.arrayOfBroadcasts.add(new Broadcast(name, 0, song, artist, "guppy"));
+                        main_activity.arrayOfBroadcasts.add(new Broadcast(name, 0, song, artist, "guppy", broadcasting));
                         main_activity.pid_list.add(i, id);
                         main_activity.name_list.add(i, name);
+                        main_activity.broadcasting_list.add(i, broadcasting);
+
                         Log.d("array of broadcasts", main_activity.arrayOfBroadcasts.toString());
 
 
@@ -221,21 +225,29 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                     main_activity.lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            String temp = main_activity.pid_list.get(position);
-                            if(temp.equals(main_activity.current_following_id) == false) {
-                                main_activity.current_following_id = temp;
-                                main_activity.current_following_name = main_activity.name_list.get(position);
-                                new Increment_Listeners().execute(main_activity.current_following_id, main_activity.current_user_id);
-                                new Get_Following_Or_Nah().execute();
-                                search_box.clearFocus();
-                                main_activity.TuneIn();
+                            if(main_activity.broadcasting_list.get(position).equals("1")) {
+                                String temp = main_activity.pid_list.get(position);
+                                if (temp.equals(main_activity.current_following_id) == false) {
+                                    if (main_activity.broadcasting_list.get(position).equals("1")) {
+                                        main_activity.current_following_id = temp;
+                                        main_activity.current_following_name = main_activity.name_list.get(position);
+                                        new Increment_Listeners().execute(main_activity.current_following_id, main_activity.current_user_id);
+                                        new Get_Following_Or_Nah().execute();
+                                        search_box.clearFocus();
+                                        main_activity.TuneIn();
+                                    } else {
+                                        main_activity.broadcasting_toast.show();
+                                    }
+                                } else {
+                                    android.support.v4.app.FragmentTransaction fragmentTransaction = main_activity.fm.beginTransaction();
+                                    fragmentTransaction.replace(R.id.fragment_container, main_activity.tuning_in_fragment);
+                                    fragmentTransaction.addToBackStack(null);
+                                    fragmentTransaction.commit();
+                                }
                             }
-
-                            else{
-                                android.support.v4.app.FragmentTransaction fragmentTransaction = main_activity.fm.beginTransaction();
-                                fragmentTransaction.replace(R.id.fragment_container, main_activity.tuning_in_fragment);
-                                fragmentTransaction.addToBackStack(null);
-                                fragmentTransaction.commit();
+                            else
+                            {
+                                main_activity.broadcasting_toast.show();
                             }
                         }
                     });
@@ -304,13 +316,16 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                         String name = c.getString("name");
                         String song = c.getString("song");
                         String artist = c.getString("artist");
+                        String broadcasting = c.getString("broadcasting");
+
                         //String listeners = c.getString("listeners");
                         //int real_listeners = Integer.parseInt(listeners);
 
 
-                        main_activity.arrayOfBroadcasts.add(new Broadcast(name, 0, song, artist, "guppy"));
+                        main_activity.arrayOfBroadcasts.add(new Broadcast(name, 0, song, artist, "guppy", broadcasting));
                         main_activity.pid_list.add(i, id);
                         main_activity.name_list.add(i, name);
+                        main_activity.broadcasting_list.add(i, broadcasting);
                         Log.d("array of broadcasts", main_activity.arrayOfBroadcasts.toString());
 
 
@@ -354,24 +369,30 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                     main_activity.lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            String temp = main_activity.pid_list.get(position);
-                            if(temp.equals(main_activity.current_following_id) == false) {
-                                main_activity.current_following_id = temp;
-                                main_activity.current_following_name = main_activity.name_list.get(position);
-                                new Increment_Listeners().execute(main_activity.current_following_id, main_activity.current_user_id);
-                                new Get_Following_Or_Nah().execute();
-                                search_box.clearFocus();
-                                main_activity.TuneIn();
-                            }
+                            if (main_activity.broadcasting_list.get(position).equals("1")) {
 
-                            else{
-                                search_box.clearFocus();
-                                android.support.v4.app.FragmentTransaction fragmentTransaction = main_activity.fm.beginTransaction();
-                                fragmentTransaction.replace(R.id.fragment_container, main_activity.tuning_in_fragment);
-                                fragmentTransaction.addToBackStack(null);
-                                fragmentTransaction.commit();
+                                String temp = main_activity.pid_list.get(position);
+                                if (temp.equals(main_activity.current_following_id) == false) {
+                                    main_activity.current_following_id = temp;
+                                    main_activity.current_following_name = main_activity.name_list.get(position);
+                                    new Increment_Listeners().execute(main_activity.current_following_id, main_activity.current_user_id);
+                                    new Get_Following_Or_Nah().execute();
+                                    search_box.clearFocus();
+                                    main_activity.TuneIn();
+                                } else {
+                                    search_box.clearFocus();
+                                    android.support.v4.app.FragmentTransaction fragmentTransaction = main_activity.fm.beginTransaction();
+                                    fragmentTransaction.replace(R.id.fragment_container, main_activity.tuning_in_fragment);
+                                    fragmentTransaction.addToBackStack(null);
+                                    fragmentTransaction.commit();
+                                }
+                            }
+                            else
+                            {
+                                main_activity.broadcasting_toast.show();
                             }
                         }
+
                     });
 
 
@@ -567,11 +588,25 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
             int resId = getResources().getIdentifier(mBroadcast.image_title, "drawable", getActivity().getPackageName());
             profilePicImage.setImageResource(resId);
 
-            userTextView.setText(mBroadcast.username);
-            String listeners = mBroadcast.listeners + " Listeners";
-            listenersTextView.setText(listeners);
-            String songAndArtist = mBroadcast.song + " - " + mBroadcast.artist;
-            songArtistTextView.setText(songAndArtist);
+            if(mBroadcast.broadcasting == false)
+            {
+                userTextView.setText(mBroadcast.username);
+                userTextView.setTextColor(Color.GRAY);
+                listenersTextView.setTextColor(Color.GRAY);
+                songArtistTextView.setTextColor(Color.GRAY);
+                songArtistTextView.setText("User Not Broadcasting");
+                listenersTextView.setText("0 Listeners");
+
+            }
+
+            else {
+                userTextView.setText(mBroadcast.username);
+                String listeners = mBroadcast.listeners + " Listeners";
+                listenersTextView.setText(listeners);
+                String songAndArtist = mBroadcast.song + " - " + mBroadcast.artist;
+                songArtistTextView.setText(songAndArtist);
+            }
+
             return convertView;
         }
 

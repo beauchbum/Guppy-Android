@@ -68,7 +68,6 @@ public class TuneIn_Fragment extends Fragment implements
     private boolean broadcaster_playing = false;
     private boolean currently_playing = false;
     private boolean following;
-    private ScheduledThreadPoolExecutor exec;
     public ProgressDialog pdialog;
 
     private ImageView albumImageView;
@@ -90,8 +89,8 @@ public class TuneIn_Fragment extends Fragment implements
         song.setTypeface(custom_font, Typeface.BOLD);
         album.setTypeface(custom_font, Typeface.BOLD);
         artist.setTypeface(custom_font, Typeface.BOLD);
-        Bitmap icon = BitmapFactory.decodeResource(getResources(),R.drawable.guppy);
-        imageViewRound.setImageBitmap(icon);
+        //Bitmap icon = BitmapFactory.decodeResource(getResources(),R.drawable.guppy);
+        //imageViewRound.setImageBitmap(icon);
         //new Get_Following_Or_Nah().execute();
 
         Log.d("Tune In", "Fragment Started");
@@ -127,10 +126,17 @@ public class TuneIn_Fragment extends Fragment implements
             pause_play.setImageResource(R.drawable.dots);
         }
 
+        new DownloadImageTask().execute(the_art);
+
+
 
         android.support.v7.app.ActionBar bar = main_activity.getSupportActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#209CF2")));
         bar.setTitle(Html.fromHtml("<font color='#ffffff'>" + main_activity.current_following_name + "</font>"));
+        main_activity.stop_tune_in.setTitle("Tune Out " + main_activity.current_following_name);
+        main_activity.see_profile.setTitle("See " + main_activity.current_following_name + "'s Profile");
+        main_activity.stop_tune_in.setVisible(true);
+        main_activity.see_profile.setVisible(true);
 
 
 
@@ -183,8 +189,9 @@ public class TuneIn_Fragment extends Fragment implements
 
     public void PlayMusic()
     {
-        exec = new ScheduledThreadPoolExecutor(1);
-        exec.scheduleAtFixedRate(new Runnable() {
+        Log.d("play music", "it running");
+        main_activity.exec = new ScheduledThreadPoolExecutor(1);
+        main_activity.exec.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
 
@@ -664,17 +671,18 @@ public class TuneIn_Fragment extends Fragment implements
             String urldisplay = urls[0];
             Bitmap mIcon11 = null;
             try {
+                Log.d("Art URL", urls[0]);
                 InputStream in = new java.net.URL(urldisplay).openStream();
                 mIcon11 = BitmapFactory.decodeStream(in);
             } catch (Exception e) {
-                Log.e("Error", e.getMessage());
+                Log.e("Error", "No Text Yet");
                 e.printStackTrace();
             }
             return mIcon11;
         }
 
         protected void onPostExecute(Bitmap result) {
-            albumImageView.setImageBitmap(result);
+            imageViewRound.setImageBitmap(result);
 
         }
     }

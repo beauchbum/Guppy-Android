@@ -1695,8 +1695,7 @@ containing a value of this type.
         public static final int list_item=0x7f0d0028;
         public static final int list_item_image=0x7f0d005e;
         public static final int media_actions=0x7f0d0066;
-        public static final int menu_cancel=0x7f0d0079;
-        public static final int menu_follow=0x7f0d0077;
+        public static final int menu_stop_tune_in=0x7f0d0077;
         public static final int menu_view_profile=0x7f0d0078;
         public static final int middle=0x7f0d001b;
         public static final int multiply=0x7f0d0014;
