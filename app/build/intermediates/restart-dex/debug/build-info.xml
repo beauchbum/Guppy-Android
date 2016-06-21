@@ -4,31 +4,110 @@
     api-level="21"
     density="xxhdpi"
     format="7"
-    timestamp="1892750470103042" >
+    timestamp="2441811944095556" >
 
     <task
         name="javac"
-        duration="518" />
+        duration="663" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="49" />
+        duration="258" />
     <task
         name="verifier"
-        duration="9" />
+        duration="49" />
 
     <artifact
         location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_6\classes.dex"
         type="DEX" />
 
-    <build timestamp="1890798361118070" >
+    <build timestamp="2435783120706104" >
         <artifact
             location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
     </build>
-    <build timestamp="1892750470103042" >
+    <build timestamp="2436006939592597" >
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_5\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_3\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_2\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_4\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_1\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_0\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_7\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-23.3.0_0dee85f36e3295571b07d67d8065fe86055eaa9c\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-23.3.0_3d88b041ecd972e3116a1a4e25548e4a07950d80\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_9\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_8\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\jnihelpers-1.0_cfa841c03d7578a0556a998d41919c9f3d2c3c01\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.spotify.sdk-spotify-player-1.0.0-beta11_f09b6cba3ef2463a4f4687ec958b84ae3871df7d\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_110084b987d6db9640b81f646f06ec7a733a7127\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-23.3.0_b1023095d748ad4be128eff28f6fbc247932646c\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_7124a0e3efae57dd9a307657d72b2b9897809ec8\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-23.3.0_af7aa4e30c9639cb2415ed41332eb0f82fdf6ed4\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-23.3.0_f3369c60bec355507614e88855679e3bfe1a60d2\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.github.kaaes-spotify-web-api-android-0.2.0_94b122897ce446654b36e96638e632abe867a273\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.spotify.sdk-spotify-auth-1.0.0-beta11_84ea2408a6e2b02116b8851ee4a4e0a3242bdb8e\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\gson-2.3.1_75766f7b275865b8da21cbe341203b4033f2d1d6\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\retrofit-1.9.0_79e4a95fb6d83fae609b891c34b3c0133ceb009c\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\httpclient-4.4.1.1_349ea115c7ee321e030d2d7829a19daa1e38c7da\classes.dex"
+            type="DEX" />
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-23.3.0_d0f89b08928c29a6284cf9acd2ad84c0b1ce1a34\classes.dex"
+            type="DEX" />
+    </build>
+    <build timestamp="2441545166672498" >
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\res\resources-debug.ap_"
+            type="RESOURCES" />
+    </build>
+    <build timestamp="2441811944095556" >
         <artifact
             location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_6\classes.dex"
             type="DEX" />

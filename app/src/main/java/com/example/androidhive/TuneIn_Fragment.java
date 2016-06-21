@@ -14,12 +14,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
@@ -29,6 +32,7 @@ import com.spotify.sdk.android.player.Player;
 import com.spotify.sdk.android.player.PlayerNotificationCallback;
 import com.spotify.sdk.android.player.PlayerState;
 import com.spotify.sdk.android.player.Spotify;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,14 +65,18 @@ public class TuneIn_Fragment extends Fragment implements
     private TextView song;
     private TextView album;
     private TextView artist;
+    private TextView paused_textview;
     private ImageButton follow_button;
     private ImageButton pause_play;
     private String old_uri = "No Track Yet";
     private String new_uri;
-    private boolean broadcaster_playing = false;
+    private boolean broadcaster_playing = true;
+    private boolean broadcasting = true;
     private boolean currently_playing = false;
     private boolean following;
     public ProgressDialog pdialog;
+    public View rootview;
+    public Toast following_toast;
 
     private ImageView albumImageView;
     private ImageView imageViewRound;
@@ -77,40 +85,45 @@ public class TuneIn_Fragment extends Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootview = inflater.inflate(R.layout.tunein_fragment, container, false);
+        rootview = inflater.inflate(R.layout.tunein_fragment, container, false);
         main_activity = (Explore) getActivity();
         //username = (TextView) findViewById(R.id.username);
         song = (TextView) rootview.findViewById(R.id.song);
         album = (TextView) rootview.findViewById(R.id.album);
         artist = (TextView) rootview.findViewById(R.id.artist);
-        imageViewRound=(ImageView) rootview.findViewById(R.id.imageView_round);
-        Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Infinity.ttf");
+        albumImageView=(ImageView) rootview.findViewById(R.id.album_image_view);
+        paused_textview=(TextView) rootview.findViewById(R.id.paused_playback);
+        //Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Infinity.ttf");
         //username.setTypeface(custom_font, Typeface.BOLD);
-        song.setTypeface(custom_font, Typeface.BOLD);
-        album.setTypeface(custom_font, Typeface.BOLD);
-        artist.setTypeface(custom_font, Typeface.BOLD);
+        //song.setTypeface(custom_font, Typeface.BOLD);
+        //album.setTypeface(custom_font, Typeface.BOLD);
+        //artist.setTypeface(custom_font, Typeface.BOLD);
+
+
+
         //Bitmap icon = BitmapFactory.decodeResource(getResources(),R.drawable.guppy);
         //imageViewRound.setImageBitmap(icon);
         //new Get_Following_Or_Nah().execute();
 
+
+
         Log.d("Tune In", "Fragment Started");
 
 
+
+
         currently_following = main_activity.current_following_id;
-        main_activity.tuning_in = true;
 
         follow_button = (ImageButton) rootview.findViewById(R.id.plus_button);
         follow_button.setOnClickListener(this);
 
-        pause_play = (ImageButton) rootview.findViewById(R.id.dots_button);
+        pause_play = (ImageButton) rootview.findViewById(R.id.play);
         pause_play.setOnClickListener(this);
-
-        albumImageView = (ImageView) rootview.findViewById(R.id.album_ImageView);
 
 
         if(main_activity.following_or_nah)
         {
-            follow_button.setImageResource(R.drawable.dickbutt);
+            follow_button.setImageResource(R.drawable.check);
         }
         else
         {
@@ -119,14 +132,36 @@ public class TuneIn_Fragment extends Fragment implements
 
         if(main_activity.paused_playback)
         {
-            pause_play.setImageResource(R.drawable.dickbutt);
+            pause_play.setImageResource(R.drawable.play);
         }
         else
         {
-            pause_play.setImageResource(R.drawable.dots);
+            pause_play.setImageResource(R.drawable.pause);
         }
 
-        new DownloadImageTask().execute(the_art);
+        if(main_activity.tuning_in)
+        {
+            albumImageView.setImageBitmap(main_activity.albumArtImage);
+            if(main_activity.following_or_nah)
+            {
+                follow_button.setImageResource(R.drawable.check);
+            }
+            else
+            {
+                follow_button.setImageResource(R.drawable.plus);
+            }
+
+            song.setText(the_song);
+            album.setText(the_album);
+            artist.setText(the_artist);
+        }
+        else
+        {
+            Log.d("Downloading Image", "");
+
+            new DownloadImageTask().execute(the_art);
+        }
+        main_activity.tuning_in = true;
 
 
 
@@ -146,15 +181,32 @@ public class TuneIn_Fragment extends Fragment implements
             @Override
             public void run() {
                 main_activity.runOnUiThread(new Runnable() {
+
+
                     public void run() {
                         //username.setText(the_username);
+                        if(broadcasting == false) {
+                            main_activity.onOptionsItemSelected(main_activity.my_menu.findItem(R.id.menu_stop_tune_in));
+                        }
+
                         if(main_activity.following_or_nah)
                         {
-                            follow_button.setImageResource(R.drawable.dickbutt);
+                            follow_button.setImageResource(R.drawable.check);
                         }
                         else
                         {
                             follow_button.setImageResource(R.drawable.plus);
+                        }
+
+                        if(broadcaster_playing == false)
+                        {
+                            albumImageView.setAlpha(90);
+                            paused_textview.setVisibility(View.VISIBLE);
+                        }
+                        else
+                        {
+                            albumImageView.setAlpha(255);
+                            paused_textview.setVisibility(View.GONE);
                         }
 
                         song.setText(the_song);
@@ -164,6 +216,7 @@ public class TuneIn_Fragment extends Fragment implements
                 });
             }
         }, 0, 1000);
+
 
 
 
@@ -184,7 +237,9 @@ public class TuneIn_Fragment extends Fragment implements
                 Log.e("MainActivity", "Could not initialize player: " + throwable.getMessage());
             }
         });
+
         return rootview;
+
     }
 
     public void PlayMusic()
@@ -194,60 +249,79 @@ public class TuneIn_Fragment extends Fragment implements
         main_activity.exec.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
+                if(main_activity.tuning_in) {
 
-                //JSON making the HTTP request
-                List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("id", main_activity.current_following_id));
-                JSONObject json = main_activity.jsonParser.makeHttpRequest(
-                        main_activity.url_get_uri, "GET", params);
+                    //JSON making the HTTP request
+                    List<NameValuePair> params = new ArrayList<NameValuePair>();
+                    params.add(new BasicNameValuePair("id", main_activity.current_following_id));
+                    JSONObject json = main_activity.jsonParser.makeHttpRequest(
+                            main_activity.url_get_uri, "GET", params);
 
-                try {
+                    try {
 
-                    int success = json.getInt(main_activity.TAG_SUCCESS);
-                    if (success == 1) {
-                        // successfully received product details
-                        JSONArray productObj = json
-                                .getJSONArray("user"); // JSON Array
+                        int success = json.getInt(main_activity.TAG_SUCCESS);
+                        if (success == 1) {
+                            // successfully received product details
+                            JSONArray productObj = json
+                                    .getJSONArray("user"); // JSON Array
 
-                        // get first product object from JSON Array
-                        JSONObject product = productObj.getJSONObject(0);
-                        new_uri = product.getString("uri");
-                        //the_username = product.getString("name");
-                        the_song = product.getString("song");
-                        the_album = product.getString("album");
-                        the_artist = product.getString("artist");
-                        the_art = product.getString("artwork");
-                        broadcaster_playing = convert_string(product.getString("playing"));
-                        //String am_i_playing = String.valueOf(broadcaster_playing);
-                        //Log.d("broadcaster playing", am_i_playing);
+                            // get first product object from JSON Array
+                            JSONObject product = productObj.getJSONObject(0);
+                            new_uri = product.getString("uri");
+                            //the_username = product.getString("name");
+                            the_song = product.getString("song");
+                            the_album = product.getString("album");
+                            the_artist = product.getString("artist");
+                            the_art = product.getString("artwork");
+                            Log.d("User Broadcasting ", product.getString("broadcasting"));
+                            broadcaster_playing = convert_string(product.getString("playing"));
+                            broadcasting = convert_string(product.getString("broadcasting"));
+                            //String am_i_playing = String.valueOf(broadcaster_playing);
+                            //Log.d("broadcaster playing", am_i_playing);
 
-                    }else{
-                        // product with pid not found
+                        } else {
+                            // product with pid not found
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                if (new_uri.equals(old_uri) == false) {
-                    main_activity.mPlayer.play(new_uri);
-                    currently_playing = true;
-                    old_uri = new_uri;
-                    new DownloadImageTask().execute(the_art);
 
-                }
-                if (currently_playing == false && broadcaster_playing == true)
-                {
-                    main_activity.mPlayer.resume();
-                    currently_playing = true;
-                }
-                if (currently_playing == true && broadcaster_playing == false)
-                {
-                    main_activity.mPlayer.pause();
-                    currently_playing = false;
+                    if(broadcasting == false)
+                    {
+                        main_activity.runOnUiThread(new Runnable() {
+
+
+                            public void run() {
+                                //username.setText(the_username);
+
+                                main_activity.onOptionsItemSelected(main_activity.my_menu.findItem(R.id.menu_stop_tune_in));
+                                broadcasting = true;
+
+                            }
+                        });
+                    }
+
+                    if (new_uri.equals(old_uri) == false) {
+                        main_activity.mPlayer.play(new_uri);
+                        currently_playing = true;
+                        old_uri = new_uri;
+                        new DownloadImageTask().execute(the_art);
+
+                    }
+                    if (currently_playing == false && broadcaster_playing == true) {
+                        main_activity.mPlayer.resume();
+                        currently_playing = true;
+                    }
+                    if (currently_playing == true && broadcaster_playing == false) {
+                        main_activity.mPlayer.pause();
+                        currently_playing = false;
+                    }
                 }
 
             }
         }, 0, 1, TimeUnit.SECONDS);
     }
+
 
 
     @Override
@@ -259,29 +333,51 @@ public class TuneIn_Fragment extends Fragment implements
                 if(main_activity.following_or_nah == false)
                 {
                     new FollowUser().execute(main_activity.current_following_id, main_activity.current_user_id);
+                    try {
+                        following_toast.cancel();
+                    }catch (Exception e)
+                    {
+
+                    }
+                    following_toast = Toast.makeText(getActivity(), "Followed " + main_activity.current_following_name,
+                            Toast.LENGTH_SHORT);
+                    following_toast.setGravity(Gravity.CENTER, 0, 0);
+                    following_toast.show();
                     main_activity.following_or_nah = true;
-                    follow_button.setImageResource(R.drawable.dickbutt);
+                    follow_button.setImageResource(R.drawable.check);
                 }
                 else
                 {
                     new UnfollowUser().execute(main_activity.current_following_id, main_activity.current_user_id);
+                    try {
+                        following_toast.cancel();
+                    }catch (Exception e)
+                    {
+
+                    }
+                    following_toast = Toast.makeText(getActivity(), "Unfollowed " + main_activity.current_following_name,
+                            Toast.LENGTH_SHORT);
+                    following_toast.setGravity(Gravity.CENTER, 0, 0);
+                    following_toast.show();
                     main_activity.following_or_nah = false;
                     follow_button.setImageResource(R.drawable.plus);
                 }
                 break;
-            case R.id.dots_button:
-                if (main_activity.paused_playback == false)
+            case R.id.play:
+                if (main_activity.paused_playback == false && broadcaster_playing == true)
                 {
                     //exec.shutdown();
                     main_activity.mPlayer.pause();
-                    pause_play.setImageResource(R.drawable.dickbutt);
+                    pause_play.setImageResource(R.drawable.play);
                     main_activity.paused_playback = true;
                 }
                 else
                 {
-                    main_activity.mPlayer.resume();
-                    pause_play.setImageResource(R.drawable.dots);
-                    main_activity.paused_playback = false;  
+                    if(broadcaster_playing == true) {
+                        main_activity.mPlayer.resume();
+                        pause_play.setImageResource(R.drawable.pause);
+                        main_activity.paused_playback = false;
+                    }
                 }
 
         }
@@ -417,6 +513,7 @@ public class TuneIn_Fragment extends Fragment implements
             pdialog.setIndeterminate(false);
             pdialog.setCancelable(false);
             pdialog.show();
+
         }
 
         /**
@@ -473,6 +570,7 @@ public class TuneIn_Fragment extends Fragment implements
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once got all details
             pdialog.dismiss();
+
 
         }
     }
@@ -678,11 +776,13 @@ public class TuneIn_Fragment extends Fragment implements
                 Log.e("Error", "No Text Yet");
                 e.printStackTrace();
             }
+            main_activity.albumArtImage = mIcon11;
             return mIcon11;
         }
 
         protected void onPostExecute(Bitmap result) {
-            imageViewRound.setImageBitmap(result);
+            albumImageView.setImageBitmap(result);
+
 
         }
     }

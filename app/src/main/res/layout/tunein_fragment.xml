@@ -8,14 +8,17 @@
     tools:context="com.example.androidhive.Explore"
     android:background="#ffffff">
 
-    <ImageView
-        android:id="@+id/album_ImageView"
-        android:layout_gravity="center"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true"/>
 
+
+    <TextView
+        android:id="@+id/paused_playback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Paused Playback"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="175dp"
+        android:textSize="28dp"
+        android:visibility="invisible"/>
 
 
     <LinearLayout
@@ -28,41 +31,54 @@
 
 
         <ImageView
-            android:id="@+id/imageView_round"
+            android:id="@+id/album_image_view"
             android:layout_width="275dp"
             android:layout_height="275dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="40dp"
-            android:layout_marginBottom="4dp" />
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/guppy"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="275dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Large Text"
             android:textSize="30dp"
+            android:singleLine="true"
+            android:ellipsize="marquee"
             android:id="@+id/song"
+            android:gravity="center"
             android:layout_gravity="center_horizontal"
+            android:fontFamily="Gotham"
             android:layout_alignParentBottom="true"
             android:layout_weight="0.03" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="275dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_alignParentBottom="true"
             android:text="Large Text"
             android:textSize="20dp"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:fontFamily="Gotham"
             android:id="@+id/album"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.03" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="275dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_alignParentBottom="true"
             android:text="Large Text"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:fontFamily="Gotham"
             android:textSize="20dp"
             android:id="@+id/artist"
             android:layout_gravity="center_horizontal"
@@ -84,10 +100,10 @@
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"/>
             <ImageButton
-                android:id="@+id/dots_button"
+                android:id="@+id/play"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/dots"
+                android:src="@drawable/pause"
                 android:background="@null"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"/>

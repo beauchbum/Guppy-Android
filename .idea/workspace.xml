@@ -71,32 +71,26 @@
       <file leaf-file-name="Explore.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/androidhive/Explore.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.28935185">
-              <caret line="358" column="16" selection-start-line="358" selection-start-column="16" selection-end-line="358" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.3607143">
+              <caret line="286" column="0" selection-start-line="286" selection-start-column="0" selection-end-line="286" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#8364#8384#0" expanded="true" />
-                <element signature="e#8435#8456#0" expanded="true" />
-                <element signature="method#onActivityResult#0;class#Explore#0" expanded="false" />
+                <element signature="e#9328#9348#0" expanded="true" />
+                <element signature="e#9399#9420#0" expanded="true" />
+                <element signature="e#10406#10671#0" expanded="true" />
+                <element signature="e#10670#10671#0" expanded="true" />
+                <element signature="e#10829#11861#0" expanded="true" />
+                <element signature="e#11860#11861#0" expanded="true" />
+                <element signature="method#onPostCreate#0;class#Explore#0" expanded="false" />
                 <element signature="class#CreateNewProduct#0;class#Explore#0" expanded="false" />
-                <element signature="method#onCreateContextMenu#0;class#Explore#0" expanded="false" />
-                <element signature="class#StartBroadcast#0;class#Explore#0" expanded="false" />
-                <element signature="class#StopBroadcast#0;class#Explore#0" expanded="false" />
-                <element signature="class#ChangePlayback#0;class#Explore#0" expanded="false" />
-                <element signature="class#SetURI#0;class#Explore#0" expanded="false" />
+                <element signature="e#23182#24293#0" expanded="true" />
+                <element signature="e#23297#24259#0" expanded="true" />
+                <element signature="e#24258#24259#0" expanded="true" />
+                <element signature="e#24292#24293#0" expanded="true" />
+                <element signature="e#25366#28749#0" expanded="true" />
+                <element signature="e#28748#28749#0" expanded="true" />
                 <element signature="class#Get_guppy_id#0;class#Explore#0" expanded="false" />
-                <element signature="method#onDestroy#0;class#Explore#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="menu.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.823529">
-              <caret line="12" column="45" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="45" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -104,11 +98,12 @@
       <file leaf-file-name="Following_Fragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/androidhive/Following_Fragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="229" column="0" selection-start-line="229" selection-start-column="0" selection-end-line="229" selection-end-column="0" />
+            <state vertical-scroll-proportion="-2.1136363">
+              <caret line="276" column="17" selection-start-line="276" selection-start-column="15" selection-end-line="276" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="class#Increment_Listeners#0;class#Following_Fragment#0" expanded="false" />
+                <element signature="class#Get_Following_Or_Nah#0;class#Following_Fragment#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -117,7 +112,7 @@
       <file leaf-file-name="list_item.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.375">
+            <state vertical-scroll-proportion="-4.861111">
               <caret line="86" column="35" selection-start-line="86" selection-start-column="35" selection-end-line="86" selection-end-column="35" />
               <folding />
             </state>
@@ -130,29 +125,89 @@
       <file leaf-file-name="TuneIn_Fragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/androidhive/TuneIn_Fragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="6.431818">
-              <caret line="209" column="4" selection-start-line="209" selection-start-column="4" selection-end-line="209" selection-end-column="4" />
+            <state vertical-scroll-proportion="-6.659091">
+              <caret line="343" column="47" selection-start-line="343" selection-start-column="47" selection-end-line="343" selection-end-column="67" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#6970#9437#0" expanded="true" />
-                <element signature="e#9436#9437#0" expanded="true" />
-                <element signature="method#convert_string#0;class#TuneIn_Fragment#0" expanded="false" />
-                <element signature="class#Decrement_Listeners#0;class#TuneIn_Fragment#0" expanded="false" />
-                <element signature="method#onStop#0;class#TuneIn_Fragment#0" expanded="false" />
-                <element signature="class#Get_Following_Or_Nah#0;class#TuneIn_Fragment#0" expanded="false" />
-                <element signature="class#Get_uri#0;class#TuneIn_Fragment#0" expanded="false" />
-                <element signature="class#FollowUser#0;class#TuneIn_Fragment#0" expanded="false" />
-                <element signature="class#UnfollowUser#0;class#TuneIn_Fragment#0" expanded="false" />
+                <element signature="e#5968#7414#0" expanded="true" />
+                <element signature="e#6085#7388#0" expanded="true" />
+                <element signature="e#7387#7388#0" expanded="true" />
+                <element signature="e#7413#7414#0" expanded="true" />
+                <element signature="e#8419#11789#0" expanded="true" />
+                <element signature="e#8650#8665#0" expanded="true" />
+                <element signature="e#10624#10992#0" expanded="true" />
+                <element signature="e#10991#10992#0" expanded="true" />
+                <element signature="e#11788#11789#0" expanded="true" />
+                <element signature="e#14252#14253#0" expanded="true" />
+                <element signature="e#14308#14309#0" expanded="true" />
+                <element signature="e#14355#14356#0" expanded="true" />
+                <element signature="e#14412#14413#0" expanded="true" />
+                <element signature="e#14476#14477#0" expanded="true" />
+                <element signature="e#14530#14531#0" expanded="true" />
+                <element signature="e#14582#14583#0" expanded="true" />
+                <element signature="e#14648#14649#0" expanded="true" />
+                <element signature="e#15873#15888#0" expanded="true" />
+                <element signature="e#17901#17916#0" expanded="true" />
+                <element signature="e#20499#20514#0" expanded="true" />
+                <element signature="e#22377#22392#0" expanded="true" />
+                <element signature="e#23942#23957#0" expanded="true" />
+                <element signature="e#25210#25211#0" expanded="true" />
+                <element signature="e#25254#25255#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_base.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_base.xml">
+      <file leaf-file-name="UserProfile_Fragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/androidhive/UserProfile_Fragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.2916666">
-              <caret line="62" column="24" selection-start-line="62" selection-start-column="24" selection-end-line="62" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="91" column="55" selection-start-line="91" selection-start-column="55" selection-end-line="91" selection-end-column="55" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#5973#7419#0" expanded="true" />
+                <element signature="e#6090#7393#0" expanded="true" />
+                <element signature="e#7392#7393#0" expanded="true" />
+                <element signature="e#7418#7419#0" expanded="true" />
+                <element signature="e#8424#11794#0" expanded="true" />
+                <element signature="e#8655#8670#0" expanded="true" />
+                <element signature="e#10629#10997#0" expanded="true" />
+                <element signature="e#10996#10997#0" expanded="true" />
+                <element signature="e#11793#11794#0" expanded="true" />
+                <element signature="e#14257#14258#0" expanded="true" />
+                <element signature="e#14313#14314#0" expanded="true" />
+                <element signature="e#14360#14361#0" expanded="true" />
+                <element signature="e#14417#14418#0" expanded="true" />
+                <element signature="e#14481#14482#0" expanded="true" />
+                <element signature="e#14535#14536#0" expanded="true" />
+                <element signature="e#14587#14588#0" expanded="true" />
+                <element signature="e#14653#14654#0" expanded="true" />
+                <element signature="class#FollowUser#0;class#UserProfile_Fragment#0" expanded="false" />
+                <element signature="e#25215#25216#0" expanded="true" />
+                <element signature="e#25259#25260#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="userprofile_fragment.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/userprofile_fragment.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.6388888">
+              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tunein_fragment.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/tunein_fragment.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.3472222">
+              <caret line="80" column="39" selection-start-line="0" selection-start-column="0" selection-end-line="119" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -167,9 +222,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="resourceFile" />
+        <option value="valueResourceFile" />
         <option value="Class" />
         <option value="layoutResourceFile_vertical" />
-        <option value="valueResourceFile" />
       </list>
     </option>
   </component>
@@ -1798,13 +1853,16 @@
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_base.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/tunein_fragment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/androidhive/Broadcast.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/actionbar_menu.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/androidhive/Following_Fragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/tunein_fragment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/androidhive/TuneIn_Fragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/androidhive/User_Profile.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/androidhive/UserProfile_Fragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/userprofile_fragment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/androidhive/Explore.java" />
       </list>
     </option>
@@ -2030,6 +2088,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="menu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Guppy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Guppy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2397,16 +2485,16 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6625767" sideWeight="0.50323623" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37055215" sideWeight="0.49676377" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20479302" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21349694" sideWeight="0.49676377" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20424837" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.116564415" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.57300615" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28711656" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973032" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22923408" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
@@ -2464,22 +2552,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="5" />
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/androidhive/Following_Fragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="class#Increment_Listeners#0;class#Following_Fragment#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/androidhive/TuneIn_Fragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2791,17 +2868,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/tunein_fragment.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="63" column="51" selection-start-line="63" selection-start-column="51" selection-end-line="63" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/androidhive/AppCompatPreferenceActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2880,17 +2946,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.375">
-          <caret line="86" column="35" selection-start-line="86" selection-start-column="35" selection-end-line="86" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_base.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.2916666">
@@ -2912,51 +2967,134 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/androidhive/Following_Fragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="229" column="0" selection-start-line="229" selection-start-column="0" selection-end-line="229" selection-end-column="0" />
+        <state vertical-scroll-proportion="-2.1136363">
+          <caret line="276" column="17" selection-start-line="276" selection-start-column="15" selection-end-line="276" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="class#Increment_Listeners#0;class#Following_Fragment#0" expanded="false" />
+            <element signature="class#Get_Following_Or_Nah#0;class#Following_Fragment#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/androidhive/TuneIn_Fragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="6.431818">
-          <caret line="209" column="4" selection-start-line="209" selection-start-column="4" selection-end-line="209" selection-end-column="4" />
+        <state vertical-scroll-proportion="-4.861111">
+          <caret line="86" column="35" selection-start-line="86" selection-start-column="35" selection-end-line="86" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/androidhive/UserProfile_Fragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="91" column="55" selection-start-line="91" selection-start-column="55" selection-end-line="91" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#6970#9437#0" expanded="true" />
-            <element signature="e#9436#9437#0" expanded="true" />
-            <element signature="method#convert_string#0;class#TuneIn_Fragment#0" expanded="false" />
-            <element signature="class#Decrement_Listeners#0;class#TuneIn_Fragment#0" expanded="false" />
-            <element signature="method#onStop#0;class#TuneIn_Fragment#0" expanded="false" />
-            <element signature="class#Get_Following_Or_Nah#0;class#TuneIn_Fragment#0" expanded="false" />
-            <element signature="class#Get_uri#0;class#TuneIn_Fragment#0" expanded="false" />
-            <element signature="class#FollowUser#0;class#TuneIn_Fragment#0" expanded="false" />
-            <element signature="class#UnfollowUser#0;class#TuneIn_Fragment#0" expanded="false" />
+            <element signature="e#5973#7419#0" expanded="true" />
+            <element signature="e#6090#7393#0" expanded="true" />
+            <element signature="e#7392#7393#0" expanded="true" />
+            <element signature="e#7418#7419#0" expanded="true" />
+            <element signature="e#8424#11794#0" expanded="true" />
+            <element signature="e#8655#8670#0" expanded="true" />
+            <element signature="e#10629#10997#0" expanded="true" />
+            <element signature="e#10996#10997#0" expanded="true" />
+            <element signature="e#11793#11794#0" expanded="true" />
+            <element signature="e#14257#14258#0" expanded="true" />
+            <element signature="e#14313#14314#0" expanded="true" />
+            <element signature="e#14360#14361#0" expanded="true" />
+            <element signature="e#14417#14418#0" expanded="true" />
+            <element signature="e#14481#14482#0" expanded="true" />
+            <element signature="e#14535#14536#0" expanded="true" />
+            <element signature="e#14587#14588#0" expanded="true" />
+            <element signature="e#14653#14654#0" expanded="true" />
+            <element signature="class#FollowUser#0;class#UserProfile_Fragment#0" expanded="false" />
+            <element signature="e#25215#25216#0" expanded="true" />
+            <element signature="e#25259#25260#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/tunein_fragment.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.3472222">
+          <caret line="80" column="39" selection-start-line="0" selection-start-column="0" selection-end-line="119" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/userprofile_fragment.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.6388888">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/androidhive/TuneIn_Fragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.659091">
+          <caret line="343" column="47" selection-start-line="343" selection-start-column="47" selection-end-line="343" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5968#7414#0" expanded="true" />
+            <element signature="e#6085#7388#0" expanded="true" />
+            <element signature="e#7387#7388#0" expanded="true" />
+            <element signature="e#7413#7414#0" expanded="true" />
+            <element signature="e#8419#11789#0" expanded="true" />
+            <element signature="e#8650#8665#0" expanded="true" />
+            <element signature="e#10624#10992#0" expanded="true" />
+            <element signature="e#10991#10992#0" expanded="true" />
+            <element signature="e#11788#11789#0" expanded="true" />
+            <element signature="e#14252#14253#0" expanded="true" />
+            <element signature="e#14308#14309#0" expanded="true" />
+            <element signature="e#14355#14356#0" expanded="true" />
+            <element signature="e#14412#14413#0" expanded="true" />
+            <element signature="e#14476#14477#0" expanded="true" />
+            <element signature="e#14530#14531#0" expanded="true" />
+            <element signature="e#14582#14583#0" expanded="true" />
+            <element signature="e#14648#14649#0" expanded="true" />
+            <element signature="e#15873#15888#0" expanded="true" />
+            <element signature="e#17901#17916#0" expanded="true" />
+            <element signature="e#20499#20514#0" expanded="true" />
+            <element signature="e#22377#22392#0" expanded="true" />
+            <element signature="e#23942#23957#0" expanded="true" />
+            <element signature="e#25210#25211#0" expanded="true" />
+            <element signature="e#25254#25255#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/androidhive/Explore.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28935185">
-          <caret line="358" column="16" selection-start-line="358" selection-start-column="16" selection-end-line="358" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.3607143">
+          <caret line="286" column="0" selection-start-line="286" selection-start-column="0" selection-end-line="286" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#8364#8384#0" expanded="true" />
-            <element signature="e#8435#8456#0" expanded="true" />
-            <element signature="method#onActivityResult#0;class#Explore#0" expanded="false" />
+            <element signature="e#9328#9348#0" expanded="true" />
+            <element signature="e#9399#9420#0" expanded="true" />
+            <element signature="e#10406#10671#0" expanded="true" />
+            <element signature="e#10670#10671#0" expanded="true" />
+            <element signature="e#10829#11861#0" expanded="true" />
+            <element signature="e#11860#11861#0" expanded="true" />
+            <element signature="method#onPostCreate#0;class#Explore#0" expanded="false" />
             <element signature="class#CreateNewProduct#0;class#Explore#0" expanded="false" />
-            <element signature="method#onCreateContextMenu#0;class#Explore#0" expanded="false" />
-            <element signature="class#StartBroadcast#0;class#Explore#0" expanded="false" />
-            <element signature="class#StopBroadcast#0;class#Explore#0" expanded="false" />
-            <element signature="class#ChangePlayback#0;class#Explore#0" expanded="false" />
-            <element signature="class#SetURI#0;class#Explore#0" expanded="false" />
+            <element signature="e#23182#24293#0" expanded="true" />
+            <element signature="e#23297#24259#0" expanded="true" />
+            <element signature="e#24258#24259#0" expanded="true" />
+            <element signature="e#24292#24293#0" expanded="true" />
+            <element signature="e#25366#28749#0" expanded="true" />
+            <element signature="e#28748#28749#0" expanded="true" />
             <element signature="class#Get_guppy_id#0;class#Explore#0" expanded="false" />
-            <element signature="method#onDestroy#0;class#Explore#0" expanded="false" />
           </folding>
         </state>
       </provider>

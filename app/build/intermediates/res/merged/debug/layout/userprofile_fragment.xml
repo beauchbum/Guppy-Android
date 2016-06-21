@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center_horizontal"
+    tools:context="com.example.androidhive.Explore"
+    android:background="#ffffff">
+
+
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1">
+
+
+
+
+        <com.example.androidhive.RoundedImageView
+            android:id="@+id/imageView_round"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="100dp" />
+
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="3">
+
+        <TextView
+            android:layout_width = "0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Listeners"
+            android:textSize="20dp"
+            android:paddingLeft="10dp"
+            android:gravity="left"
+            android:id="@+id/listeners"
+            android:fontFamily="Gotham"
+
+            android:layout_alignParentBottom="true" />
+
+        <TextView
+            android:layout_width = "0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_alignParentBottom="true"
+            android:text="Followers"
+            android:textSize="20dp"
+            android:paddingLeft="10dp"
+            android:gravity="left"
+            android:fontFamily="Gotham"
+            android:id="@+id/followers" />
+
+        <TextView
+            android:layout_width = "0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_alignParentBottom="true"
+            android:text="Following"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:fontFamily="Gotham"
+            android:textSize="20dp"
+            android:id="@+id/following" />
+
+    </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -54,6 +55,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 import cz.msebera.android.httpclient.NameValuePair;
@@ -72,31 +75,104 @@ import retrofit.client.Response;
 public class Explore extends AppCompatActivity{
 
 
-    public String current_user_id;
-    public String spotify_id;
-    public String current_following_id;
-    public String current_following_name;
-    public JSONParser jsonParser = new JSONParser();
-    public BroadcastReceiver receiver;
+
+    //Explore Fragment
+    public ListView mExploreList;
+    public LinearLayout mExploreListviewElement;
+    List<String> image_locations;
+    HashMap<String, List<String>> listDataChild;
+    ArrayList<String> listDataHeader;
+    List<String> user_options;
+    ListView lv;
+
+//////////////////////////////////////////////////////////////
+
+    //Tune In Fragment
     public boolean paused_playback;
     public boolean broadcaster_playing;
     public boolean tuning_in = false;
+    public String current_following_id;
+    public String current_following_name;
+    public boolean following_or_nah = false;
+    public Player mPlayer;
+    public ScheduledThreadPoolExecutor exec;
+
+//////////////////////////////////////////////////////////////
+
+    //Following Fragment
+    public ArrayAdapter<String> mAdapter;
+    ArrayList<Broadcast> arrayOfBroadcasts;
+    Following_Fragment.BroadcastAdapter adapter;
+    public ArrayList<String> pid_list;
+    public ArrayList<String> name_list;
+    public ArrayList<String> broadcasting_list;
+
+//////////////////////////////////////////////////////////////
+
+    //Broadcasting
+    public ToggleButton broad_button;
+    public boolean currently_broadcasting = false;
+    public boolean isBroadcaster_playing = true;
+    public BroadcastReceiver receiver;
     public String is_playing;
     public boolean receiver_exists = false;
+    public String current_user_id;
+    public String spotify_id;
+    public Bitmap albumArtImage;
+    public String albumArt;
+    public SpotifyApi my_api;
+    public SpotifyService spotify;
+    public Boolean albumArtDone = false;
+    String trackId;
+    String artistName;
+    String albumName;
+    String trackName;
+    public SetURI uri_posting;
+    public Long broadcast_receive_time;
+    public Long song_duration;
+    public boolean first_receive = false;
+    public Timer broadcast_timer;
+
+//////////////////////////////////////////////////////////////
+
+    //Navigation of Fragments
     public LinearLayout mDrawerLayout;
     public DrawerLayout Drawer;
     public ListView mDrawerList;
     public TextView drawerSwitchStatus;
-    public ArrayAdapter<String> mAdapter;
-    public ToggleButton broad_button;
-    public boolean currently_broadcasting = false;
-    public boolean broadcast_status = false;
+    android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+    public Fragment fr;
+    public Fragment tuning_in_fragment;
+    public Toast broadcasting_toast;
+    public ProgressDialog pdialog;
+    private ActionBarDrawerToggle mDrawerToggle;
+    public Menu my_menu;
+    public MenuItem stop_tune_in;
+    public MenuItem see_profile;
+    public android.support.v4.app.FragmentTransaction fragmentTransaction;
+    public TuneIn_Fragment my_otherfragment;
+
+//////////////////////////////////////////////////////////////
+
+    //General Use
+    public JSONParser jsonParser = new JSONParser();
     public static final String TAG_PID = "id";
 
+    public final static String EXTRA_MESSAGE = "com.mycompany.app.MESSAGE";
+    public AuthenticationResponse response;
+    public static final int REQUEST_CODE = 1337;
+    // TODO: Replace with your client ID
+    public static final String CLIENT_ID = "57b61875218e4e1f8a8d0cdb57a7259b";
+    // TODO: Replace with your redirect URI
+    public static final String REDIRECT_URI = "sync-me-up://callback";
+    public static final String TAG_PRODUCTS = "users";
+    public static final String TAG_NAME = "name";
+    public static final String TAG_SUCCESS = "success";
 
+//////////////////////////////////////////////////////////////
+
+    // PHP Script URLs
     public static String ip = "52.38.141.152";
-
-    // url to get all products list
     public static String url_get_following = "http://" + ip + "/get_following.php";
     public static String url_search_users = "http://" + ip + "/search_users.php";
     public static final String url_start_broadcast = "http://" + ip + "/start_broadcast.php";
@@ -113,84 +189,10 @@ public class Explore extends AppCompatActivity{
     public static String url_get_following_or_nah = "http://" + ip + "/get_following_or_not.php";
     public static String url_get_guppy_id = "http://" + ip + "/get_guppy_id.php";
 
-
-
-
-
-    //Explore List Stuff
-    public ListView mExploreList;
-    public LinearLayout mExploreListviewElement;
-    List<String> image_locations;
-    HashMap<String, List<String>> listDataChild;
-    ArrayList<String> listDataHeader;
-    List<String> user_options;
-
-    ListView lv;
-
-
-    ArrayList<Broadcast> arrayOfBroadcasts;
-    Following_Fragment.BroadcastAdapter adapter;
-    public ArrayList<String> pid_list;
-    public ArrayList<String> name_list;
-    public ArrayList<String> broadcasting_list;
-
-
-
-
-    public static final String TAG_PRODUCTS = "users";
-    public static final String TAG_NAME = "name";
-    public static final String TAG_SUCCESS = "success";
-
-
-
-    //Album Art Stuff
-    public String albumArt;
-    public SpotifyApi my_api;
-    public SpotifyService spotify;
-    public Boolean albumArtDone = false;
-    String trackId;
-    String artistName;
-    String albumName;
-    String trackName;
-    public boolean following_or_nah = false;
-    public Player mPlayer;
-    public ScheduledThreadPoolExecutor exec;
-
-
-
+//////////////////////////////////////////////////////////////
 
     // products JSONArray
     JSONArray products = null;
-
-
-
-    // Progress Dialog
-
-
-    public ProgressDialog pdialog;
-    private ActionBarDrawerToggle mDrawerToggle;
-    public Menu my_menu;
-    public MenuItem stop_tune_in;
-    public MenuItem see_profile;
-
-    // url to create new product
-
-    android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-    public Fragment fr;
-    public Fragment tuning_in_fragment;
-    public Toast broadcasting_toast;
-
-
-
-
-    public final static String EXTRA_MESSAGE = "com.mycompany.app.MESSAGE";
-    public AuthenticationResponse response;
-    public static final int REQUEST_CODE = 1337;
-    // TODO: Replace with your client ID
-    public static final String CLIENT_ID = "57b61875218e4e1f8a8d0cdb57a7259b";
-    // TODO: Replace with your redirect URI
-    public static final String REDIRECT_URI = "sync-me-up://callback";
-
 
     //Runs "LoadAllProducts" and begins the Spotify login
     @Override
@@ -198,7 +200,7 @@ public class Explore extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-
+        uri_posting = new SetURI();
 
         if (findViewById(R.id.fragment_container) != null) {
 
@@ -224,6 +226,8 @@ public class Explore extends AppCompatActivity{
 
         broadcasting_toast = Toast.makeText(getApplicationContext(), "User Not Broadcasting", Toast.LENGTH_SHORT);
         broadcasting_toast.setGravity(Gravity.CENTER, 0, 0);
+        song_duration = 0L;
+        broadcast_receive_time = 0L;
 
         mDrawerLayout = (LinearLayout) findViewById(R.id.drawer_linear_layout);
         //mDrawerSwitch = (Switch) findViewById(R.id.drawer_switch);
@@ -259,6 +263,28 @@ public class Explore extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("com.spotify.music.playbackstatechanged");
+        filter.addAction("com.spotify.music.metadatachanged");
+        filter.addAction("com.spotify.music.queuechanged");
+
+
+
+        receiver = new MyBroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                if(first_receive == false)
+                {
+                    first_receive = true;
+                }
+
+            }
+
+        };
+        registerReceiver(receiver, filter);
+
+
 
 
 
@@ -266,13 +292,28 @@ public class Explore extends AppCompatActivity{
 
         broad_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(((ToggleButton) v).isChecked()) {
-                    currently_broadcasting = true;
-                    new StartBroadcast().execute();
+                if(first_receive) {
+                    if (((ToggleButton) v).isChecked()) {
+                        currently_broadcasting = true;
+                        new StartBroadcast().execute();
+                    } else {
+                        currently_broadcasting = false;
+                        new StopBroadcast().execute();
+                    }
                 }
-                else {
-                    currently_broadcasting = false;
-                    new StopBroadcast().execute();
+                else
+                {
+                    broad_button.setChecked(false);
+                    try{
+                        broadcasting_toast.cancel();
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+                    broadcasting_toast = Toast.makeText(getApplicationContext(), "Spotify Must Be Open to Broadcast", Toast.LENGTH_SHORT);
+                    broadcasting_toast.setGravity(Gravity.CENTER, 0, 0);
+                    broadcasting_toast.show();
                 }
             }
         });
@@ -307,6 +348,41 @@ public class Explore extends AppCompatActivity{
 
     }
 
+    public void TuneOut()
+    {
+        new Decrement_Listeners().execute(current_following_id, current_user_id);
+        current_following_id = null;
+        current_following_name = null;
+        tuning_in = false;
+        Log.d("Progress", "After Tuning IN");
+        mPlayer.pause();
+        Log.d("Progress", "After Pausing");
+
+        paused_playback = false;
+        broadcaster_playing = false;
+        broad_button.setEnabled(true);
+        Log.d("Progress", "Changing Button");
+
+        fragmentTransaction = fm.beginTransaction();
+
+        my_otherfragment = (TuneIn_Fragment) getSupportFragmentManager().findFragmentByTag("Tune In");
+        if (my_otherfragment != null && my_otherfragment.isVisible())
+        {
+            Log.d("Removing Fragment", "tune in");
+            fragmentTransaction.remove(tuning_in_fragment);
+            fr = new Following_Fragment();
+            fragmentTransaction.add(R.id.fragment_container, fr, "Following").commit();
+        }
+        else
+        {
+            Log.d("Removing Fragment", "Other");
+
+            fragmentTransaction.remove(tuning_in_fragment).commit();
+        }
+        see_profile.setVisible(false);
+        stop_tune_in.setVisible(false);
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -316,28 +392,7 @@ public class Explore extends AppCompatActivity{
 
         switch(item.getItemId()){
             case R.id.menu_stop_tune_in:
-                Log.d("Item Selected", "Shit");
-                current_following_id = null;
-                current_following_name = null;
-                tuning_in = false;
-                mPlayer.shutdown();
-                broadcaster_playing = false;
-                exec.shutdown();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = fm.beginTransaction();
-
-                TuneIn_Fragment my_otherfragment = (TuneIn_Fragment) getSupportFragmentManager().findFragmentByTag("Tune In");
-                if (my_otherfragment != null && my_otherfragment.isVisible())
-                {
-                    fragmentTransaction.remove(tuning_in_fragment);
-                    fr = new Following_Fragment();
-                    fragmentTransaction.add(R.id.fragment_container, fr, "Following").commit();
-                }
-                else
-                {
-                    fragmentTransaction.remove(tuning_in_fragment).commit();
-                }
-                see_profile.setVisible(false);
-                stop_tune_in.setVisible(false);
+                TuneOut();
                 break;
             case R.id.menu_view_profile:
 
@@ -356,7 +411,9 @@ public class Explore extends AppCompatActivity{
 
     public void TuneIn(){
         android.support.v4.app.FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        Log.d(" ")
+        new StopBroadcast().execute();
+        broad_button.setChecked(false);
+        broad_button.setEnabled(false);
         tuning_in_fragment = new TuneIn_Fragment();
         fragmentTransaction.replace(R.id.fragment_container, tuning_in_fragment, "Tune In");
         fragmentTransaction.addToBackStack(null);
@@ -587,16 +644,42 @@ public class Explore extends AppCompatActivity{
          * */
         protected String doInBackground(String... args) {
 
-			/*
-			// getting updated data from EditTexts
-			String name = txtName.getText().toString();
-			String price = txtPrice.getText().toString();
-			String description = txtDesc.getText().toString();
-			*/
 
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("id", current_user_id));
+
+            broadcast_timer = new Timer();
+            broadcast_timer.schedule(new TimerTask() {
+
+                @Override
+                public void run() {
+                    runOnUiThread(new Runnable() {
+
+
+                        public void run() {
+                            {
+                                Long time = System.currentTimeMillis();
+
+                                try {
+                                    Log.d("Broadcast Receive", broadcast_receive_time.toString());
+                                    Log.d("System Time", time.toString());
+                                    Log.d("Song Duration", song_duration.toString());
+                                    Long thing = time - broadcast_receive_time;
+                                    if ((thing) > song_duration) {
+                                        broad_button.setChecked(false);
+                                        new StopBroadcast().execute();
+
+                                    }
+                                } catch (Exception e) {
+
+                                }
+                            }
+
+                        }
+                    });
+                }
+            }, 0, 1000);
 
 
 
@@ -634,66 +717,78 @@ public class Explore extends AppCompatActivity{
             receiver = new MyBroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
-                    long timeSentInMs = intent.getLongExtra("timeSent", 0L);
 
-                    String action = intent.getAction();
-                    trackId = intent.getStringExtra("id");
-                    artistName = intent.getStringExtra("artist");
-                    albumName = intent.getStringExtra("album");
-                    trackName = intent.getStringExtra("track");
+                    broadcast_receive_time = intent.getLongExtra("timeSent", 0L);
 
-                    int trackLengthInSec = intent.getIntExtra("length", 0);
-                    if (action.equals(BroadcastTypes.METADATA_CHANGED)) {
-                        //GetAlbumArt running_task = new GetAlbumArt();
-                        //running_task.execute(trackId);
+                        String action = intent.getAction();
 
-                        try {
-                            albumArtDone = false;
-                            String newTrackId = trackId.substring(14);
+
+                        int trackLengthInSec = intent.getIntExtra("length", 0);
+                        if (action.equals(BroadcastTypes.METADATA_CHANGED)) {
+                            //GetAlbumArt running_task = new GetAlbumArt();
+                            //running_task.execute(trackId);
+
+                            uri_posting.cancel(true);
+                            trackId = intent.getStringExtra("id");
+                            artistName = intent.getStringExtra("artist");
+                            albumName = intent.getStringExtra("album");
+                            trackName = intent.getStringExtra("track");
+
+                            Log.d("Broadcast Received", trackName + " " + albumName + " " + artistName);
 
 
                             try {
-
-                                spotify.getTrack(newTrackId, new Callback<Track>() {
-                                    @Override
-                                    public void success(Track track, Response response) {
-                                        albumArt = track.album.images.get(0).url;
-                                        new SetURI().execute(trackId, trackName, albumName, artistName, albumArt);
-
-                                    }
-
-                                    @Override
-                                    public void failure(RetrofitError error) {
-                                    }
-
-                                });
+                                albumArtDone = false;
+                                String newTrackId = trackId.substring(14);
 
 
-                            } catch (RetrofitError error) {
-                                ErrorDetails details = SpotifyError.fromRetrofitError(error).getErrorDetails();
-                                System.out.println(details.status + ":" + details.message);
+                                try {
+
+                                    spotify.getTrack(newTrackId, new Callback<Track>() {
+                                        @Override
+                                        public void success(Track track, Response response) {
+                                            albumArt = track.album.images.get(0).url;
+                                            song_duration = track.duration_ms;
+                                            uri_posting = new SetURI();
+                                            uri_posting.execute(trackId, trackName, albumName, artistName, albumArt);
+
+                                        }
+
+                                        @Override
+                                        public void failure(RetrofitError error) {
+                                        }
+
+                                    });
+
+
+                                } catch (RetrofitError error) {
+                                    ErrorDetails details = SpotifyError.fromRetrofitError(error).getErrorDetails();
+                                    System.out.println(details.status + ":" + details.message);
+                                }
+                            } catch (StringIndexOutOfBoundsException error) {
+
                             }
-                        }catch (StringIndexOutOfBoundsException error){
+
 
                         }
 
+                        if (action.equals(BroadcastTypes.PLAYBACK_STATE_CHANGED)) {
+                            boolean temp_broadcaster_playing = intent.getBooleanExtra("playing", false);
+                            //int positionInMs = intent.getIntExtra("playbackPosition", 0);
+                            if (broadcaster_playing != temp_broadcaster_playing) {
+
+                                if (temp_broadcaster_playing) {
+                                    is_playing = "true";
+                                } else {
+                                    is_playing = "false";
+                                }
+                                new ChangePlayback().execute(is_playing);
+                                broadcaster_playing = temp_broadcaster_playing;
+                            }
+                        }
 
                     }
 
-                    if (action.equals(BroadcastTypes.PLAYBACK_STATE_CHANGED)) {
-                        broadcaster_playing = intent.getBooleanExtra("playing", false);
-                        //int positionInMs = intent.getIntExtra("playbackPosition", 0);
-                        if (broadcaster_playing){
-                            is_playing = "true";
-                        }
-                        else{
-                            is_playing = "false";
-                        }
-                        new ChangePlayback().execute(is_playing);
-                    }
-
-
-                }
             };
             registerReceiver(receiver, filter);
             receiver_exists = true;
@@ -728,6 +823,7 @@ public class Explore extends AppCompatActivity{
         protected String doInBackground(String... args) {
 
             // Building Parameters
+            broadcast_timer.cancel();
             if(receiver_exists){
                 unregisterReceiver(receiver);
             }
@@ -769,6 +865,7 @@ public class Explore extends AppCompatActivity{
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once product uupdated
             //pDialog.dismiss();
+            first_receive = true;
         }
     }
 
@@ -795,6 +892,7 @@ public class Explore extends AppCompatActivity{
 			String description = txtDesc.getText().toString();
 			*/
 
+            Log.d("Changing Playback",args[0]);
 
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -843,7 +941,7 @@ public class Explore extends AppCompatActivity{
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once product uupdated
             //pDialog.dismiss();
-        }
+    }
     }
 
     class SetURI extends AsyncTask<String, String, String> {
@@ -905,6 +1003,7 @@ public class Explore extends AppCompatActivity{
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once product uupdated
             //pDialog.dismiss();
+            Log.d("Posting URL", "It worked");
         }
     }
 
@@ -962,6 +1061,64 @@ public class Explore extends AppCompatActivity{
          * **/
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once got all details
+        }
+    }
+
+    class Decrement_Listeners extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        /**
+         * Creating product
+         */
+        protected String doInBackground(String... args) {
+
+
+            // Building Parameters
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("id", args[0]));
+            params.add(new BasicNameValuePair("listener_id", args[1]));
+
+
+            // getting JSON Object
+            // Note that create product url accepts POST method
+
+            JSONObject json = jsonParser.makeHttpRequest(url_decrement_listeners,
+                    "POST", params);
+
+            // check log cat fro response
+            Log.d("Create Response", json.toString());
+
+            // check for success tag
+            try {
+                int success = json.getInt(TAG_SUCCESS);
+
+                if (success == 1) {
+
+                } else {
+                    // failed to create product
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+
+
         }
     }
 
