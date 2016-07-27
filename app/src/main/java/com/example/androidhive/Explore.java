@@ -111,8 +111,9 @@ public class Explore extends AppCompatActivity{
 
     //Broadcasting
     public ToggleButton broad_button;
-    public boolean currently_broadcasting = false;
-    public boolean isBroadcaster_playing = true;
+    public boolean broadcast_status = false;
+    public boolean isBroadcaster_playing = false;
+    public boolean brodcaster_active = false;
     public BroadcastReceiver receiver;
     public String is_playing;
     public boolean receiver_exists = false;
@@ -128,9 +129,8 @@ public class Explore extends AppCompatActivity{
     String albumName;
     String trackName;
     public SetURI uri_posting;
-    public Long broadcast_receive_time;
-    public Long song_duration;
-    public boolean first_receive = false;
+    public Long broadcast_receive_time = 0L;
+    public Long song_duration = 0L;
     public Timer broadcast_timer;
 
 //////////////////////////////////////////////////////////////
@@ -143,7 +143,7 @@ public class Explore extends AppCompatActivity{
     android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
     public Fragment fr;
     public Fragment tuning_in_fragment;
-    public Toast broadcasting_toast;
+    public Toast my_toast;
     public ProgressDialog pdialog;
     private ActionBarDrawerToggle mDrawerToggle;
     public Menu my_menu;
@@ -151,6 +151,15 @@ public class Explore extends AppCompatActivity{
     public MenuItem see_profile;
     public android.support.v4.app.FragmentTransaction fragmentTransaction;
     public TuneIn_Fragment my_otherfragment;
+
+//////////////////////////////////////////////////////////////
+
+    //User Profles
+    public String user_profile_name;
+    public String user_profile_id;
+    public boolean following_user_profile;
+
+
 
 //////////////////////////////////////////////////////////////
 
@@ -187,7 +196,12 @@ public class Explore extends AppCompatActivity{
     public static String url_follow_user = "http://" + ip + "/follow_user.php";
     public static String url_unfollow_user = "http://" + ip + "/unfollow_user.php";
     public static String url_get_following_or_nah = "http://" + ip + "/get_following_or_not.php";
+    public static String url_get_following_number = "http://" + ip + "/get_following_number.php";
+    public static String url_get_followers_number = "http://" + ip + "/get_followers_number.php";
+    public static String url_get_followers_profile = "http://" + ip + "/get_followers_profile.php";
+    public static String url_get_following_profile = "http://" + ip + "/get_following_profile.php";
     public static String url_get_guppy_id = "http://" + ip + "/get_guppy_id.php";
+
 
 //////////////////////////////////////////////////////////////
 
@@ -224,8 +238,8 @@ public class Explore extends AppCompatActivity{
         pdialog.setCancelable(false);
         pdialog.show();
 
-        broadcasting_toast = Toast.makeText(getApplicationContext(), "User Not Broadcasting", Toast.LENGTH_SHORT);
-        broadcasting_toast.setGravity(Gravity.CENTER, 0, 0);
+        my_toast = Toast.makeText(getApplicationContext(), "User Not Broadcasting", Toast.LENGTH_SHORT);
+        my_toast.setGravity(Gravity.CENTER, 0, 0);
         song_duration = 0L;
         broadcast_receive_time = 0L;
 
@@ -263,28 +277,6 @@ public class Explore extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("com.spotify.music.playbackstatechanged");
-        filter.addAction("com.spotify.music.metadatachanged");
-        filter.addAction("com.spotify.music.queuechanged");
-
-
-
-        receiver = new MyBroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-
-                if(first_receive == false)
-                {
-                    first_receive = true;
-                }
-
-            }
-
-        };
-        registerReceiver(receiver, filter);
-
-
 
 
 
@@ -292,29 +284,14 @@ public class Explore extends AppCompatActivity{
 
         broad_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(first_receive) {
-                    if (((ToggleButton) v).isChecked()) {
-                        currently_broadcasting = true;
-                        new StartBroadcast().execute();
-                    } else {
-                        currently_broadcasting = false;
-                        new StopBroadcast().execute();
-                    }
+                if (((ToggleButton) v).isChecked()) {
+                    broadcast_status = true;
+                    new StartBroadcast().execute();
+                } else {
+                    broadcast_status = false;
+                    new StopBroadcast().execute("true");
                 }
-                else
-                {
-                    broad_button.setChecked(false);
-                    try{
-                        broadcasting_toast.cancel();
-                    }
-                    catch (Exception e)
-                    {
 
-                    }
-                    broadcasting_toast = Toast.makeText(getApplicationContext(), "Spotify Must Be Open to Broadcast", Toast.LENGTH_SHORT);
-                    broadcasting_toast.setGravity(Gravity.CENTER, 0, 0);
-                    broadcasting_toast.show();
-                }
             }
         });
 
@@ -341,10 +318,6 @@ public class Explore extends AppCompatActivity{
 
         arrayOfBroadcasts = new ArrayList<Broadcast>();
         //new LoadAllProducts().execute();
-
-
-
-
 
     }
 
@@ -383,6 +356,29 @@ public class Explore extends AppCompatActivity{
         stop_tune_in.setVisible(false);
     }
 
+    public void SeeProfile(String user_profile_id, String user_profile_name)
+    {
+
+        if(this.user_profile_name == user_profile_name && this.user_profile_id == user_profile_id)
+        {
+
+        }
+        else {
+
+            this.user_profile_id = user_profile_id;
+            this.user_profile_name = user_profile_name;
+            fragmentTransaction = fm.beginTransaction();
+
+            fr = new UserProfile_Fragment();
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.replace(R.id.fragment_container, fr, "Profile").commit();
+
+        }
+
+
+
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -395,6 +391,8 @@ public class Explore extends AppCompatActivity{
                 TuneOut();
                 break;
             case R.id.menu_view_profile:
+                SeeProfile(current_following_id, current_following_name);
+                break;
 
 
         }
@@ -411,7 +409,7 @@ public class Explore extends AppCompatActivity{
 
     public void TuneIn(){
         android.support.v4.app.FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        new StopBroadcast().execute();
+        new StopBroadcast().execute("true");
         broad_button.setChecked(false);
         broad_button.setEnabled(false);
         tuning_in_fragment = new TuneIn_Fragment();
@@ -490,7 +488,14 @@ public class Explore extends AppCompatActivity{
                     }
                     else
                     {
-                        Toast my_toast = Toast.makeText(getApplicationContext(), "Not Tuning Into Any Broadcast", Toast.LENGTH_SHORT);
+                        try {
+                            my_toast.cancel();
+                        }catch (Exception e)
+                        {
+
+                        }
+                        my_toast = Toast.makeText(getApplicationContext(), "Not Tuned In to Any Broadcast",
+                                Toast.LENGTH_SHORT);
                         my_toast.setGravity(Gravity.CENTER, 0, 0);
                         my_toast.show();
 
@@ -644,7 +649,10 @@ public class Explore extends AppCompatActivity{
          * */
         protected String doInBackground(String... args) {
 
-
+            if(receiver_exists){
+                unregisterReceiver(receiver);
+                receiver_exists = false;
+            }
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("id", current_user_id));
@@ -662,13 +670,30 @@ public class Explore extends AppCompatActivity{
                                 Long time = System.currentTimeMillis();
 
                                 try {
+                                    Long thing = time - broadcast_receive_time;
                                     Log.d("Broadcast Receive", broadcast_receive_time.toString());
                                     Log.d("System Time", time.toString());
                                     Log.d("Song Duration", song_duration.toString());
-                                    Long thing = time - broadcast_receive_time;
-                                    if ((thing) > song_duration) {
+                                    Log.d("Time minus Song", thing.toString());
+                                    if ((thing) > song_duration && broadcast_status == true) {
+                                        new SetURI().execute(null, null, null, null, null);
+                                        new ChangePlayback().execute("false");
+                                        new StopBroadcast().execute("false");
+                                        broadcast_status = false;
+                                        isBroadcaster_playing = false;
                                         broad_button.setChecked(false);
-                                        new StopBroadcast().execute();
+                                        try {
+                                            my_toast.cancel();
+                                        }catch (Exception e)
+                                        {
+
+                                        }
+                                        my_toast = Toast.makeText(getApplicationContext(), "Stopped Broadcasting Due to Inactivity",
+                                                Toast.LENGTH_SHORT);
+                                        my_toast.setGravity(Gravity.CENTER, 0, 0);
+                                        my_toast.show();
+                                        broadcast_timer.cancel();
+
 
                                     }
                                 } catch (Exception e) {
@@ -679,7 +704,9 @@ public class Explore extends AppCompatActivity{
                         }
                     });
                 }
-            }, 0, 1000);
+            }, 5000, 3000);
+
+
 
 
 
@@ -714,11 +741,19 @@ public class Explore extends AppCompatActivity{
 
 
 
+
+
             receiver = new MyBroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
 
-                    broadcast_receive_time = intent.getLongExtra("timeSent", 0L);
+                    if (intent.getLongExtra("timeSent", 0L) >= broadcast_receive_time)
+                    {
+                        broadcast_receive_time = intent.getLongExtra("timeSent", 0L);
+                    }
+
+                    Log.d("Broadcast Received", broadcast_receive_time.toString());
+                    isBroadcaster_playing = true;
 
                         String action = intent.getAction();
 
@@ -751,6 +786,8 @@ public class Explore extends AppCompatActivity{
                                             song_duration = track.duration_ms;
                                             uri_posting = new SetURI();
                                             uri_posting.execute(trackId, trackName, albumName, artistName, albumArt);
+
+
 
                                         }
 
@@ -792,6 +829,7 @@ public class Explore extends AppCompatActivity{
             };
             registerReceiver(receiver, filter);
             receiver_exists = true;
+            Log.d("Receiver Registered", "Whatever");
 
             return null;
         }
@@ -823,11 +861,13 @@ public class Explore extends AppCompatActivity{
         protected String doInBackground(String... args) {
 
             // Building Parameters
-            broadcast_timer.cancel();
-            if(receiver_exists){
-                unregisterReceiver(receiver);
+
+            if(args[0] == "true") {
+                if (receiver_exists) {
+                    unregisterReceiver(receiver);
+                }
+                receiver_exists = false;
             }
-            receiver_exists = false;
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("id", current_user_id));
 
@@ -865,7 +905,6 @@ public class Explore extends AppCompatActivity{
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once product uupdated
             //pDialog.dismiss();
-            first_receive = true;
         }
     }
 
@@ -1128,7 +1167,7 @@ public class Explore extends AppCompatActivity{
     public void onDestroy()
     {
 
-        new StopBroadcast().execute();
+        new StopBroadcast().execute("true");
         new ChangePlayback().execute("false");
         super.onDestroy();
         new SetURI().execute(null, null, null, null, null);

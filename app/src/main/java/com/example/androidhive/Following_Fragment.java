@@ -236,7 +236,7 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                                         search_box.clearFocus();
                                         main_activity.TuneIn();
                                     } else {
-                                        main_activity.broadcasting_toast.show();
+                                        main_activity.my_toast.show();
                                     }
                                 } else {
                                     android.support.v4.app.FragmentTransaction fragmentTransaction = main_activity.fm.beginTransaction();
@@ -247,7 +247,7 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                             }
                             else
                             {
-                                main_activity.broadcasting_toast.show();
+                                main_activity.my_toast.show();
                             }
                         }
                     });
@@ -389,7 +389,7 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                             }
                             else
                             {
-                                main_activity.broadcasting_toast.show();
+                                main_activity.my_toast.show();
                             }
                         }
 
