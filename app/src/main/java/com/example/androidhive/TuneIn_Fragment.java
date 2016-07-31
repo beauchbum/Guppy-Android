@@ -107,7 +107,6 @@ public class TuneIn_Fragment extends Fragment implements
 
 
 
-        Log.d("Tune In", "Fragment Started");
 
 
 
@@ -157,7 +156,6 @@ public class TuneIn_Fragment extends Fragment implements
         }
         else
         {
-            Log.d("Downloading Image", "");
 
             new DownloadImageTask().execute(the_art);
         }
@@ -244,7 +242,6 @@ public class TuneIn_Fragment extends Fragment implements
 
     public void PlayMusic()
     {
-        Log.d("play music", "it running");
         main_activity.exec = new ScheduledThreadPoolExecutor(1);
         main_activity.exec.scheduleAtFixedRate(new Runnable() {
             @Override
@@ -273,7 +270,6 @@ public class TuneIn_Fragment extends Fragment implements
                             the_album = product.getString("album");
                             the_artist = product.getString("artist");
                             the_art = product.getString("artwork");
-                            Log.d("User Broadcasting ", product.getString("broadcasting"));
                             broadcaster_playing = convert_string(product.getString("playing"));
                             broadcasting = convert_string(product.getString("broadcasting"));
                             //String am_i_playing = String.valueOf(broadcaster_playing);

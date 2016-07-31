@@ -158,6 +158,7 @@ public class Explore extends AppCompatActivity{
     public String user_profile_name;
     public String user_profile_id;
     public boolean following_user_profile;
+    public String followers_or_following;
 
 
 
@@ -198,8 +199,8 @@ public class Explore extends AppCompatActivity{
     public static String url_get_following_or_nah = "http://" + ip + "/get_following_or_not.php";
     public static String url_get_following_number = "http://" + ip + "/get_following_number.php";
     public static String url_get_followers_number = "http://" + ip + "/get_followers_number.php";
-    public static String url_get_followers_profile = "http://" + ip + "/get_followers_profile.php";
-    public static String url_get_following_profile = "http://" + ip + "/get_following_profile.php";
+    public static String url_get_followers_profiles = "http://" + ip + "/get_followers_profiles.php";
+    public static String url_get_following_profiles = "http://" + ip + "/get_following_profiles.php";
     public static String url_get_guppy_id = "http://" + ip + "/get_guppy_id.php";
 
 
@@ -358,26 +359,47 @@ public class Explore extends AppCompatActivity{
 
     public void SeeProfile(String user_profile_id, String user_profile_name)
     {
+            UserProfile_Fragment my_other_fragment = (UserProfile_Fragment) getSupportFragmentManager().findFragmentByTag("Following_Profile");
+            if(user_profile_id == this.current_following_id && user_profile_name == this.current_following_name)
+            {
+                if (my_otherfragment != null && my_otherfragment.isVisible())
+                {
+                    Log.d("Following Profile", "Visible");
+                }
+                else
+                {
+                    this.user_profile_id = user_profile_id;
+                    this.user_profile_name = user_profile_name;
+                    fragmentTransaction = fm.beginTransaction();
 
-        if(this.user_profile_name == user_profile_name && this.user_profile_id == user_profile_id)
-        {
+                    fr = new UserProfile_Fragment();
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.replace(R.id.fragment_container, fr, "Following_Profile").commit();
+                    Log.d("Following Profile", "Not Visible");
+                }
+            }
+            else
+            {
+                my_other_fragment = (UserProfile_Fragment) getSupportFragmentManager().findFragmentByTag(user_profile_id);
+                if (my_otherfragment != null && my_otherfragment.isVisible())
+                {
 
-        }
-        else {
+                }
+                else
+                {
+                    this.user_profile_id = user_profile_id;
+                    this.user_profile_name = user_profile_name;
+                    fragmentTransaction = fm.beginTransaction();
 
-            this.user_profile_id = user_profile_id;
-            this.user_profile_name = user_profile_name;
-            fragmentTransaction = fm.beginTransaction();
-
-            fr = new UserProfile_Fragment();
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.replace(R.id.fragment_container, fr, "Profile").commit();
-
-        }
-
+                    fr = new UserProfile_Fragment();
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.replace(R.id.fragment_container, fr, user_profile_id).commit();
+                }
+            }
 
 
     }
+
 
 
     @Override
@@ -649,10 +671,7 @@ public class Explore extends AppCompatActivity{
          * */
         protected String doInBackground(String... args) {
 
-            if(receiver_exists){
-                unregisterReceiver(receiver);
-                receiver_exists = false;
-            }
+
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("id", current_user_id));

@@ -28,7 +28,7 @@
             android:layout_height="250dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="50dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="15dp"
             />
 
 
@@ -40,19 +40,17 @@
         android:layout_height="match_parent"
         android:weightSum="3">
 
-        <TextView
-            android:layout_width = "fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Listeners"
-            android:textSize="20dp"
-            android:paddingLeft="10dp"
-            android:gravity="left"
-            android:id="@+id/listeners"
-            android:fontFamily="Gotham"
+        <ImageButton
+            android:id="@+id/plus_button"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/plus"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"/>
 
-            android:layout_alignParentBottom="true" />
+
 
         <TextView
             android:layout_width = "fill_parent"
@@ -65,7 +63,8 @@
             android:paddingLeft="10dp"
             android:gravity="left"
             android:fontFamily="Gotham"
-            android:id="@+id/followers" />
+            android:id="@+id/followers"
+            android:clickable="true"/>
 
         <TextView
             android:layout_width = "fill_parent"
@@ -80,7 +79,8 @@
             android:ellipsize="marquee"
             android:fontFamily="Gotham"
             android:textSize="20dp"
-            android:id="@+id/following" />
+            android:id="@+id/following"
+            android:clickable="true"/>
 
     </LinearLayout>
 

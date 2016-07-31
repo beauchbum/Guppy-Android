@@ -4,7 +4,7 @@
     api-level="21"
     density="xxhdpi"
     format="7"
-    timestamp="505302683947352" >
+    timestamp="872679860726895" >
 
     <task
         name="javac"
@@ -19,14 +19,11 @@
         name="verifier"
         duration="0" />
 
-    <artifact
-        location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\outputs\apk\app-debug.apk"
-        type="MAIN" />
-
-    <build timestamp="505302683947352" >
+    <build timestamp="872352541078679" >
         <artifact
             location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
     </build>
+    <build timestamp="872679860726895" />
 
 </instant-run>

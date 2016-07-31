@@ -27,13 +27,13 @@ repositories {
 }
 
 
+
 dependencies {
 
     // This library handles authentication and authorization
 
     compile group: 'cz.msebera.android', name: 'httpclient', version: '4.4.1.1'
     // This library handles music playback
-
 
 
     compile 'com.spotify.sdk:spotify-player:1.0.0-beta11@aar'

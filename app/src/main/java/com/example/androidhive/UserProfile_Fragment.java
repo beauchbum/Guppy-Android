@@ -54,18 +54,20 @@ import cz.msebera.android.httpclient.message.BasicNameValuePair;
  * Created by Ryan on 5/9/2016.
  */
 public class UserProfile_Fragment extends Fragment implements
-        View.OnClickListener ,PlayerNotificationCallback, ConnectionStateCallback {
+        View.OnClickListener, PlayerNotificationCallback, ConnectionStateCallback {
 
     public Explore main_activity;
     public TextView followers_tv;
     public TextView following_tv;
-    public TextView listeners_tv;
+    public ImageButton listeners_ib;
     public String followers;
     public String following;
     public String listeners;
     public boolean following_or_nah;
     public ProgressDialog pdialog;
     public View rootview;
+    private ImageButton follow_button;
+
 
 
     @Override
@@ -79,14 +81,79 @@ public class UserProfile_Fragment extends Fragment implements
 
         android.support.v7.app.ActionBar bar = main_activity.getSupportActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#209CF2")));
-        bar.setTitle(Html.fromHtml("<font color='#ffffff'>" + main_activity.current_following_name + "</font>"));
+        bar.setTitle(Html.fromHtml("<font color='#ffffff'>" + main_activity.user_profile_name + "'s Profile" + "</font>"));
         main_activity.stop_tune_in.setTitle("Tune Out " + main_activity.current_following_name);
         //main_activity.see_profile.setTitle("See " + main_activity.current_following_name + "'s Profile");
         main_activity.stop_tune_in.setVisible(true);
         //main_activity.see_profile.setVisible(true);
         following_tv = (TextView) rootview.findViewById(R.id.following);
         followers_tv = (TextView) rootview.findViewById(R.id.followers);
-        listeners_tv = (TextView) rootview.findViewById(R.id.listeners);
+
+        follow_button = (ImageButton) rootview.findViewById(R.id.plus_button);
+        follow_button.setOnClickListener(this);
+        new Get_Following_Or_Nah().execute(main_activity.current_user_id, main_activity.current_following_id);
+
+
+        if(following_or_nah)
+        {
+            follow_button.setImageResource(R.drawable.check);
+        }
+        else
+        {
+            follow_button.setImageResource(R.drawable.plus);
+        }
+
+        new Timer().schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                main_activity.runOnUiThread(new Runnable() {
+
+
+                    public void run() {
+                        //username.setText(the_username);
+
+
+                        if(following_or_nah)
+                        {
+                            follow_button.setImageResource(R.drawable.check);
+                        }
+                        else
+                        {
+                            follow_button.setImageResource(R.drawable.plus);
+                        }
+
+
+                    }
+                });
+            }
+        }, 0, 1000);
+
+        followers_tv.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Log.d("Textview Click", "Detected");
+                main_activity.followers_or_following = "followers";
+                main_activity.fragmentTransaction = main_activity.fm.beginTransaction();
+
+                main_activity.fr = new UserProfile_List();
+                main_activity.fragmentTransaction.addToBackStack(null);
+                main_activity.fragmentTransaction.replace(R.id.fragment_container, main_activity.fr, "Profiles_List").commit();
+            }
+        });
+
+        following_tv.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Log.d("Textview Click", "Detected");
+                main_activity.followers_or_following = "following";
+                main_activity.fragmentTransaction = main_activity.fm.beginTransaction();
+
+                main_activity.fr = new UserProfile_List();
+                main_activity.fragmentTransaction.addToBackStack(null);
+                main_activity.fragmentTransaction.replace(R.id.fragment_container, main_activity.fr, "Profiles_List").commit();
+            }
+        });
 
         new Get_Following_Number().execute();
         new Get_Followers_Number().execute();
@@ -97,19 +164,51 @@ public class UserProfile_Fragment extends Fragment implements
     }
 
 
-
     @Override
     public void onClick(View v)
     {
+
         switch (v.getId()) {
-            case R.id.followers:
+            case R.id.plus_button:
+                if(main_activity.following_or_nah == false)
+                {
+                    new FollowUser().execute(main_activity.current_following_id, main_activity.current_user_id);
+                    try {
+                        main_activity.my_toast.cancel();
+                    }catch (Exception e)
+                    {
 
+                    }
+                    main_activity.my_toast = Toast.makeText(getActivity(), "Followed " + main_activity.current_following_name,
+                            Toast.LENGTH_SHORT);
+                    main_activity.my_toast.setGravity(Gravity.CENTER, 0, 0);
+                    main_activity.my_toast.show();
+                    main_activity.following_or_nah = true;
+                    follow_button.setImageResource(R.drawable.check);
+                }
+                else
+                {
+                    new UnfollowUser().execute(main_activity.current_following_id, main_activity.current_user_id);
+                    try {
+                        main_activity.my_toast.cancel();
+                    }catch (Exception e)
+                    {
 
-            case R.id.following:
+                    }
+                    main_activity.my_toast = Toast.makeText(getActivity(), "Unfollowed " + main_activity.current_following_name,
+                            Toast.LENGTH_SHORT);
+                    main_activity.my_toast.setGravity(Gravity.CENTER, 0, 0);
+                    main_activity.my_toast.show();
+                    main_activity.following_or_nah = false;
+                    follow_button.setImageResource(R.drawable.plus);
+                }
+                break;
+
 
         }
 
     }
+
 
     @Override
     public void onLoggedIn() {
@@ -147,6 +246,124 @@ public class UserProfile_Fragment extends Fragment implements
         Log.d("Main2Activity", "Playback error received: " + errorType.name());
     }
 
+    class FollowUser extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        /**
+         * Creating product
+         */
+        protected String doInBackground(String... args) {
+
+
+            // Building Parameters
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("followed_id", args[0]));
+            params.add(new BasicNameValuePair("follower_id", args[1]));
+
+
+
+            // getting JSON Object
+            // Note that create product url accepts POST method
+
+            JSONObject json = main_activity.jsonParser.makeHttpRequest(main_activity.url_follow_user,
+                    "POST", params);
+
+            // check log cat fro response
+            Log.d("Create Response", json.toString());
+
+            // check for success tag
+            try {
+                int success = json.getInt(main_activity.TAG_SUCCESS);
+
+                if (success == 1) {
+
+                } else {
+                    // failed to create product
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+
+
+        }
+    }
+
+    class UnfollowUser extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        /**
+         * Creating product
+         */
+        protected String doInBackground(String... args) {
+
+
+            // Building Parameters
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("followed_id", args[0]));
+            params.add(new BasicNameValuePair("follower_id", args[1]));
+
+
+
+            // getting JSON Object
+            // Note that create product url accepts POST method
+
+            JSONObject json = main_activity.jsonParser.makeHttpRequest(main_activity.url_unfollow_user,
+                    "POST", params);
+
+            // check log cat fro response
+            Log.d("Create Response", json.toString());
+
+            // check for success tag
+            try {
+                int success = json.getInt(main_activity.TAG_SUCCESS);
+
+                if (success == 1) {
+
+                } else {
+                    // failed to create product
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+
+
+        }
+    }
+
     class Get_Following_Or_Nah extends AsyncTask<String, String, String> {
 
         /**
@@ -170,10 +387,9 @@ public class UserProfile_Fragment extends Fragment implements
 
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("current_user_id", main_activity.current_user_id));
-            params.add(new BasicNameValuePair("current_following_id", main_activity.current_following_id));
+            params.add(new BasicNameValuePair("current_following_id", main_activity.user_profile_id));
 
 
-            Log.d("PID", main_activity.current_following_id);
 
             // getting product details by making HTTP request
             // Note that product details url will use GET request
@@ -192,13 +408,12 @@ public class UserProfile_Fragment extends Fragment implements
                     String result = product.getString("result");
                     if (result.equals("true"))
                     {
-                        main_activity.following_or_nah = true;
+                        following_or_nah = true;
                     }
                     else
                     {
-                        main_activity.following_or_nah = false;
+                        following_or_nah = false;
                     }
-                    Log.d("Following Or Nah", result);
 
                 }else{
                     // product with pid not found
@@ -221,6 +436,8 @@ public class UserProfile_Fragment extends Fragment implements
         }
     }
 
+
+
     class Get_Following_Number extends AsyncTask<String, String, String> {
 
         /**
@@ -229,11 +446,7 @@ public class UserProfile_Fragment extends Fragment implements
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pdialog = new ProgressDialog(getActivity());
-            pdialog.setMessage("Loading" + main_activity.current_following_name + ". Please wait...");
-            pdialog.setIndeterminate(false);
-            pdialog.setCancelable(false);
-            pdialog.show();
+
         }
 
         /**
@@ -280,7 +493,7 @@ public class UserProfile_Fragment extends Fragment implements
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once got all details
             following_tv.setText(following + " Following");
-            pdialog.dismiss();
+
 
         }
     }

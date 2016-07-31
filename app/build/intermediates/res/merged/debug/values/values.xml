@@ -241,6 +241,7 @@
     <string name="drawer_close">Drawer Closed</string>
     <string name="drawer_open">Drawer Opened</string>
     <string name="hello">Hello World, AndroidConnectingToPhpMySQLActivity!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="ip">localhost</string>
     <string name="pref_default_display_name">John Smith</string>
     <string name="pref_description_social_recommendations">Recommendations for people to contact

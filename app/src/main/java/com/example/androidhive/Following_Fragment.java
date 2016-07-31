@@ -232,8 +232,7 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                                         main_activity.current_following_id = temp;
                                         main_activity.current_following_name = main_activity.name_list.get(position);
                                         new Increment_Listeners().execute(main_activity.current_following_id, main_activity.current_user_id);
-                                        new Get_Following_Or_Nah().execute();
-                                        search_box.clearFocus();
+                                        new Get_Following_Or_Nah().execute(main_activity.current_user_id, main_activity.current_following_id);                                        search_box.clearFocus();
                                         main_activity.TuneIn();
                                     } else {
                                         main_activity.my_toast.show();
@@ -376,7 +375,7 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                                     main_activity.current_following_id = temp;
                                     main_activity.current_following_name = main_activity.name_list.get(position);
                                     new Increment_Listeners().execute(main_activity.current_following_id, main_activity.current_user_id);
-                                    new Get_Following_Or_Nah().execute();
+                                    new Get_Following_Or_Nah().execute(main_activity.current_user_id, main_activity.current_following_id);
                                     search_box.clearFocus();
                                     main_activity.TuneIn();
                                 } else {
@@ -486,8 +485,8 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
 
 
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("current_user_id", main_activity.current_user_id));
-            params.add(new BasicNameValuePair("current_following_id", main_activity.current_following_id));
+            params.add(new BasicNameValuePair("current_user_id", args[0]));
+            params.add(new BasicNameValuePair("current_following_id", args[1]));
 
 
             Log.d("PID", main_activity.current_following_id);
