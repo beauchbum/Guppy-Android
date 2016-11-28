@@ -4,26 +4,34 @@
     api-level="21"
     density="xxhdpi"
     format="7"
-    timestamp="872679860726895" >
+    timestamp="441987096694762" >
 
     <task
         name="javac"
-        duration="0" />
+        duration="987" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="500" />
     <task
         name="verifier"
-        duration="0" />
+        duration="55" />
 
-    <build timestamp="872352541078679" >
+    <artifact
+        location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_6\classes.dex"
+        type="DEX" />
+
+    <build timestamp="441533744989099" >
         <artifact
             location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
     </build>
-    <build timestamp="872679860726895" />
+    <build timestamp="441987096694762" >
+        <artifact
+            location="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_6\classes.dex"
+            type="DEX" />
+    </build>
 
 </instant-run>

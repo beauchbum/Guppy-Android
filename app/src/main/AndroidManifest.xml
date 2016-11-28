@@ -21,30 +21,26 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
             android:name=".Explore"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:configChanges = "orientation"
+            android:screenOrientation = "portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainScreenActivity"
-            android:label="Guppy"
-            android:launchMode="singleTask" />
+
         <activity
             android:name="com.spotify.sdk.android.authentication.LoginActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges = "orientation"
+            android:screenOrientation = "portrait"/>
         <!--
              ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
 
-        <activity
-            android:name=".SettingsActivity"
-            android:launchMode="singleTask">
-
-        </activity>
     </application>
 
 </manifest>

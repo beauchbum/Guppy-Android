@@ -113,7 +113,6 @@ public class Explore extends AppCompatActivity{
     public ToggleButton broad_button;
     public boolean broadcast_status = false;
     public boolean isBroadcaster_playing = false;
-    public boolean brodcaster_active = false;
     public BroadcastReceiver receiver;
     public String is_playing;
     public boolean receiver_exists = false;
@@ -129,6 +128,7 @@ public class Explore extends AppCompatActivity{
     String albumName;
     String trackName;
     public SetURI uri_posting;
+    public ChangePlayback change_playback;
     public Long broadcast_receive_time = 0L;
     public Long song_duration = 0L;
     public Timer broadcast_timer;
@@ -216,6 +216,7 @@ public class Explore extends AppCompatActivity{
         setContentView(R.layout.activity_base);
 
         uri_posting = new SetURI();
+        change_playback = new ChangePlayback();
 
         if (findViewById(R.id.fragment_container) != null) {
 
@@ -313,12 +314,116 @@ public class Explore extends AppCompatActivity{
         pid_list = new ArrayList<String>();
         name_list = new ArrayList<String>();
         broadcasting_list = new ArrayList<String>();
-
-
-
-
         arrayOfBroadcasts = new ArrayList<Broadcast>();
         //new LoadAllProducts().execute();
+
+
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("com.spotify.music.playbackstatechanged");
+        filter.addAction("com.spotify.music.metadatachanged");
+        filter.addAction("com.spotify.music.queuechanged");
+
+
+
+
+
+        receiver = new MyBroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                if (intent.getLongExtra("timeSent", 0L) >= broadcast_receive_time)
+                {
+                    broadcast_receive_time = intent.getLongExtra("timeSent", 0L);
+                }
+
+                Log.d("Broadcast Received", broadcast_receive_time.toString());
+                String action = intent.getAction();
+
+
+
+                int trackLengthInSec = intent.getIntExtra("length", 0);
+                if (action.equals(BroadcastTypes.METADATA_CHANGED)) {
+                    //GetAlbumArt running_task = new GetAlbumArt();
+                    //running_task.execute(trackId);
+                    change_playback.cancel(true);
+
+
+                    trackId = intent.getStringExtra("id");
+                    artistName = intent.getStringExtra("artist");
+                    albumName = intent.getStringExtra("album");
+                    trackName = intent.getStringExtra("track");
+                    int temp = (intent.getIntExtra("length", 0));
+                    temp = temp/1000;
+                    song_duration = new Long(temp);
+
+
+
+                    Log.d("Broadcast Received", trackName + " " + albumName + " " + artistName + " " + song_duration.toString());
+
+
+                    try {
+                        albumArtDone = false;
+                        String newTrackId = trackId.substring(14);
+
+
+                        try {
+
+                            spotify.getTrack(newTrackId, new Callback<Track>() {
+                                @Override
+                                public void success(Track track, Response response) {
+                                    albumArt = track.album.images.get(0).url;
+                                    //song_duration = track.duration_ms;
+                                    uri_posting = new SetURI();
+                                    uri_posting.execute(trackId, trackName, albumName, artistName, albumArt);
+                                    change_playback = new ChangePlayback();
+                                    change_playback.execute("true");
+
+
+                                }
+
+                                @Override
+                                public void failure(RetrofitError error) {
+                                }
+
+                            });
+
+
+                        } catch (Exception e) {
+                            //ErrorDetails details = SpotifyError.fromRetrofitError(e).getErrorDetails();
+                            //System.out.println(details.status + ":" + details.message);
+                        }
+                    } catch (StringIndexOutOfBoundsException error) {
+
+                    }
+
+
+                }
+
+                if (action.equals(BroadcastTypes.PLAYBACK_STATE_CHANGED)) {
+                    boolean temp_broadcaster_playing = intent.getBooleanExtra("playing", false);
+                    uri_posting.cancel(true);
+
+                    //int positionInMs = intent.getIntExtra("playbackPosition", 0);
+                    if (broadcaster_playing != temp_broadcaster_playing) {
+
+                        if (temp_broadcaster_playing) {
+                            is_playing = "true";
+                        } else {
+                            is_playing = "false";
+                        }
+                        change_playback = new ChangePlayback();
+                        change_playback.execute(is_playing);
+                        broadcaster_playing = temp_broadcaster_playing;
+                    }
+                }
+
+            }
+
+        };
+        registerReceiver(receiver, filter);
+        receiver_exists = true;
+        Log.d("Receiver Registered", "Whatever");
 
     }
 
@@ -676,59 +781,6 @@ public class Explore extends AppCompatActivity{
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("id", current_user_id));
 
-            broadcast_timer = new Timer();
-            broadcast_timer.schedule(new TimerTask() {
-
-                @Override
-                public void run() {
-                    runOnUiThread(new Runnable() {
-
-
-                        public void run() {
-                            {
-                                Long time = System.currentTimeMillis();
-
-                                try {
-                                    Long thing = time - broadcast_receive_time;
-                                    Log.d("Broadcast Receive", broadcast_receive_time.toString());
-                                    Log.d("System Time", time.toString());
-                                    Log.d("Song Duration", song_duration.toString());
-                                    Log.d("Time minus Song", thing.toString());
-                                    if ((thing) > song_duration && broadcast_status == true) {
-                                        new SetURI().execute(null, null, null, null, null);
-                                        new ChangePlayback().execute("false");
-                                        new StopBroadcast().execute("false");
-                                        broadcast_status = false;
-                                        isBroadcaster_playing = false;
-                                        broad_button.setChecked(false);
-                                        try {
-                                            my_toast.cancel();
-                                        }catch (Exception e)
-                                        {
-
-                                        }
-                                        my_toast = Toast.makeText(getApplicationContext(), "Stopped Broadcasting Due to Inactivity",
-                                                Toast.LENGTH_SHORT);
-                                        my_toast.setGravity(Gravity.CENTER, 0, 0);
-                                        my_toast.show();
-                                        broadcast_timer.cancel();
-
-
-                                    }
-                                } catch (Exception e) {
-
-                                }
-                            }
-
-                        }
-                    });
-                }
-            }, 5000, 3000);
-
-
-
-
-
             // sending modified data through http request
             // Notice that update product url accepts POST method
             JSONObject json = jsonParser.makeHttpRequest(url_start_broadcast,
@@ -753,102 +805,7 @@ public class Explore extends AppCompatActivity{
                 e.printStackTrace();
             }
 
-            IntentFilter filter = new IntentFilter();
-            filter.addAction("com.spotify.music.playbackstatechanged");
-            filter.addAction("com.spotify.music.metadatachanged");
-            filter.addAction("com.spotify.music.queuechanged");
 
-
-
-
-
-            receiver = new MyBroadcastReceiver() {
-                @Override
-                public void onReceive(Context context, Intent intent) {
-
-                    if (intent.getLongExtra("timeSent", 0L) >= broadcast_receive_time)
-                    {
-                        broadcast_receive_time = intent.getLongExtra("timeSent", 0L);
-                    }
-
-                    Log.d("Broadcast Received", broadcast_receive_time.toString());
-                    isBroadcaster_playing = true;
-
-                        String action = intent.getAction();
-
-
-                        int trackLengthInSec = intent.getIntExtra("length", 0);
-                        if (action.equals(BroadcastTypes.METADATA_CHANGED)) {
-                            //GetAlbumArt running_task = new GetAlbumArt();
-                            //running_task.execute(trackId);
-
-                            uri_posting.cancel(true);
-                            trackId = intent.getStringExtra("id");
-                            artistName = intent.getStringExtra("artist");
-                            albumName = intent.getStringExtra("album");
-                            trackName = intent.getStringExtra("track");
-
-                            Log.d("Broadcast Received", trackName + " " + albumName + " " + artistName);
-
-
-                            try {
-                                albumArtDone = false;
-                                String newTrackId = trackId.substring(14);
-
-
-                                try {
-
-                                    spotify.getTrack(newTrackId, new Callback<Track>() {
-                                        @Override
-                                        public void success(Track track, Response response) {
-                                            albumArt = track.album.images.get(0).url;
-                                            song_duration = track.duration_ms;
-                                            uri_posting = new SetURI();
-                                            uri_posting.execute(trackId, trackName, albumName, artistName, albumArt);
-
-
-
-                                        }
-
-                                        @Override
-                                        public void failure(RetrofitError error) {
-                                        }
-
-                                    });
-
-
-                                } catch (RetrofitError error) {
-                                    ErrorDetails details = SpotifyError.fromRetrofitError(error).getErrorDetails();
-                                    System.out.println(details.status + ":" + details.message);
-                                }
-                            } catch (StringIndexOutOfBoundsException error) {
-
-                            }
-
-
-                        }
-
-                        if (action.equals(BroadcastTypes.PLAYBACK_STATE_CHANGED)) {
-                            boolean temp_broadcaster_playing = intent.getBooleanExtra("playing", false);
-                            //int positionInMs = intent.getIntExtra("playbackPosition", 0);
-                            if (broadcaster_playing != temp_broadcaster_playing) {
-
-                                if (temp_broadcaster_playing) {
-                                    is_playing = "true";
-                                } else {
-                                    is_playing = "false";
-                                }
-                                new ChangePlayback().execute(is_playing);
-                                broadcaster_playing = temp_broadcaster_playing;
-                            }
-                        }
-
-                    }
-
-            };
-            registerReceiver(receiver, filter);
-            receiver_exists = true;
-            Log.d("Receiver Registered", "Whatever");
 
             return null;
         }
@@ -881,12 +838,7 @@ public class Explore extends AppCompatActivity{
 
             // Building Parameters
 
-            if(args[0] == "true") {
-                if (receiver_exists) {
-                    unregisterReceiver(receiver);
-                }
-                receiver_exists = false;
-            }
+
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("id", current_user_id));
 
@@ -910,7 +862,7 @@ public class Explore extends AppCompatActivity{
                 } else {
                     // failed to update product
                 }
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -985,7 +937,7 @@ public class Explore extends AppCompatActivity{
                 } else {
                     // failed to update product
                 }
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -1026,6 +978,8 @@ public class Explore extends AppCompatActivity{
             params.add(new BasicNameValuePair("album", args[2]));
             params.add(new BasicNameValuePair("artist", args[3]));
             params.add(new BasicNameValuePair("album_art_large", args[4]));
+            params.add(new BasicNameValuePair("song_duration", song_duration.toString()));
+
 
 
 
@@ -1033,6 +987,7 @@ public class Explore extends AppCompatActivity{
             // Notice that update product url accepts POST method
             JSONObject json = jsonParser.makeHttpRequest(url_post_uri,
                     "POST", params);
+            
 
             // check json success tag
             try {

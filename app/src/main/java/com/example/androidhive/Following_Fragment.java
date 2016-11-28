@@ -169,15 +169,15 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                         String name = c.getString(main_activity.TAG_NAME);
                         String song = c.getString("song");
                         String artist = c.getString("artist");
-                        String broadcasting = c.getString("broadcasting");
+                        String playing = c.getString("playing");
                         //String listeners = c.getString("listeners");
                         //int real_listeners = Integer.parseInt(listeners);
 
 
-                        main_activity.arrayOfBroadcasts.add(new Broadcast(name, 0, song, artist, "guppy", broadcasting));
+                        main_activity.arrayOfBroadcasts.add(new Broadcast(name, 0, song, artist, "guppy", playing));
                         main_activity.pid_list.add(i, id);
                         main_activity.name_list.add(i, name);
-                        main_activity.broadcasting_list.add(i, broadcasting);
+                        main_activity.broadcasting_list.add(i, playing);
 
                         Log.d("array of broadcasts", main_activity.arrayOfBroadcasts.toString());
 
@@ -315,16 +315,16 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                         String name = c.getString("name");
                         String song = c.getString("song");
                         String artist = c.getString("artist");
-                        String broadcasting = c.getString("broadcasting");
+                        String playing = c.getString("playing");
 
                         //String listeners = c.getString("listeners");
                         //int real_listeners = Integer.parseInt(listeners);
 
 
-                        main_activity.arrayOfBroadcasts.add(new Broadcast(name, 0, song, artist, "guppy", broadcasting));
+                        main_activity.arrayOfBroadcasts.add(new Broadcast(name, 0, song, artist, "guppy", playing));
                         main_activity.pid_list.add(i, id);
                         main_activity.name_list.add(i, name);
-                        main_activity.broadcasting_list.add(i, broadcasting);
+                        main_activity.broadcasting_list.add(i, playing);
                         Log.d("array of broadcasts", main_activity.arrayOfBroadcasts.toString());
 
 
