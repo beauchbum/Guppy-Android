@@ -12,13 +12,17 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
@@ -32,29 +36,39 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.android.gms.iid.InstanceID;
+import com.google.gson.JsonObject;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
 import com.spotify.sdk.android.player.Player;
+import com.spotify.sdk.android.player.Spotify;
 
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileOutputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -65,11 +79,15 @@ import kaaes.spotify.webapi.android.SpotifyApi;
 import kaaes.spotify.webapi.android.SpotifyError;
 import kaaes.spotify.webapi.android.SpotifyService;
 import kaaes.spotify.webapi.android.models.ErrorDetails;
+import kaaes.spotify.webapi.android.models.Followers;
+import kaaes.spotify.webapi.android.models.Image;
 import kaaes.spotify.webapi.android.models.Track;
 import kaaes.spotify.webapi.android.models.UserPrivate;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+
+import static com.google.android.gms.gcm.GoogleCloudMessaging.INSTANCE_ID_SCOPE;
 
 
 public class Explore extends AppCompatActivity{
@@ -91,7 +109,8 @@ public class Explore extends AppCompatActivity{
     public boolean paused_playback;
     public boolean broadcaster_playing;
     public boolean tuning_in = false;
-    public String current_following_id;
+    public String current_following_gid;
+    public String current_following_sid;
     public String current_following_name;
     public boolean following_or_nah = false;
     public Player mPlayer;
@@ -103,35 +122,45 @@ public class Explore extends AppCompatActivity{
     public ArrayAdapter<String> mAdapter;
     ArrayList<Broadcast> arrayOfBroadcasts;
     Following_Fragment.BroadcastAdapter adapter;
-    public ArrayList<String> pid_list;
+    public ArrayList<String> gid_list;
+    public ArrayList<String> sid_list;
     public ArrayList<String> name_list;
     public ArrayList<String> broadcasting_list;
+    public String popup_current_following_gid;
+    public String popup_current_following_sid;
+    public String popup_current_following_name;
 
 //////////////////////////////////////////////////////////////
 
     //Broadcasting
     public ToggleButton broad_button;
+    public Switch broad_switch;
     public boolean broadcast_status = false;
     public boolean isBroadcaster_playing = false;
-    public BroadcastReceiver receiver;
-    public String is_playing;
+    public boolean is_playing = false;
     public boolean receiver_exists = false;
     public String current_user_id;
+    public boolean user_always_broadcasting = false;
     public String spotify_id;
+    public String spotify_profile_url;
     public Bitmap albumArtImage;
     public String albumArt;
     public SpotifyApi my_api;
+    public String SpotifyAccessToken;
+    public int SpotifyAccessTokenExpires;
+    public String SpotifyRefreshToken;
     public SpotifyService spotify;
     public Boolean albumArtDone = false;
     String trackId;
-    String artistName;
-    String albumName;
-    String trackName;
     public SetURI uri_posting;
     public ChangePlayback change_playback;
     public Long broadcast_receive_time = 0L;
     public Long song_duration = 0L;
     public Timer broadcast_timer;
+    public String GCM_IID = "";
+    String authorizedEntity = "";
+    String scope = "";
+    String token = "";
 
 //////////////////////////////////////////////////////////////
 
@@ -143,6 +172,7 @@ public class Explore extends AppCompatActivity{
     android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
     public Fragment fr;
     public Fragment tuning_in_fragment;
+    public Fragment my_broadcast_fragment;
     public Toast my_toast;
     public ProgressDialog pdialog;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -151,14 +181,27 @@ public class Explore extends AppCompatActivity{
     public MenuItem see_profile;
     public android.support.v4.app.FragmentTransaction fragmentTransaction;
     public TuneIn_Fragment my_otherfragment;
+    public Explore_Fragment temp_explore_fragment;
+    public Following_Fragment temp_following_fragment;
+    public MyBroadcast temp_broadcasting_fragment;
+    private IntentFilter song_filter = new IntentFilter(My_Broadcasting_Service.SONGCHANGE);
+    private IntentFilter playback_filter = new IntentFilter(My_Broadcasting_Service.PLAYBACK);
+
 
 //////////////////////////////////////////////////////////////
 
-    //User Profles
-    public String user_profile_name;
-    public String user_profile_id;
-    public boolean following_user_profile;
-    public String followers_or_following;
+    //My Broadcast
+    public boolean broadcast_working = false;
+    String trackName = "";
+    String artistName = "";
+    String albumName = "";
+    public BroadcastReceiver song_receiver;
+    public BroadcastReceiver playback_receiver;
+    public String spotify_profile_pic;
+
+
+
+
 
 
 
@@ -171,6 +214,7 @@ public class Explore extends AppCompatActivity{
     public final static String EXTRA_MESSAGE = "com.mycompany.app.MESSAGE";
     public AuthenticationResponse response;
     public static final int REQUEST_CODE = 1337;
+    public static final int REQUEST_TOKEN = 1338;
     // TODO: Replace with your client ID
     public static final String CLIENT_ID = "57b61875218e4e1f8a8d0cdb57a7259b";
     // TODO: Replace with your redirect URI
@@ -178,6 +222,7 @@ public class Explore extends AppCompatActivity{
     public static final String TAG_PRODUCTS = "users";
     public static final String TAG_NAME = "name";
     public static final String TAG_SUCCESS = "success";
+    public static final String MyPREFERENCES = "MyPrefs" ;
 
 //////////////////////////////////////////////////////////////
 
@@ -187,6 +232,8 @@ public class Explore extends AppCompatActivity{
     public static String url_search_users = "http://" + ip + "/search_users.php";
     public static final String url_start_broadcast = "http://" + ip + "/start_broadcast.php";
     public static final String url_stop_broadcast = "http://" + ip + "/stop_broadcast.php";
+    public static final String url_always_broadcasting = "http://" + ip + "/always_broadcasting.php";
+    public static final String url_not_always_broadcasting = "http://" + ip + "/not_always_broadcasting.php";
     public static String url_create_product = "http://" + ip + "/create_product.php";
     public static String url_post_uri = "http://" + ip + "/post_uri.php";
     public static String url_play_playback = "http://" + ip + "/play_playback.php";
@@ -202,6 +249,8 @@ public class Explore extends AppCompatActivity{
     public static String url_get_followers_profiles = "http://" + ip + "/get_followers_profiles.php";
     public static String url_get_following_profiles = "http://" + ip + "/get_following_profiles.php";
     public static String url_get_guppy_id = "http://" + ip + "/get_guppy_id.php";
+    public static String url_get_spotify_token = "http://" + ip + "/get_spotify_token.php";
+
 
 
 //////////////////////////////////////////////////////////////
@@ -213,10 +262,16 @@ public class Explore extends AppCompatActivity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_base);
+        // URL-safe characters up to a maximum of 1000, or
+        // you can also leave it blank.
+
 
         uri_posting = new SetURI();
         change_playback = new ChangePlayback();
+
+        new GCM_Token().execute();
 
         if (findViewById(R.id.fragment_container) != null) {
 
@@ -249,7 +304,8 @@ public class Explore extends AppCompatActivity{
         //mDrawerSwitch = (Switch) findViewById(R.id.drawer_switch);
         Drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.drawer_list);
-        addDrawerItems();
+        String[] mDrawerTitles = {"Home", "Following", "My Broadcast", "Settings", "Logout"};
+        addDrawerItems(mDrawerTitles);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
@@ -297,10 +353,32 @@ public class Explore extends AppCompatActivity{
             }
         });
 
+        broad_switch = (Switch) findViewById(R.id.broad_switch);
+
+        broad_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked == true){
+                    new AlwaysBroadcasting().execute("true");
+                    broadcast_status = true;
+                    broad_button.setChecked(true);
+                    broad_button.setEnabled(false);
+                    new StartBroadcast().execute();
+                }
+                else {
+                    new AlwaysBroadcasting().execute("false");
+                    broad_button.setEnabled(true);
+                }
+            }
+        });
+
+
+
+
 
 
         AuthenticationRequest.Builder builder = new AuthenticationRequest.Builder(CLIENT_ID,
-                AuthenticationResponse.Type.TOKEN,
+                AuthenticationResponse.Type.CODE,
                 REDIRECT_URI);
         builder.setScopes(new String[]{"user-read-private", "streaming"});
         AuthenticationRequest request = builder.build();
@@ -311,126 +389,47 @@ public class Explore extends AppCompatActivity{
 
 
         listDataHeader = new ArrayList<String>();
-        pid_list = new ArrayList<String>();
+        gid_list = new ArrayList<String>();
+        sid_list = new ArrayList<String>();
         name_list = new ArrayList<String>();
         broadcasting_list = new ArrayList<String>();
         arrayOfBroadcasts = new ArrayList<Broadcast>();
         //new LoadAllProducts().execute();
 
 
-
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("com.spotify.music.playbackstatechanged");
-        filter.addAction("com.spotify.music.metadatachanged");
-        filter.addAction("com.spotify.music.queuechanged");
-
-
-
-
-
-        receiver = new MyBroadcastReceiver() {
+        playback_receiver = new BroadcastReceiver(){
             @Override
-            public void onReceive(Context context, Intent intent) {
-
-                if (intent.getLongExtra("timeSent", 0L) >= broadcast_receive_time)
-                {
-                    broadcast_receive_time = intent.getLongExtra("timeSent", 0L);
-                }
-
-                Log.d("Broadcast Received", broadcast_receive_time.toString());
-                String action = intent.getAction();
+            public void onReceive(Context context, Intent intent){
+                is_playing = intent.getBooleanExtra("playback", false);
+            }
+        };
 
 
-
-                int trackLengthInSec = intent.getIntExtra("length", 0);
-                if (action.equals(BroadcastTypes.METADATA_CHANGED)) {
-                    //GetAlbumArt running_task = new GetAlbumArt();
-                    //running_task.execute(trackId);
-                    change_playback.cancel(true);
-
-
-                    trackId = intent.getStringExtra("id");
-                    artistName = intent.getStringExtra("artist");
-                    albumName = intent.getStringExtra("album");
-                    trackName = intent.getStringExtra("track");
-                    int temp = (intent.getIntExtra("length", 0));
-                    temp = temp/1000;
-                    song_duration = new Long(temp);
-
-
-
-                    Log.d("Broadcast Received", trackName + " " + albumName + " " + artistName + " " + song_duration.toString());
-
-
-                    try {
-                        albumArtDone = false;
-                        String newTrackId = trackId.substring(14);
-
-
-                        try {
-
-                            spotify.getTrack(newTrackId, new Callback<Track>() {
-                                @Override
-                                public void success(Track track, Response response) {
-                                    albumArt = track.album.images.get(0).url;
-                                    //song_duration = track.duration_ms;
-                                    uri_posting = new SetURI();
-                                    uri_posting.execute(trackId, trackName, albumName, artistName, albumArt);
-                                    change_playback = new ChangePlayback();
-                                    change_playback.execute("true");
-
-
-                                }
-
-                                @Override
-                                public void failure(RetrofitError error) {
-                                }
-
-                            });
-
-
-                        } catch (Exception e) {
-                            //ErrorDetails details = SpotifyError.fromRetrofitError(e).getErrorDetails();
-                            //System.out.println(details.status + ":" + details.message);
-                        }
-                    } catch (StringIndexOutOfBoundsException error) {
-
-                    }
-
-
-                }
-
-                if (action.equals(BroadcastTypes.PLAYBACK_STATE_CHANGED)) {
-                    boolean temp_broadcaster_playing = intent.getBooleanExtra("playing", false);
-                    uri_posting.cancel(true);
-
-                    //int positionInMs = intent.getIntExtra("playbackPosition", 0);
-                    if (broadcaster_playing != temp_broadcaster_playing) {
-
-                        if (temp_broadcaster_playing) {
-                            is_playing = "true";
-                        } else {
-                            is_playing = "false";
-                        }
-                        change_playback = new ChangePlayback();
-                        change_playback.execute(is_playing);
-                        broadcaster_playing = temp_broadcaster_playing;
-                    }
-                }
+        song_receiver = new BroadcastReceiver(){
+            @Override
+            public void onReceive(Context context, Intent intent){
+                trackName = intent.getStringExtra("song");
+                albumName = intent.getStringExtra("album");
+                artistName = intent.getStringExtra("artist");
+                broadcast_working = true;
 
             }
-
         };
-        registerReceiver(receiver, filter);
-        receiver_exists = true;
-        Log.d("Receiver Registered", "Whatever");
+    }
 
+    @Override
+    public void onStart()
+    {
+        LocalBroadcastManager.getInstance(this).registerReceiver(song_receiver, song_filter);
+        LocalBroadcastManager.getInstance(this).registerReceiver(playback_receiver, playback_filter);
+        super.onStart();
     }
 
     public void TuneOut()
     {
-        new Decrement_Listeners().execute(current_following_id, current_user_id);
-        current_following_id = null;
+        new Decrement_Listeners().execute(current_following_gid, current_user_id);
+        current_following_gid = null;
+        current_following_sid = null;
         current_following_name = null;
         tuning_in = false;
         Log.d("Progress", "After Tuning IN");
@@ -460,78 +459,9 @@ public class Explore extends AppCompatActivity{
         }
         see_profile.setVisible(false);
         stop_tune_in.setVisible(false);
-    }
+        String[] mDrawerTitles = {"Home", "Following", "My Broadcast", "Settings", "Logout"};
+        addDrawerItems(mDrawerTitles);
 
-    public void SeeProfile(String user_profile_id, String user_profile_name)
-    {
-            UserProfile_Fragment my_other_fragment = (UserProfile_Fragment) getSupportFragmentManager().findFragmentByTag("Following_Profile");
-            if(user_profile_id == this.current_following_id && user_profile_name == this.current_following_name)
-            {
-                if (my_otherfragment != null && my_otherfragment.isVisible())
-                {
-                    Log.d("Following Profile", "Visible");
-                }
-                else
-                {
-                    this.user_profile_id = user_profile_id;
-                    this.user_profile_name = user_profile_name;
-                    fragmentTransaction = fm.beginTransaction();
-
-                    fr = new UserProfile_Fragment();
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.replace(R.id.fragment_container, fr, "Following_Profile").commit();
-                    Log.d("Following Profile", "Not Visible");
-                }
-            }
-            else
-            {
-                my_other_fragment = (UserProfile_Fragment) getSupportFragmentManager().findFragmentByTag(user_profile_id);
-                if (my_otherfragment != null && my_otherfragment.isVisible())
-                {
-
-                }
-                else
-                {
-                    this.user_profile_id = user_profile_id;
-                    this.user_profile_name = user_profile_name;
-                    fragmentTransaction = fm.beginTransaction();
-
-                    fr = new UserProfile_Fragment();
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.replace(R.id.fragment_container, fr, user_profile_id).commit();
-                }
-            }
-
-
-    }
-
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-
-        switch(item.getItemId()){
-            case R.id.menu_stop_tune_in:
-                TuneOut();
-                break;
-            case R.id.menu_view_profile:
-                SeeProfile(current_following_id, current_following_name);
-                break;
-
-
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
     }
 
     public void TuneIn(){
@@ -546,9 +476,43 @@ public class Explore extends AppCompatActivity{
 
     }
 
-    private void addDrawerItems() {
+    public void SeeProfile(){
+        spotify_profile_url = "https://open.spotify.com/user/";
+        String menu_view_profile_url = spotify_profile_url.concat(current_following_sid.toString());
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(menu_view_profile_url));
+        Log.d("SPOTIFY PROFILE", menu_view_profile_url);
+        startActivity(browserIntent);
+    }
+
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+            switch (item.getItemId()) {
+                case R.id.menu_stop_tune_in:
+                    TuneOut();
+                    break;
+                case R.id.menu_view_profile:
+                    SeeProfile();
+                    break;
+            }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+
+    public void addDrawerItems(final String[] mDrawerTitles) {
         // More Drawer Stuff
-        String[] mDrawerTitles = {"Home", "Following", "Currently Listening", "Settings", "Logout"};
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mDrawerTitles) {
             @Override
             public View getView(int position, View convertView,
@@ -569,78 +533,83 @@ public class Explore extends AppCompatActivity{
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    Explore_Fragment my_otherfragment = (Explore_Fragment) getSupportFragmentManager().findFragmentByTag("Explore");
-                    if (my_otherfragment != null && my_otherfragment.isVisible())
-                    {
-
-                    }
-                    else
-                    {
-                        android.support.v4.app.FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                        fr = new Explore_Fragment();
-                        fragmentTransaction.replace(R.id.fragment_container, fr, "Explore");
-                        fragmentTransaction.commit();
-                    }
-                    Drawer.closeDrawers();
-                }
-                if (position == 1) {
-                    Following_Fragment my_otherfragment = (Following_Fragment)getSupportFragmentManager().findFragmentByTag("Following");
-                    if (my_otherfragment != null && my_otherfragment.isVisible())
-                    {
-
-                    }
-                    else
-                    {
-                        android.support.v4.app.FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                        fr = new Following_Fragment();
-                        fragmentTransaction.replace(R.id.fragment_container, fr, "Following");
-                        Explore_Fragment myFragment = (Explore_Fragment) getSupportFragmentManager().findFragmentByTag("Explore");
-                        if (myFragment != null && myFragment.isVisible()) {
-                            fragmentTransaction.addToBackStack(null);
-                        }
-                        fragmentTransaction.commit();
-                    }
-
-                    Drawer.closeDrawers();
-                }
-                if (position == 2) {
-                    if(tuning_in)
-                    {
-                        android.support.v4.app.FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment_container, tuning_in_fragment, "Tune In");
-                        fragmentTransaction.addToBackStack(null);
-                        fragmentTransaction.commit();
-                        Drawer.closeDrawers();
-                    }
-                    else
-                    {
-                        try {
-                            my_toast.cancel();
-                        }catch (Exception e)
+                switch (mDrawerTitles[position]){
+                    case "Home":
+                        temp_explore_fragment = (Explore_Fragment) getSupportFragmentManager().findFragmentByTag("Explore");
+                        if (temp_explore_fragment != null && temp_explore_fragment.isVisible())
                         {
 
                         }
-                        my_toast = Toast.makeText(getApplicationContext(), "Not Tuned In to Any Broadcast",
-                                Toast.LENGTH_SHORT);
-                        my_toast.setGravity(Gravity.CENTER, 0, 0);
-                        my_toast.show();
+                        else
+                        {
+                            android.support.v4.app.FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                            fr = new Explore_Fragment();
+                            fragmentTransaction.replace(R.id.fragment_container, fr, "Explore");
+                            fragmentTransaction.commit();
+                        }
+                        Drawer.closeDrawers();
+                        break;
+                    case "Following":
+                        temp_following_fragment = (Following_Fragment)getSupportFragmentManager().findFragmentByTag("Following");
+                        if (temp_following_fragment != null && temp_following_fragment.isVisible())
+                        {
 
-                    }
+                        }
+                        else
+                        {
+                            fr = new Following_Fragment();
+                            android.support.v4.app.FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment_container, fr, "Following").addToBackStack(null);
+                            fragmentTransaction.commit();
+                        }
+
+                        Drawer.closeDrawers();
+                        break;
+                    case "My Broadcast":
+                        if (broadcast_status)
+                        {
+                            temp_broadcasting_fragment = (MyBroadcast)getSupportFragmentManager().findFragmentByTag("MyBroadcast");
+                            if (temp_broadcasting_fragment != null && temp_broadcasting_fragment.isVisible())
+                            {
+
+                            }
+                            else {
+                                android.support.v4.app.FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                                fr = new MyBroadcast();
+                                fragmentTransaction.replace(R.id.fragment_container, fr, "MyBroadcast").addToBackStack(null);
+                                fragmentTransaction.commit();
+
+                            }
+                            Drawer.closeDrawers();
+                            break;
+                        }
+                        else
+                        {
+                            my_toast = Toast.makeText(getApplicationContext(), "You aren't broadcasting!", Toast.LENGTH_SHORT);
+                            my_toast.setGravity(Gravity.CENTER, 0, 0);
+                            my_toast.show();
+                            break;
+                        }
+
+                    case "Settings":
+                        Drawer.closeDrawers();
+                        break;
+                    case "Logout":
+                        AuthenticationClient.logout(getApplicationContext());
+                        Intent i = getBaseContext().getPackageManager()
+                                .getLaunchIntentForPackage(getBaseContext().getPackageName());
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        finish();
+                        startActivity(i);
+                        break;
+                    default:
+                        android.support.v4.app.FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container, tuning_in_fragment, "Tune In").addToBackStack(null);
+                        fragmentTransaction.commit();
+                        Drawer.closeDrawers();
 
                 }
-                if (position == 3){
-                    Drawer.closeDrawers();
 
-                }
-                if (position == 4) {
-                    AuthenticationClient.logout(getApplicationContext());
-                    Intent i = getBaseContext().getPackageManager()
-                            .getLaunchIntentForPackage(getBaseContext().getPackageName());
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    finish();
-                    startActivity(i);
-                }
             }
         });
     }
@@ -653,9 +622,79 @@ public class Explore extends AppCompatActivity{
         // Check if result comes from the correct activity
         if (requestCode == REQUEST_CODE) {
             response = AuthenticationClient.getResponse(resultCode, intent);
+            String code = response.getCode();
+            Log.d("RYAN - CODE", code);
+            new GetSpotifyToken().execute(code);
+        }
 
+
+
+    }
+
+    class GetSpotifyToken extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        /**
+         * Getting product details in background thread
+         * */
+        protected String doInBackground(String... args) {
+
+
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("auth_code", args[0]));
+
+
+
+            // getting product details by making HTTP request
+            // Note that product details url will use GET request
+            JSONObject json = jsonParser.makeHttpRequest(url_get_spotify_token, "GET", params);
+
+            try {
+
+                int success = json.getInt(TAG_SUCCESS);
+                if (success == 1) {
+                    // successfully received product details
+                    JSONArray productObj = json.getJSONArray("users"); // JSON Array
+
+                    // get first product object from JSON Array
+                    JSONObject product = productObj.getJSONObject(0);
+                    SpotifyAccessToken = product.getString("access_token");
+                    SpotifyAccessTokenExpires = product.getInt("expires_in");
+                    SpotifyRefreshToken = product.getString("refresh_token");
+
+                    Log.d("RYAN - ACCESS TOKEN", SpotifyAccessToken);
+
+
+
+
+
+                }else{
+                    // product with pid not found
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * **/
+        protected void onPostExecute(String temp) {
+            // dismiss the dialog once got all details
             my_api = new SpotifyApi();
-            my_api.setAccessToken(response.getAccessToken());
+
+
+            my_api.setAccessToken(SpotifyAccessToken);
             spotify = my_api.getService();
 
             spotify.getMe(new Callback<UserPrivate>() {
@@ -663,7 +702,14 @@ public class Explore extends AppCompatActivity{
                 public void success(UserPrivate userPrivate, Response response) {
                     String name = userPrivate.display_name.toString();
                     spotify_id = userPrivate.id.toString();
-                    new CreateNewProduct().execute(name, spotify_id);
+                    Map spotify_external_urls =  userPrivate.external_urls;
+                    Image spotify_images = userPrivate.images.get(0);
+                    Object spotify_profile = spotify_external_urls.get("spotify");
+                    spotify_profile_url = spotify_profile.toString();
+                    spotify_profile_pic = spotify_images.url;
+
+
+                    new CreateNewProduct().execute(name, spotify_id, spotify_profile_url, spotify_profile_pic);
 
 
                 }
@@ -694,8 +740,9 @@ public class Explore extends AppCompatActivity{
 
                 // Building Parameters
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("id", args[1]));
                 params.add(new BasicNameValuePair("name", args[0]));
+                params.add(new BasicNameValuePair("id", args[1]));
+                params.add(new BasicNameValuePair("prof_pic", args[2]));
 
 
                 // getting JSON Object
@@ -760,6 +807,9 @@ public class Explore extends AppCompatActivity{
     }
 
 
+
+
+
     public class StartBroadcast extends AsyncTask<String, String, String> {
 
         /**
@@ -817,6 +867,7 @@ public class Explore extends AppCompatActivity{
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once product uupdated
             //pDialog.dismiss();
+
         }
     }
 
@@ -848,6 +899,72 @@ public class Explore extends AppCompatActivity{
             // Notice that update product url accepts POST method
             JSONObject json = jsonParser.makeHttpRequest(url_stop_broadcast,
                     "POST", params);
+
+            // check json success tag
+            try {
+                int success = json.getInt("success");
+
+                if (success == 1) {
+                    // successfully updated
+                    Intent i = getIntent();
+                    // send result code 100 to notify about product update
+                    setResult(100, i);
+
+                } else {
+                    // failed to update product
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once product uupdated
+            //pDialog.dismiss();
+        }
+    }
+
+    class AlwaysBroadcasting extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         * */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        /**
+         * Saving product
+         * */
+        protected String doInBackground(String... args) {
+
+            // Building Parameters
+            JSONObject json;
+
+
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("id", current_user_id));
+            if (args[0] == "true"){
+                json = jsonParser.makeHttpRequest(url_always_broadcasting,
+                        "POST", params);
+            }
+            else {
+                json = jsonParser.makeHttpRequest(url_not_always_broadcasting,
+                        "POST", params);
+            }
+
+
+            // sending modified data through http request
+            // Notice that update product url accepts POST method
+
 
             // check json success tag
             try {
@@ -951,7 +1068,7 @@ public class Explore extends AppCompatActivity{
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once product uupdated
             //pDialog.dismiss();
-    }
+        }
     }
 
     class SetURI extends AsyncTask<String, String, String> {
@@ -1046,6 +1163,8 @@ public class Explore extends AppCompatActivity{
             // Note that product details url will use GET request
             JSONObject json = jsonParser.makeHttpRequest(
                     url_get_guppy_id, "GET", params);
+
+            String temp = "Empty";
             try {
 
                 int success = json.getInt(TAG_SUCCESS);
@@ -1057,6 +1176,10 @@ public class Explore extends AppCompatActivity{
                     // get first product object from JSON Array
                     JSONObject product = productObj.getJSONObject(0);
                     current_user_id = product.getString("guppy_id");
+                    temp = product.getString("always_broadcasting");
+
+
+
 
 
                 }else{
@@ -1065,15 +1188,41 @@ public class Explore extends AppCompatActivity{
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return null;
+            return temp;
         }
 
 
         /**
          * After completing background task Dismiss the progress dialog
          * **/
-        protected void onPostExecute(String file_url) {
+        protected void onPostExecute(String temp) {
             // dismiss the dialog once got all details
+            Log.d("RYAN TAG", temp);
+
+            if (temp.equals("1"))
+            {
+                user_always_broadcasting = true;
+                broad_button.setChecked(true);
+                broad_button.setEnabled(false);
+                broad_switch.setChecked(true);
+            }
+            Log.d("RYAN TAG", "" + user_always_broadcasting);
+            Intent i = new Intent(getApplicationContext(), My_Broadcasting_Service.class);
+
+
+            SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putString("gid", current_user_id);
+            editor.putString("token", SpotifyAccessToken);
+            editor.putString("refresh", SpotifyRefreshToken);
+            editor.putInt("token_time", SpotifyAccessTokenExpires);
+            editor.commit();
+
+
+
+            startService(i);
+
+
         }
     }
 
@@ -1135,7 +1284,46 @@ public class Explore extends AppCompatActivity{
         }
     }
 
+    class GCM_Token extends AsyncTask<String, String, String> {
 
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        /**
+         * Creating product
+         */
+        protected String doInBackground(String... args) {
+
+
+            // Building Parameters
+            try {
+                InstanceID instanceID = InstanceID.getInstance(getApplicationContext());
+                String token = instanceID.getToken("818475639900", GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
+                Log.d("RYAN", token);
+            }
+            catch (Exception exception){
+
+            }
+
+
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+
+
+        }
+    }
 
     @Override
     public void onDestroy()
@@ -1143,6 +1331,8 @@ public class Explore extends AppCompatActivity{
 
         new StopBroadcast().execute("true");
         new ChangePlayback().execute("false");
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(song_receiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(playback_receiver);
         super.onDestroy();
         new SetURI().execute(null, null, null, null, null);
     }

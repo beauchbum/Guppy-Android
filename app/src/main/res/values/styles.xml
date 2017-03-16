@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="guppy_theme" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="colorPrimary">@color/primary_material_guppy_color</item>
+        <item name="colorAccent">@color/primary_material_guppy_color</item>
+    </style>
+</resources>

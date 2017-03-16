@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "818475639900",
+    "firebase_url": "https://guppy-157403.firebaseio.com",
+    "project_id": "guppy-157403",
+    "storage_bucket": "guppy-157403.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:818475639900:android:a7d66bbcb583f393",
+        "android_client_info": {
+          "package_name": "com.example.androidhive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "818475639900-98mavaf1ak1d6jnq6ek0vmb70vjjti5s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVPp2ubCjgFe9YStakNWy1KFrEFi_brho"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

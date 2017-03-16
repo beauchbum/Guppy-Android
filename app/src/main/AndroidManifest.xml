@@ -13,34 +13,70 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+
+    <permission
+        android:name="android.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="android.permission.C2D_MESSAGE" />
 
     <application
         android:configChanges="keyboardHidden|orientation"
         android:icon="@drawable/guppy"
         android:label="Guppy"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/guppy_theme">
         <activity
             android:name=".Explore"
+            android:configChanges="orientation"
             android:launchMode="singleTask"
-            android:configChanges = "orientation"
-            android:screenOrientation = "portrait">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.spotify.sdk.android.authentication.LoginActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:configChanges = "orientation"
-            android:screenOrientation = "portrait"/>
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!--
              ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
 
+        <service
+            android:name=".MyIntentService"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="com.something.app" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".Broadcasting_Service"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name="com.example.androidhive.My_Broadcasting_Service"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

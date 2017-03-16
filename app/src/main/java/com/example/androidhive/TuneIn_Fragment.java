@@ -98,7 +98,8 @@ public class TuneIn_Fragment extends Fragment implements
         //song.setTypeface(custom_font, Typeface.BOLD);
         //album.setTypeface(custom_font, Typeface.BOLD);
         //artist.setTypeface(custom_font, Typeface.BOLD);
-
+        String[] mDrawerTitles = {"Home", "Following", "My Broadcast", main_activity.current_following_name.split(" ")[0] + "'s Broadcast", "Settings", "Logout"};
+        main_activity.addDrawerItems(mDrawerTitles);
 
 
         //Bitmap icon = BitmapFactory.decodeResource(getResources(),R.drawable.guppy);
@@ -111,7 +112,7 @@ public class TuneIn_Fragment extends Fragment implements
 
 
 
-        currently_following = main_activity.current_following_id;
+        currently_following = main_activity.current_following_gid;
 
         follow_button = (ImageButton) rootview.findViewById(R.id.plus_button);
         follow_button.setOnClickListener(this);
@@ -250,7 +251,7 @@ public class TuneIn_Fragment extends Fragment implements
 
                     //JSON making the HTTP request
                     List<NameValuePair> params = new ArrayList<NameValuePair>();
-                    params.add(new BasicNameValuePair("id", main_activity.current_following_id));
+                    params.add(new BasicNameValuePair("id", main_activity.current_following_gid));
                     JSONObject json = main_activity.jsonParser.makeHttpRequest(
                             main_activity.url_get_uri, "GET", params);
 
@@ -328,7 +329,7 @@ public class TuneIn_Fragment extends Fragment implements
             case R.id.plus_button:
                 if(main_activity.following_or_nah == false)
                 {
-                    new FollowUser().execute(main_activity.current_following_id, main_activity.current_user_id);
+                    new FollowUser().execute(main_activity.current_following_gid, main_activity.current_user_id);
                     try {
                         following_toast.cancel();
                     }catch (Exception e)
@@ -344,7 +345,7 @@ public class TuneIn_Fragment extends Fragment implements
                 }
                 else
                 {
-                    new UnfollowUser().execute(main_activity.current_following_id, main_activity.current_user_id);
+                    new UnfollowUser().execute(main_activity.current_following_gid, main_activity.current_user_id);
                     try {
                         following_toast.cancel();
                     }catch (Exception e)
@@ -520,10 +521,10 @@ public class TuneIn_Fragment extends Fragment implements
 
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("current_user_id", main_activity.current_user_id));
-            params.add(new BasicNameValuePair("current_following_id", main_activity.current_following_id));
+            params.add(new BasicNameValuePair("current_following_id", main_activity.current_following_gid));
 
 
-            Log.d("PID", main_activity.current_following_id);
+            Log.d("PID", main_activity.current_following_gid);
 
             // getting product details by making HTTP request
             // Note that product details url will use GET request
@@ -595,9 +596,9 @@ public class TuneIn_Fragment extends Fragment implements
 
 
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("id", main_activity.current_following_id));
+            params.add(new BasicNameValuePair("id", main_activity.current_following_gid));
 
-            Log.d("PID", main_activity.current_following_id);
+            Log.d("PID", main_activity.current_following_gid);
 
             // getting product details by making HTTP request
             // Note that product details url will use GET request

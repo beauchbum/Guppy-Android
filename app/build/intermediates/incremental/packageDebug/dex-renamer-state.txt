@@ -1,0 +1,7 @@
+#Wed Mar 15 21:23:18 CDT 2017
+base.0=C\:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_7124a0e3efae57dd9a307657d72b2b9897809ec8
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=C\:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_110084b987d6db9640b81f646f06ec7a733a7127\\classes.dex
+base.1=C\:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_110084b987d6db9640b81f646f06ec7a733a7127
+file.0=C\:\\Users\\Ryan\\Documents\\GitHub\\Guppy\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_7124a0e3efae57dd9a307657d72b2b9897809ec8\\classes.dex

@@ -5,23 +5,32 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SearchViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.Gravity;
+import android.widget.PopupMenu;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -151,7 +160,7 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                 // Checking for SUCCESS TAG
                 int success = json.getInt(main_activity.TAG_SUCCESS);
                 main_activity.arrayOfBroadcasts.clear();
-                main_activity.pid_list.clear();
+                main_activity.gid_list.clear();
 
                 if (success == 1) {
                     // products found
@@ -165,19 +174,22 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                         boolean exists = false;
 
                         // Storing each json item in variable
-                        String id = c.getString("guppy_id");
+                        String gid = c.getString("guppy_id");
                         String name = c.getString(main_activity.TAG_NAME);
+                        String sid = c.getString("spotify_id");
                         String song = c.getString("song");
                         String artist = c.getString("artist");
                         String playing = c.getString("playing");
+                        String broadcasting = c.getString("broadcasting");
                         //String listeners = c.getString("listeners");
                         //int real_listeners = Integer.parseInt(listeners);
 
 
-                        main_activity.arrayOfBroadcasts.add(new Broadcast(name, 0, song, artist, "guppy", playing));
-                        main_activity.pid_list.add(i, id);
+                        main_activity.arrayOfBroadcasts.add(new Broadcast(name, 0, song, artist, "guppy", broadcasting));
+                        main_activity.gid_list.add(i, gid);
+                        main_activity.sid_list.add(i, sid);
                         main_activity.name_list.add(i, name);
-                        main_activity.broadcasting_list.add(i, playing);
+                        main_activity.broadcasting_list.add(i, broadcasting);
 
                         Log.d("array of broadcasts", main_activity.arrayOfBroadcasts.toString());
 
@@ -192,7 +204,7 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                         if(!exists) {
                             main_activity.listDataHeader.add(name);
                             main_activity.listDataChild.put(name, main_activity.user_options);
-                            main_activity.pid_list.add(id);
+                            main_activity.gid_list.add(gid);
                         }
 
 
@@ -226,16 +238,20 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             if(main_activity.broadcasting_list.get(position).equals("1")) {
-                                String temp = main_activity.pid_list.get(position);
-                                if (temp.equals(main_activity.current_following_id) == false) {
+                                String temp = main_activity.gid_list.get(position);
+                                if (temp.equals(main_activity.current_following_gid) == false) {
                                     if (main_activity.broadcasting_list.get(position).equals("1")) {
-                                        main_activity.current_following_id = temp;
+                                        main_activity.current_following_gid = temp;
                                         main_activity.current_following_name = main_activity.name_list.get(position);
-                                        new Increment_Listeners().execute(main_activity.current_following_id, main_activity.current_user_id);
-                                        new Get_Following_Or_Nah().execute(main_activity.current_user_id, main_activity.current_following_id);                                        search_box.clearFocus();
+                                        main_activity.current_following_sid = main_activity.sid_list.get(position);
+                                        new Increment_Listeners().execute(main_activity.current_following_gid, main_activity.current_user_id);
+                                        new Get_Following_Or_Nah().execute(main_activity.current_user_id, main_activity.current_following_gid);
+                                        search_box.clearFocus();
                                         main_activity.TuneIn();
                                     } else {
-                                        main_activity.my_toast.show();
+                                        Toast toast = Toast.makeText(main_activity.getApplicationContext(), "Your friend is not broadcasting!", Toast.LENGTH_SHORT);
+                                        toast.setGravity(Gravity.CENTER, 0, 0);
+                                        toast.show();
                                     }
                                 } else {
                                     android.support.v4.app.FragmentTransaction fragmentTransaction = main_activity.fm.beginTransaction();
@@ -246,7 +262,9 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                             }
                             else
                             {
-                                main_activity.my_toast.show();
+                                Toast toast = Toast.makeText(main_activity.getApplicationContext(), "Your friend is not broadcasting!", Toast.LENGTH_SHORT);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
                             }
                         }
                     });
@@ -297,7 +315,7 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                 // Checking for SUCCESS TAG
                 int success = json.getInt(main_activity.TAG_SUCCESS);
                 main_activity.arrayOfBroadcasts.clear();
-                main_activity.pid_list.clear();
+                main_activity.gid_list.clear();
 
                 if (success == 1) {
                     // products found
@@ -311,20 +329,24 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                         boolean exists = false;
 
                         // Storing each json item in variable
-                        String id = c.getString("guppy_id");
+                        String gid = c.getString("guppy_id");
+                        String sid = c.getString("spotify_id");
                         String name = c.getString("name");
                         String song = c.getString("song");
                         String artist = c.getString("artist");
                         String playing = c.getString("playing");
+                        String broadcasting = c.getString("broadcasting");
 
                         //String listeners = c.getString("listeners");
                         //int real_listeners = Integer.parseInt(listeners);
 
 
-                        main_activity.arrayOfBroadcasts.add(new Broadcast(name, 0, song, artist, "guppy", playing));
-                        main_activity.pid_list.add(i, id);
+                        main_activity.arrayOfBroadcasts.add(new Broadcast(name, 0, song, artist, "guppy", broadcasting));
+                        main_activity.gid_list.add(i, gid);
+                        main_activity.sid_list.add(i, sid);
                         main_activity.name_list.add(i, name);
-                        main_activity.broadcasting_list.add(i, playing);
+
+                        main_activity.broadcasting_list.add(i, broadcasting);
                         Log.d("array of broadcasts", main_activity.arrayOfBroadcasts.toString());
 
 
@@ -338,7 +360,7 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                         if(!exists) {
                             main_activity.listDataHeader.add(name);
                             main_activity.listDataChild.put(name, main_activity.user_options);
-                            main_activity.pid_list.add(id);
+                            main_activity.gid_list.add(gid);
                         }
 
 
@@ -370,12 +392,13 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             if (main_activity.broadcasting_list.get(position).equals("1")) {
 
-                                String temp = main_activity.pid_list.get(position);
-                                if (temp.equals(main_activity.current_following_id) == false) {
-                                    main_activity.current_following_id = temp;
+                                String temp = main_activity.gid_list.get(position);
+                                if (temp.equals(main_activity.current_following_gid) == false) {
+                                    main_activity.current_following_gid = temp;
+                                    main_activity.current_following_sid = main_activity.sid_list.get(position);
                                     main_activity.current_following_name = main_activity.name_list.get(position);
-                                    new Increment_Listeners().execute(main_activity.current_following_id, main_activity.current_user_id);
-                                    new Get_Following_Or_Nah().execute(main_activity.current_user_id, main_activity.current_following_id);
+                                    new Increment_Listeners().execute(main_activity.current_following_gid, main_activity.current_user_id);
+                                    new Get_Following_Or_Nah().execute(main_activity.current_user_id, main_activity.current_following_gid);
                                     search_box.clearFocus();
                                     main_activity.TuneIn();
                                 } else {
@@ -388,7 +411,9 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
                             }
                             else
                             {
-                                main_activity.my_toast.show();
+                                Toast toast = Toast.makeText(main_activity.getApplicationContext(), "Your friend is not broadcasting!", Toast.LENGTH_SHORT);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
                             }
                         }
 
@@ -472,7 +497,7 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
         protected void onPreExecute() {
             super.onPreExecute();
             pdialog = new ProgressDialog(getActivity());
-            pdialog.setMessage("Loading" + main_activity.current_following_name + ". Please wait...");
+            pdialog.setMessage("Loading" + main_activity.current_following_sid + ". Please wait...");
             pdialog.setIndeterminate(false);
             pdialog.setCancelable(false);
             pdialog.show();
@@ -488,8 +513,6 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
             params.add(new BasicNameValuePair("current_user_id", args[0]));
             params.add(new BasicNameValuePair("current_following_id", args[1]));
 
-
-            Log.d("PID", main_activity.current_following_id);
 
             // getting product details by making HTTP request
             // Note that product details url will use GET request
@@ -538,7 +561,6 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
 
 
 
-
     public class BroadcastAdapter extends ArrayAdapter<Broadcast> {
 
         private final int VIEW_TYPE_SELECTED = 1;
@@ -564,6 +586,7 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
         @Override
         public View getView(int position, View convertView, ViewGroup parent)
         {
+
             Broadcast mBroadcast = getItem(position);
             int viewType = getItemViewType(position);
             int layoutId = -1;
@@ -583,6 +606,63 @@ public class Following_Fragment extends Fragment implements SwipeRefreshLayout.O
             TextView listenersTextView = (TextView) convertView.findViewById(R.id.text_view_listeners);
             TextView songArtistTextView = (TextView) convertView.findViewById(R.id.song_text_view);
             ImageView profilePicImage = (ImageView) convertView.findViewById(R.id.list_item_image);
+            final ImageButton button_more = (ImageButton) convertView.findViewById(R.id.button_more);
+            button_more.setTag(position);
+            button_more.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    final int popup_position = (int) v.getTag();
+                    main_activity.popup_current_following_gid = main_activity.gid_list.get(popup_position);
+                    main_activity.popup_current_following_sid = main_activity.sid_list.get(popup_position);
+                    main_activity.popup_current_following_name = main_activity.name_list.get(popup_position);
+                    final String broadcast_status = main_activity.broadcasting_list.get(popup_position);
+                    final PopupMenu popup = new PopupMenu(getActivity(), button_more);
+
+                    MenuInflater inflater = popup.getMenuInflater();
+                    inflater.inflate(R.menu.actions, popup.getMenu());
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            boolean currently_tuning_in = false;
+                            if (main_activity.current_following_gid == main_activity.popup_current_following_gid)
+                            {
+                                currently_tuning_in = true;
+                            }
+                            main_activity.current_following_gid = main_activity.popup_current_following_gid;
+                            main_activity.current_following_sid = main_activity.popup_current_following_sid;
+                            main_activity.current_following_name = main_activity.popup_current_following_name;
+                            switch (item.getItemId()) {
+                                case R.id.popup_menu_tune_in:
+                                    if (broadcast_status.equals("1")) {
+                                        if (currently_tuning_in) {
+                                            search_box.clearFocus();
+                                            android.support.v4.app.FragmentTransaction fragmentTransaction = main_activity.fm.beginTransaction();
+                                            fragmentTransaction.replace(R.id.fragment_container, main_activity.tuning_in_fragment);
+                                            fragmentTransaction.addToBackStack(null);
+                                            fragmentTransaction.commit();
+                                        } else {
+                                            main_activity.TuneIn();
+                                        }
+                                    }
+                                    else {
+                                        Toast toast = Toast.makeText(main_activity.getApplicationContext(), "Your friend is not broadcasting!", Toast.LENGTH_SHORT);
+                                        toast.setGravity(Gravity.CENTER, 0, 0);
+                                        toast.show();
+                                        }
+                                    break;
+                                case R.id.popup_menu_see_profile:
+                                    main_activity.SeeProfile();
+                                    break;
+                            }
+                            return true;
+
+                        }
+                    });
+                    popup.show();
+                }
+            });
+
+
 
             int resId = getResources().getIdentifier(mBroadcast.image_title, "drawable", getActivity().getPackageName());
             profilePicImage.setImageResource(resId);

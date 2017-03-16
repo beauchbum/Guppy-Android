@@ -60,10 +60,24 @@
 
             <ListView android:id="@+id/drawer_list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:divider="#FFFFFF"
                 android:dividerHeight="1dp"/>
+
+            <Switch
+                android:id="@+id/broad_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10dp"
+                android:text="Always Broadcast"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:paddingLeft="16dp"
+                android:switchMinWidth="60dp"/>
+
 
         </LinearLayout>
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="guppy_theme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary_material_guppy_color</item>
+        <item name="android:navigationBarColor">@color/foreground_material_light</item>
+        <item name="android:statusBarColor">@color/secondary_material_guppy_color</item>
+        <item name="colorAccent">@color/primary_material_guppy_color</item>
+    </style>
+</resources>

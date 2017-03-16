@@ -1,3 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        is-multidex="true"
+        jar="C:\Users\Ryan\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit\retrofit\1.9.0\a681c044244d9fc375198588297a39ba78028423\retrofit-1.9.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="a681c044244d9fc375198588297a39ba78028423">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\retrofit-1.9.0_79e4a95fb6d83fae609b891c34b3c0133ceb009c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.spotify.sdk\spotify-player\1.0.0-beta11\jars\libs\jnihelpers-1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="69282b403869c13d701fde63d2971fe46efe796a">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\jnihelpers-1.0_cfa841c03d7578a0556a998d41919c9f3d2c3c01\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Ryan\.gradle\caches\modules-2\files-2.1\cz.msebera.android\httpclient\4.4.1.1\c8d96f6fd2bcc179c312da33ee670a71188cc60d\httpclient-4.4.1.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="c8d96f6fd2bcc179c312da33ee670a71188cc60d">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\httpclient-4.4.1.1_349ea115c7ee321e030d2d7829a19daa1e38c7da\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\10.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="3347c3e7056fabc88bdbd8fdae65ddf2b674d977">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-base-10.0.0_af2a5d565fe97a0a24ef3341905f34b9801b8035\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-iid\10.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="147c3e6b95aa3d1e83705b056777ef865d272969">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-iid-10.0.0_b8807c3f0903960ec74e288dbb99e20684dca3a4\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="664789e128eac4dceeed3757dee0a41171cd0d21">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_110084b987d6db9640b81f646f06ec7a733a7127\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\10.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="985be85104f6d0c5c5e51e7b7e60d8883a98ac64">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-tasks-10.0.0_3edfb201acdbb92321f612734190f6f9145e58c7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="1b8e03daaa43fb0a4cd57e378167c2fd70454c1e">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-23.3.0_d0f89b08928c29a6284cf9acd2ad84c0b1ce1a34\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0\jars\libs\internal_impl-24.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="fcaf463e10e69c1923ccf1edeba3b4196d239e00">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.0.0_962b8243d3117ae0b7cf3608effc9ef8b8b2a48b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\10.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="0e2bf5e85132c8bfed05a87b71352918815e0205">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-gcm-10.0.0_c56ba6ed7572144d610a2c80ad78a88dbc53772f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Ryan\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.3.1\ecb6e1f8e4b0e84c4b886c2f14a1500caf309757\gson-2.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\gson-2.3.1_75766f7b275865b8da21cbe341203b4033f2d1d6\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="db9a5718ad8ae54173e4ecdfe2bc800c73ffe64c">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_7124a0e3efae57dd9a307657d72b2b9897809ec8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.spotify.sdk\spotify-auth\1.0.0-beta11\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="b3863b278fa29b48c4eb316dea792d659e5e5aa7">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.spotify.sdk-spotify-auth-1.0.0-beta11_84ea2408a6e2b02116b8851ee4a4e0a3242bdb8e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="23be6993826b8fd88bbc8d14928bb3b8960d3d4e">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-23.3.0_0dee85f36e3295571b07d67d8065fe86055eaa9c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="a0b5d60246cd9d4f3f2443611b3b4c25265840b5">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-23.3.0_b1023095d748ad4be128eff28f6fbc247932646c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Ryan\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\24.0.0\support-annotations-24.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="2943c74db6d4346ab8c6531adac91fa05c137c40">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-24.0.0_f9c593b21d539fb60e75d742a9da38a57c38de27\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.spotify.sdk\spotify-player\1.0.0-beta11\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="38fd1f0aba035dd5a960f37af891a8ad144782d2">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.spotify.sdk-spotify-player-1.0.0-beta11_f09b6cba3ef2463a4f4687ec958b84ae3871df7d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.github.kaaes\spotify-web-api-android\0.2.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="f6058539eefdd79c58dd287dce8346f78978947f">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.github.kaaes-spotify-web-api-android-0.2.0_94b122897ce446654b36e96638e632abe867a273\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\10.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="75dbc3537bc912d077b3db2f5ac72d5b43644b2c">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-10.0.0_47706c90e5af76cc9bf1104bcb57d9ec4209c6f5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="2f7e6e2dad1bccaf68a8820820adc6c0d5b96d37">
+        <dex dex="C:\Users\Ryan\Documents\GitHub\Guppy\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-24.0.0_cb2a22f5b71de8fa6d2740605e0482bbaced1221\classes.dex" />
+    </item>
+
+</items>

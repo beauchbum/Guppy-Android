@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:Guppy="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/popup_menu_tune_in"
+        android:title="Tune In"
+        Guppy:showAsAction="ifRoom"/>
+    <item android:id="@+id/popup_menu_see_profile"
+        android:title="See Profile" />
+</menu>
